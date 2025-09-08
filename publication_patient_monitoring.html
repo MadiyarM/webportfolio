@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>An Intelligent System for Automated Monitoring and Control of Patient Conditions — AIR 2025 · Madiyar Mukanov</title>
+  <meta name="description" content="Real-time IR-RGB fusion for contactless temperature screening with face identification, on-device logging (SQLite), alerts, and compact 3D-printed enclosure. Springer publication in press, 2025." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="canonical" href="https://yourdomain.com/publication_patient_monitoring.html" />
+  <meta name="theme-color" content="#16a34a" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="An Intelligent System for Automated Monitoring and Control of Patient Conditions — AIR 2025" />
+  <meta property="og:description" content="Real-time IR-RGB fusion for contactless temperature screening with face identification, on-device logging (SQLite), alerts, and compact 3D-printed enclosure." />
+  <meta property="og:url" content="https://yourdomain.com/publication_patient_monitoring.html" />
+  <meta property="og:image" content="https://yourdomain.com/assets/img/papers/patient-monitoring-system.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    :root {
+      --sidebar-width: 280px;
+    }
+
+    /* ===== Layout ===== */
+    .content-layout{
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .sidebar{
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+    }
+
+    .main-content{
+      flex: 1;
+      max-width: calc(100% - var(--sidebar-width) - 2rem);
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar-card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar-card h3{
+      margin: 0 0 1rem 0;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .publication-meta{
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .meta-item{
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .meta-label{
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .meta-value{
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .badge{
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: rgba(22,163,74,.1);
+      color: var(--accent-dark);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .download-links{
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .download-btn{
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .download-btn:hover{
+      border-color: var(--accent);
+      background: rgba(22,163,74,.05);
+    }
+
+    .external-links{
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .external-link{
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      color: var(--link);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .external-link:hover{
+      text-decoration: underline;
+    }
+
+    /* ===== Main Content ===== */
+    .publication-header{
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .publication-title{
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin: 0 0 1rem 0;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .publication-subtitle{
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin: 0 0 1.5rem 0;
+    }
+
+    .venue-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    /* ===== Content Sections ===== */
+    .content-section{
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .content-section h2{
+      margin: 0 0 1.5rem 0;
+      font-size: 1.5rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .content-section h3{
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.2rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .content-section p{
+      margin: 0 0 1rem 0;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .abstract{
+      font-style: italic;
+      background: rgba(22,163,74,.05);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .keywords{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .keyword{
+      padding: 0.3rem 0.8rem;
+      background: rgba(22,163,74,.1);
+      color: var(--accent-dark);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .feature-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .feature-card{
+      padding: 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .feature-icon{
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .feature-card h4{
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .feature-card p{
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .image-gallery{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .gallery-item{
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .gallery-item img{
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-caption{
+      padding: 1rem;
+      background: var(--bg);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .bibtex-container{
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+
+    .bibtex-container pre{
+      margin: 0;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px){
+      .content-layout{
+        flex-direction: column;
+      }
+      .sidebar{
+        width: 100%;
+      }
+      .main-content{
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 680px){
+      .content-section{padding: 1.5rem}
+      .publication-title{font-size: 2rem}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html">Random projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="content-layout">
+        <!-- ===== Sidebar ===== -->
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3>Publication Details</h3>
+            <div class="publication-meta">
+              <div class="meta-item">
+                <div class="meta-label">Authors</div>
+                <div class="meta-value">Madiyar Mukanov</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Venue</div>
+                <div class="meta-value">AIR 2025</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Year</div>
+                <div class="meta-value">2025</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">
+                  <span class="badge">Springer publication: in press</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>External Links</h3>
+            <div class="external-links">
+              <!-- <a href="https://doi.org/10.1007/springer-patient-monitoring-2025" class="external-link" target="_blank">
+                🔗 DOI
+              </a>
+              <a href="https://arxiv.org/abs/2501.01234" class="external-link" target="_blank">
+                📚 arXiv
+              </a> -->
+              <a href="https://github.com/MadiyarM/patient-monitoring-raspi-mlx90640" class="external-link" target="_blank">
+                💻 GitHub Repository
+              </a>
+              <!-- <a href="https://demo.patient-monitoring.ai" class="external-link" target="_blank">
+                🎮 Live Demo
+              </a> -->
+            </div>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>Keywords</h3>
+            <div class="keywords">
+              <span class="keyword">Patient monitoring</span>
+              <span class="keyword">IR-RGB fusion</span>
+              <span class="keyword">Thermal imaging</span>
+              <span class="keyword">Face identification</span>
+              <span class="keyword">Edge computing</span>
+              <span class="keyword">Healthcare automation</span>
+              <span class="keyword">Contactless screening</span>
+              <span class="keyword">Real-time processing</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ===== Main Content ===== -->
+        <main class="main-content">
+          <div class="publication-header" style="margin-bottom: 0;">
+            <h1 class="publication-title">An Intelligent System for Automated Monitoring and Control of Patient Conditions</h1>
+            <p class="publication-subtitle">Real-time IR-RGB fusion for contactless temperature screening with face identification, on-device logging (SQLite), alerts, and compact 3D-printed enclosure</p>
+            <div class="venue-badge">
+              🏆 Presented at AIR 2025
+            </div>
+            <p style="margin-top: 1.5rem; color: var(--muted); font-size: 1rem;">Please see our paper for additional details on the project. (pdf link <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" style="color: #2563eb; text-decoration: underline;">here</a>)</p>
+          </div>
+
+          <div class="content-section">
+            <h2>Abstract</h2>
+            <div class="abstract">
+              <p>This paper presents a contactless temperature monitoring and patient identification system intended to meet stringent sanitary requirements in modern healthcare. By integrating a Raspberry Pi 4, an MLX90640 thermal sensor accurate to ±1 °C, and a Pi Camera Module 2 with 90–95% face recognition accuracy, it enables rapid, noninvasive detection of abnormal temperatures while minimizing staff-patient contact. The sensor’s 24 × 32 infrared array is fused with RGB frames for temperature assessment and identity verification. Controlled trials at ambient temperatures of 16 °C, 24 °C, and 26 °C consistently record ~33 °C on healthy foreheads, closely matching results from standard infrared thermometers. Minor temperature reductions occur with increasing distance, highlighting the need for proper alignment. Automated logging in a local SQLite database streamlines clinical workflows, allowing immediate retrieval of recorded data. Additionally, the approach significantly lowers staff workload by automating identification tasks, promoting safer, more efficient procedures. The findings underscore cost-effectiveness and scalability for continuous screening in diverse clinical environments, while reducing cross-contamination risks through rapid, contactless operation. Future efforts will broaden the dataset for enhanced algorithmic robustness, incorporate multi-parameter assessments of vital signs, and refine sensor calibration across variable conditions. 
+                Overall, this solution offers a promising avenue toward improved operational efficiency and infection control, aligning with contemporary standards for data-driven medical practice.</p>              
+            </div>
+          </div>
+
+          <div class="content-section">
+            <h2>Paper PDF</h2>
+            <div class="pdf-viewer-container">
+              <iframe 
+                src="assets/pdf/papers/mukanov2025-patient-monitoring.pdf#toolbar=1&navpanes=1&scrollbar=1&page=1&view=FitH" 
+                width="100%" 
+                height="600px" 
+                frameborder="0"
+                title="Patient Monitoring System Paper PDF"
+                style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow);">
+                <p>Your browser does not support PDFs. 
+                  <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" rel="noopener">
+                    Download the PDF instead
+                  </a>
+                </p>
+              </iframe>
+              <div class="pdf-actions" style="margin-top: 1rem; text-align: center;">
+                <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" rel="noopener" class="btn btn-primary">
+                  📄 Open PDF in New Tab
+                </a>
+                <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" download="mukanov2025-patient-monitoring.pdf" class="btn">
+                  💾 Download PDF
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-section">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+              <div class="feature-card">
+                <div class="feature-icon">🌡️</div>
+                <h4>Real-time Temperature Monitoring</h4>
+                <p>Contactless temperature screening using advanced thermal imaging technology with high accuracy and reliability.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">👤</div>
+                <h4>Face Identification</h4>
+                <p>Advanced computer vision algorithms for reliable patient identification and tracking across different conditions.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h4>IR-RGB Fusion</h4>
+                <p>Sophisticated sensor fusion combining thermal and visual data for enhanced monitoring capabilities.</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h4>Real-time Processing</h4>
+                <p>Low-latency processing pipeline optimized for immediate response and alert generation.</p>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    }
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

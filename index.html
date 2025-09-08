@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Madiyar Mukanov — Robotics / AI</title>
+  <meta name="description" content="Portfolio site highlighting robotics & AI: publications, projects, resources, news, and contacts." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="canonical" href="https://madiyarmukanov.com/" />
+  <meta name="theme-color" content="#16a34a" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Madiyar Mukanov — Robotics / AI" />
+  <meta property="og:description" content="Portfolio of robotics & AI work: publications, technical projects, resources, and news." />
+  <meta property="og:url" content="https://madiyarmukanov.com/" />
+  <meta property="og:image" content="https://madiyarmukanov.com/assets/img/avatar.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Madiyar Mukanov",
+    "url": "https://madiyarmukanov.com/",
+    "image": "https://madiyarmukanov.com/assets/img/avatar.jpg",
+    "jobTitle": "Robotics / AI Engineer",
+    "sameAs": [
+      "https://github.com/MadiyarM",
+      "https://www.linkedin.com/in/muqantegi/"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Madiyar Mukanov",
+    "url": "https://madiyarmukanov.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://madiyarmukanov.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    :root {
+      --avatar: clamp(140px, 22vw, 240px);
+    }
+
+    /* Skip link */
+    .skip-link{position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip-link:focus{left:4%; top:10px; width:auto; height:auto; padding:.4rem .6rem; background:#fff; border:1px solid var(--border); border-radius:.5rem; z-index:1001}
+
+    /* ===== Cover (Inverted Pyramid) with grid-areas ===== */
+    .cover{
+      display:grid;
+      grid-template-columns: var(--avatar) 1fr;
+      grid-template-areas:
+        "title title"
+        "avatar intro"
+        "contact contact"
+        "highlights highlights";
+      gap:1.25rem; align-items:start;
+    }
+    .title{grid-area:title}
+    .avatar{grid-area:avatar; width:var(--avatar); height:var(--avatar); border-radius:14px; object-fit:cover; border:1px solid var(--border); box-shadow:var(--shadow)}
+    .intro{grid-area:intro; display:grid; gap:.75rem; background:linear-gradient(180deg, rgba(22,163,74,.08), rgba(22,163,74,0)); padding:1rem; border:1px solid var(--border); border-radius:12px}
+    .contact{grid-area:contact}
+    .highlights{grid-area:highlights}
+
+    .kicker{font-size:.85rem; color:var(--text-muted); letter-spacing:.18em; text-transform:uppercase}
+    h1{font-size: clamp(28px, 3vw, 40px); line-height:1.15; margin:.2rem 0 .2rem}
+    .outcome{margin:.25rem 0 1rem; font-size:1.05rem}
+    .outcome strong{color:var(--accent-dark)}
+    .intro p{margin:0}
+    .skills{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.5rem; margin-top:.15rem}
+    .skills li{list-style:none; background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:.4rem .6rem}
+
+    /* Contact strip with icons */
+    .contact{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.2rem; color:var(--text-muted)}
+    .contact a{color:var(--text); display:inline-flex; align-items:center; gap:.4rem; padding:.15rem .35rem; border:1px solid transparent; border-radius:.5rem}
+    .contact a:hover{background:rgba(22,163,74,.08); border-color:var(--border); text-decoration:none}
+    .icon{width:18px; height:18px; fill:currentColor; opacity:.9}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+    /* ===== Visual‑first highlights (light overlay) ===== */
+    .highlights{margin:1.2rem 0 0; display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
+    .card{grid-column: span 4; position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--border); background:var(--panel)}
+    .card img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.04)}
+    .card .meta{position:absolute; inset:auto 0 0 0; padding:.75rem .9rem; color:var(--text);
+      background:linear-gradient(180deg, rgba(255,255,255,0) 0, rgba(255,255,255,.76) 70%, rgba(255,255,255,.96) 100%); border-top:1px solid rgba(22,163,74,.18)}
+    .card h3{margin:0 0 .25rem; font-size:1.05rem}
+    .badge{display:inline-block; font-size:.8rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
+    .pins{opacity: 1; color: black;}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border); margin-top:2rem; background:#fafdfb}
+    footer .wrap{display:flex; gap:.6rem; align-items:center; height:64px}
+
+    /* Responsive adjustments */
+    @media (max-width: 860px){
+      :root{ --avatar: clamp(96px, 24vw, 160px); }
+      .cover{
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "avatar"
+          "title"
+          "intro"
+          "contact"
+          "highlights";
+      }
+      .avatar{justify-self:start}
+      .skills{grid-template-columns: 1fr}
+      .highlights .card{grid-column: span 6}
+    }
+    @media (max-width: 680px){
+      .highlights .card{grid-column: span 12}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="./technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html">Random projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===== Cover: Inverted Pyramid with avatar aligned to intro on desktop; avatar first on mobile ===== -->
+    <section class="container cover" style="margin-top:.3rem">
+      <div class="title">
+        <div class="kicker">robotics·ai·machine learning</div>
+        <h1>Madiyar Mukanov</h1>
+        <p class="outcome"><strong>Outcome:</strong> Built field‑tested perception systems that fuse <em>thermal</em> (MLX90640) and <em>RGB</em> (Pi Camera) data for patient monitoring and mobile robots.</p>
+      </div>
+
+      <img class="avatar" src="assets/img/avatar.jpg" alt="Portrait of Madiyar Mukanov" loading="lazy" decoding="async" />
+
+      <div class="intro">
+        <div class="about">
+          <p><strong>About me:</strong> I am a robotics and computer-vision engineer with a physics-first mindset. I recently completed my M.Sc. in Robotics (2025) at Satbayev University, where I built an intelligent patient-monitoring platform.</p>
+        
+          <p>My foundation is a B.Sc. in Nuclear Physics from Al-Farabi Kazakh National University. That training directly powers my AI/ML and robotics work: stochastic processes &amp; Monte Carlo → Bayesian filters and uncertainty quantification; signal/measurement theory → calibration, sensor models, and error propagation; instrumentation &amp; radiation/thermal physics → practical sensing and embedded drivers; PDEs &amp; numerical methods → simulation, optimization, and differentiable programming. In short, I bring the rigor of measurement science to learning systems and robot perception.</p>
+          
+          <p>I chose robotics after the Kyoto Institute of Technology Summer School, where hands-on labs with sensors, embedded systems, and mobile robots showed me how physics becomes autonomy in the real world—and where I won the program’s electronics tournament. That experience made the shift to MSc in Robotics both natural and necessary.</p>
+          
+          <p>Beyond research, I build products and teach. I founded HonestREBot, a Telegram Mini-App that crowdsources reviews of residential complexes in Kazakhstan. I’ve also taught math and physics and mentor students.</p>
+          
+          <p>I have presented my Springer-indexed paper on thermal-imaging–based patient monitoring at AIR2025 (organized by Nazarbayev University and SCRS), and the article is in press.</p>
+        </div>
+        <p><strong>Motivation:</strong> make ideas touch reality—turning physics and code into reliable decisions that help people in messy, real-world environments.</p>
+        <!-- <ul class="skills" aria-label="Technical skills">
+          <li>Sensor fusion (thermal+RGB), OpenCV, camera calibration</li>
+          <li>Embedded Linux (Raspberry Pi), Python/C++, performance tuning</li>
+          <li>Data logging/telemetry, evaluation at the edge</li>
+          <li>Experiment design, metrics, ablations</li>
+        </ul> -->
+        <p>Résumé/CV: <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer" style="color: #1313bd;">PDF</a></p>
+      </div>
+
+      <div class="contact" role="contentinfo">
+        <span>Contact me</span>·
+        <a class="contact-link" href="mailto:mmukanovm@gmail.com">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 2v.217l10 6.25 10-6.25V6L12 12.25 2 6z"/></svg>
+          <span class="sr-only">Email:</span> mmukanovm@gmail.com
+        </a>·
+        <a class="contact-link" href="https://github.com/MadiyarM" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.85 3.14 8.96 7.49 10.41.55.1.75-.24.75-.53 0-.26-.01-1.11-.02-2.02-3.05.66-3.7-1.3-3.7-1.3-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.08-.67.08-.67 1.09.08 1.66 1.12 1.66 1.12.98 1.67 2.58 1.19 3.2.91.1-.71.38-1.19.69-1.47-2.44-.28-5.01-1.22-5.01-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.41.11-2.94 0 0 .92-.29 3.02 1.13.87-.24 1.8-.35 2.73-.35.93 0 1.86.12 2.73.35 2.1-1.42 3.02-1.13 3.02-1.13.6 1.53.22 2.66.11 2.94.7.77 1.12 1.75 1.12 2.95 0 4.22-2.58 5.15-5.04 5.42.39.34.74 1.01.74 2.04 0 1.47-.01 2.66-.01 3.02 0 .29.2.64.76.53 4.34-1.45 7.48-5.56 7.48-10.41C23.02 5.24 18.27.5 12 .5z"/></svg>
+          GitHub
+        </a>·
+        <a class="contact-link" href="https://www.linkedin.com/in/muqantegi/" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.5 0h3.8v2.1h.05c.53-1 1.83-2.1 3.77-2.1 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.43 0-2.8 1.9-2.8 3.86V24h-4V8.5z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <!-- ===== Visual‑first highlights (3–4) ===== -->
+      <div class="highlights" role="navigation" aria-label="Highlighted work">
+        <a class="card" href="publication_patient_monitoring.html" title="Patient Monitoring System - AIR 2025">
+          <img src="assets/img/papers/certificate.png" alt="Patient monitoring system with IR-RGB fusion" loading="lazy" decoding="async" />
+          <div class="meta">
+            <span class="badge">Publication · Computer Vision · Healthcare</span>
+          </div>
+        </a>
+        <a class="card" href="technical_projects.html" title="HonestREBot — Telegram Mini‑App">
+          <img src="assets/img/projects/random/randomhonestre-bot-preview.jpg" alt="Telegram mini app interface and moderation tools" loading="lazy" decoding="async" />
+          <div class="meta">
+            <h3 class="pins">HonestREBot — Telegram Web‑App</h3>
+            <span class="badge">Product · Web</span>
+          </div>
+        </a>
+        <a class="card" href="technical_projects.html" title="Bicycle Speedometer">
+          <img src="assets/img/projects/kyoto/kyoto-2019-certificate.jpg" alt="Graphs comparing sensor accuracy and response" loading="lazy" decoding="async" />
+          <div class="meta">
+            <h3 class="pins">Bicycle Speedometer — Kyoto Award 2019</h3>
+            <span class="badge">Sensors · Tournaments</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

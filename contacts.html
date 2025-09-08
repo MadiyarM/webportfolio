@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacts — Madiyar Mukanov</title>
+  <meta name="description" content="Get in touch — email, GitHub, LinkedIn. Lightweight mail composer, copy-to-clipboard, and local time in Asia/Almaty." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    /* ===== Page header ===== */
+    .page-head{padding:.6rem 0 1rem}
+    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
+    .page-head p{color:var(--text-muted); margin:.2rem 0}
+    .profiles{display:flex; flex-wrap:wrap; gap:.5rem; margin:.6rem 0 0}
+    .pill{display:inline-block; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--text)}
+    .pill:hover{border-color:var(--accent); background:rgba(22,163,74,.08); text-decoration:none}
+
+    /* ===== Grid ===== */
+    .grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:1rem}
+    .card{border:1px solid var(--border); border-radius:12px; background:#fff; box-shadow:var(--shadow)}
+    .card .hd{display:flex; align-items:center; gap:.6rem; padding:.8rem .9rem; border-bottom:1px solid var(--border)}
+    .card .bd{padding:.9rem}
+
+    .icon{width:20px; height:20px; fill:currentColor}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:.75rem; padding:.5rem .65rem; border:1px solid var(--border); border-radius:.6rem; background:#fff}
+    .row + .row{margin-top:.6rem}
+    .row a{display:inline-flex; align-items:center; gap:.45rem; color:var(--text)}
+    .row .btn{display:inline-flex; align-items:center; gap:.35rem; padding:.38rem .55rem; border:1px solid var(--border); border-radius:.5rem; background:#fff; color:var(--text); text-decoration:none}
+    .row .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
+
+    /* Composer */
+    .form{display:grid; gap:.6rem}
+    .form label{font-weight:600}
+    .form input,.form textarea{width:100%; padding:.55rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
+    .form textarea{min-height:120px; resize:vertical}
+    .form .actions{display:flex; gap:.6rem; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:.4rem; padding:.48rem .7rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text); text-decoration:none}
+    .btn.primary{border-color:var(--accent); background:rgba(22,163,74,.08)}
+    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
+
+    /* Clock */
+    .clock{font-variant-numeric:tabular-nums; font-weight:700}
+    .muted{color:var(--text-muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .grid{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html">Random projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html" aria-current="page">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <h1>Contacts</h1>
+      <p>Fastest way is email. You can also reach me via GitHub or LinkedIn.</p>
+      <div class="profiles">
+        <a class="pill" href="assets/pdf/cv.pdf" target="_blank" rel="noopener">Résumé/CV (PDF)</a>
+        <!-- <a class="pill" href="assets/data/madiyar-mukanov.vcf">vCard (.vcf)</a> -->
+      </div>
+    </section>
+
+    <section class="container grid">
+      <!-- ===== Left: Methods ===== -->
+      <div class="card">
+        <div class="hd"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.713 2 6.75V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6.75l-10 5.963zM22 6H2l10 6 10-6z"/></svg><strong>Contact methods</strong></div>
+        <div class="bd">
+          <div class="row">
+            <a id="email-link" href="mailto:mmukanovm@gmail.com">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 2v.217l10 6.25 10-6.25V6L12 12.25 2 6z"/></svg>
+              <span>mmukanovm@gmail.com</span>
+            </a>
+            <button class="btn" id="copy-email" type="button" aria-label="Copy email">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+              Copy
+            </button>
+          </div>
+
+          <div class="row">
+            <a href="https://github.com/MadiyarM" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.85 3.14 8.96 7.49 10.41.55.1.75-.24.75-.53 0-.26-.01-1.11-.02-2.02-3.05.66-3.7-1.3-3.7-1.3-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.08-.67.08-.67 1.09.08 1.66 1.12 1.66 1.12.98 1.67 2.58 1.19 3.2.91.1-.71.38-1.19.69-1.47-2.44-.28-5.01-1.22-5.01-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.41.11-2.94 0 0 .92-.29 3.02 1.13.87-.24 1.8-.35 2.73-.35.93 0 1.86.12 2.73.35 2.1-1.42 3.02-1.13 3.02-1.13.6 1.53.22 2.66.11 2.94.7.77 1.12 1.75 1.12 2.95 0 4.22-2.58 5.15-5.04 5.42.39.34.74 1.01.74 2.04 0 1.47-.01 2.66-.01 3.02 0 .29.2.64.76.53 4.34-1.45 7.48-5.56 7.48-10.41C23.02 5.24 18.27.5 12 .5z"/></svg>
+              <span>github.com/MadiyarM</span>
+            </a>
+            <a class="btn" href="https://github.com/MadiyarM?tab=repositories" target="_blank" rel="noopener">Repos</a>
+          </div>
+
+          <div class="row">
+            <a href="https://www.linkedin.com/in/muqantegi/" target="_blank" rel="noopener">
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.5 0h3.8v2.1h.05c.53-1 1.83-2.1 3.77-2.1 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.43 0-2.8 1.9-2.8 3.86V24h-4V8.5z"/></svg>
+              <span>linkedin.com/in/muqantegi</span>
+            </a>
+            <a class="btn" href="https://www.linkedin.com/in/muqantegi/details/contact-info/" target="_blank" rel="noopener">Contact info</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Right: Quick composer & local time ===== -->
+      <aside class="card">
+        <div class="hd"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4a2 2 0 0 1 2-2h9l7 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4zm11 0v5h5"/></svg><strong>Quick mail composer</strong></div>
+        <div class="bd">
+          <form class="form" onsubmit="compose(event)">
+            <div>
+              <label for="subj">Subject</label>
+              <input id="subj" type="text" placeholder="Collaboration on thermal+RGB fusion" />
+            </div>
+            <div>
+              <label for="msg">Message</label>
+              <textarea id="msg" placeholder="Hi Madiyar"></textarea>
+            </div>
+            <div class="actions">
+              <button class="btn primary" type="submit">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+                Compose email
+              </button>
+              <button class="btn" type="button" id="clear">Clear</button>
+            </div>
+          </form>
+          <!-- <p class="muted" style="margin:.6rem 0 0">Opens your email client via <code>mailto:</code> (no file uploads here).</p> -->
+        </div>
+      </aside>
+
+      <aside class="card">
+        <div class="hd">
+          <svg class="icon-clock" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="Local time">
+            <!-- Циферблат -->
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <!-- Риски 12/3/6/9 -->
+            <path d="M12 3.5v2.2M20.5 12h-2.2M12 18.3v2.2M5.7 12H3.5"
+                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Стрелки -->
+            <path d="M12 12 V7.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M12 12 L15.2 13.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <!-- Ось -->
+            <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+          </svg>
+          <strong>Abu Dhabi Time</strong>
+        </div>
+        <div class="bd">
+          <div class="clock" id="clock-abu-dhabi">…</div>
+          <div class="muted">Asia/Dubai (UTC+4)</div>
+        </div>
+      </aside>
+
+      <aside class="card">
+        <div class="hd">
+          <svg class="icon-clock" viewBox="0 0 24 24" width="24" height="24" role="img" aria-label="Local time">
+            <!-- Циферблат -->
+            <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <!-- Риски 12/3/6/9 -->
+            <path d="M12 3.5v2.2M20.5 12h-2.2M12 18.3v2.2M5.7 12H3.5"
+                  fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Стрелки -->
+            <path d="M12 12 V7.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <path d="M12 12 L15.2 13.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            <!-- Ось -->
+            <circle cx="12" cy="12" r="1.2" fill="currentColor"/>
+          </svg>
+          <strong>Almaty Time</strong></div>
+        <div class="bd">
+          <div class="clock" id="clock">…</div>
+          <div class="muted">Asia/Almaty (GMT+6)</div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Copy email
+    const copyBtn = document.getElementById('copy-email');
+    copyBtn?.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText('mmukanovm@gmail.com');
+        copyBtn.textContent = 'Copied';
+        setTimeout(()=> copyBtn.textContent = 'Copy', 1400);
+      }catch(e){
+        alert('Copy failed');
+      }
+    });
+
+    // Quick composer
+    function compose(e){
+      e.preventDefault();
+      const subj = encodeURIComponent(document.getElementById('subj').value.trim());
+      const msg  = encodeURIComponent(document.getElementById('msg').value.trim());
+      const mail = `mailto:mmukanovm@gmail.com?subject=${subj}&body=${msg}`;
+      window.location.href = mail;
+    }
+    document.getElementById('clear')?.addEventListener('click', ()=>{
+      document.getElementById('subj').value='';
+      document.getElementById('msg').value='';
+    });
+
+    // Local time (Asia/Almaty)
+    const clockEl = document.getElementById('clock');
+    function tick(){
+      const now = new Date();
+      const fmt = new Intl.DateTimeFormat('en-US', {
+        timeZone:'Asia/Almaty', weekday:'short', month:'short', day:'2-digit',
+        hour:'2-digit', minute:'2-digit', second:'2-digit', 
+      });
+      clockEl.textContent = fmt.format(now);
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+
+  <script>
+    (() => {
+      const el = document.getElementById('clock-abu-dhabi');
+      const tz = 'Asia/Dubai';
+      const locale = 'en-US-u-nu-latn'; // force English + Latin digits
+    
+      const formatter = new Intl.DateTimeFormat(locale, {
+        timeZone: tz,
+        weekday: 'short',
+        // year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      });
+    
+      function tick() {
+        el.textContent = formatter.format(new Date());
+      }
+    
+      tick();
+      setInterval(tick, 1000);
+    })();
+    </script>
+</body>
+</html>

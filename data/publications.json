@@ -1,0 +1,71 @@
+{
+  "publications": [
+    {
+      "id": "mukanov2025patient",
+      "title": "An Intelligent System for Automated Monitoring and Control of Patient Conditions",
+      "authors": [
+        {
+          "name": "Madiyar Mukanov",
+          "affiliation": "Independent Researcher",
+          "email": "madiyar@example.com"
+        }
+      ],
+      "venue": {
+        "name": "AIR 2025",
+        "type": "conference",
+        "location": "International Conference on Artificial Intelligence and Robotics",
+        "date": "2025"
+      },
+      "status": "in_press",
+      "publisher": "Springer",
+      "year": 2025,
+      "abstract": "This paper presents an intelligent system for automated monitoring and control of patient conditions using real-time IR-RGB fusion technology. The system combines thermal imaging with RGB cameras to enable contactless temperature screening while maintaining face identification capabilities. The architecture includes on-device logging using SQLite database, automated alert generation, and a compact 3D-printed enclosure for practical deployment. The system demonstrates significant improvements in patient monitoring efficiency while maintaining privacy and reducing physical contact requirements. Experimental results show high accuracy in temperature measurement and reliable face identification across various lighting conditions and patient positions. The modular design allows for easy integration into existing healthcare infrastructure and provides a scalable solution for automated patient monitoring in clinical settings.",
+      "keywords": [
+        "patient monitoring",
+        "IR-RGB fusion",
+        "thermal imaging",
+        "face identification",
+        "edge computing",
+        "healthcare automation",
+        "contactless screening",
+        "real-time processing"
+      ],
+      "files": {
+        "pdf": "assets/pdf/papers/mukanov2025-patient-monitoring.pdf",
+        "preprint": "assets/pdf/papers/mukanov2025-patient-monitoring-preprint.pdf",
+        "presentation": "assets/pdf/papers/mukanov2025-patient-monitoring-slides.pdf",
+        "supplementary": "assets/pdf/papers/mukanov2025-patient-monitoring-supplementary.pdf"
+      },
+      "links": {
+        "doi": "https://doi.org/10.1007/springer-patient-monitoring-2025",
+        "arxiv": "https://arxiv.org/abs/2501.01234",
+        "github": "https://github.com/MadiyarM/patient-monitoring-system",
+        "demo": "https://demo.patient-monitoring.ai"
+      },
+      "metrics": {
+        "citations": 0,
+        "downloads": 0,
+        "views": 0
+      },
+      "awards": [],
+      "media": {
+        "thumbnail": "assets/img/papers/patient-monitoring-system.jpg",
+        "gallery": [
+          "assets/img/papers/patient-monitoring-ui.jpg",
+          "assets/img/papers/patient-monitoring-hardware.jpg",
+          "assets/img/papers/patient-monitoring-results.jpg"
+        ],
+        "video": "assets/video/patient-monitoring-demo.mp4"
+      },
+      "bibtex": "@inproceedings{mukanov2025patient,\n  title={An Intelligent System for Automated Monitoring and Control of Patient Conditions},\n  author={Mukanov, Madiyar},\n  booktitle={AIR 2025},\n  year={2025},\n  publisher={Springer},\n  note={in press}\n}",
+      "created": "2025-01-01",
+      "updated": "2025-01-01"
+    }
+  ],
+  "metadata": {
+    "total_publications": 1,
+    "last_updated": "2025-01-01",
+    "version": "1.0",
+    "schema": "publications-v1"
+  }
+}

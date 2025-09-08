@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resources (Write‑Ups) — Madiyar Mukanov</title>
+  <meta name="description" content="Write‑ups, cheat sheets, templates, and guides for robotics/AI work. Visual‑first cards with fast search & tags." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    /* ===== Page header ===== */
+    .page-head{padding:.6rem 0 1rem}
+    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
+    .page-head p{color:var(--text-muted); margin:.2rem 0}
+
+    /* ===== Controls ===== */
+    .controls{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin: .6rem 0 1rem}
+    .controls input[type="search"]{width:min(360px,100%); padding:.5rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
+    .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark); cursor:pointer}
+    .chip.active{background:rgba(22,163,74,.12); border-color:var(--accent)}
+
+    /* ===== Resources grid ===== */
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
+    .res{grid-column: span 6; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden; position:relative}
+    .res a.cover{display:block}
+    .res img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.04)}
+    .res .body{padding:.9rem}
+    .res h3{margin:.1rem 0 .4rem; font-size:1.12rem}
+    .pins{position:relative; padding-left:.65rem}
+    .pins::before{content:""; position:absolute; left:0; top:.15rem; bottom:.15rem; width:3px; border-radius:2px; background:linear-gradient(180deg, rgba(22,163,74,.75) 0%, rgba(22,163,74,.2) 100%)}
+    .meta{display:flex; gap:.5rem; flex-wrap:wrap; color:var(--text-muted); font-size:.9rem}
+    .badge{display:inline-block; font-size:.78rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
+    .tags{display:flex; flex-wrap:wrap; gap:.4rem; margin:.45rem 0 0}
+    .tag{font-size:.8rem; padding:.18rem .5rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark)}
+
+    .links{display:flex; flex-wrap:wrap; gap:.45rem; margin:.55rem 0 0}
+    .btn{display:inline-block; padding:.45rem .7rem; border-radius:.55rem; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none}
+    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
+
+    details{margin-top:.5rem}
+    details > summary{cursor:pointer; color:var(--accent-dark)}
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .res{grid-column: span 12}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html">Random projects</a></li>
+          <li><a href="resources.html" aria-current="page">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <h1>Resources (Write‑Ups)</h1>
+      <p>Cheat sheets, guides, and templates I reuse across projects.</p>
+
+      <!-- Filters -->
+      <!-- <div class="controls">
+        <input id="q" type="search" placeholder="Search title or tags…" aria-label="Search resources" />
+        <button class="chip" data-filter="Vision">Vision</button>
+        <button class="chip" data-filter="Sensors">Sensors</button>
+        <button class="chip" data-filter="Embedded">Embedded</button>
+        <button class="chip" data-filter="Evaluation">Evaluation</button>
+        <button class="chip" data-filter="Writing">Writing</button>
+        <button class="chip" data-filter="Template">Template</button>
+        <button class="chip" data-filter="Cheat Sheet">Cheat Sheet</button>
+        <button class="chip" data-filter="Guide">Guide</button>
+      </div> -->
+    </section>
+
+    <section class="container">
+      <div id="grid" class="grid">
+        <!-- Resource 1: OpenCV calibration cheat sheet -->
+        <!-- <article class="res" data-tags="Vision,OpenCV,Calibration,Cheat Sheet">
+          <a class="cover" href="assets/pdf/resources/opencv-calibration-cheatsheet.pdf" title="OpenCV Camera Calibration Cheat Sheet (PDF)" target="_blank" rel="noopener">
+            <img src="assets/img/resources/opencv-calibration.jpg" alt="OpenCV chessboard calibration diagram and equations" />
+          </a>
+          <div class="body">
+            <h3 class="pins">OpenCV Camera Calibration Cheat Sheet</h3>
+            <div class="meta">
+              <span class="badge">Cheat Sheet</span>
+              <span>Last updated: 2025‑08‑01</span>
+            </div>
+            <div class="tags">
+              <span class="tag">Vision</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Calibration</span>
+            </div>
+            <div class="links">
+              <a class="btn" href="assets/pdf/resources/opencv-calibration-cheatsheet.pdf" target="_blank" rel="noopener">Download PDF</a>
+            </div>
+            <details>
+              <summary>Outline</summary>
+              <ul>
+                <li>Patterns (chessboard, circles)</li>
+                <li>Intrinsics/extrinsics</li>
+                <li>Distortion models</li>
+                <li>Reprojection error and tips</li>
+              </ul>
+            </details>
+          </div>
+        </article> -->
+
+        <!-- Resource 2: MLX90640 quick start guide -->
+        <article class="res" data-tags="Sensors,Thermal,Embedded,Guide">
+          <a class="cover" href="assets/pdf/resources/mlx90640-quickstart.pdf" title="MLX90640 Quick Start (PDF)" target="_blank" rel="noopener">
+            <img src="assets/img/resources/mlx90640-quickstart.jpg" alt="Thermal sensor array MLX90640 with wiring" />
+          </a>
+          <div class="body">
+            <h3 class="pins">MLX90640 Quick Start</h3>
+            <div class="meta">
+              <span class="badge">Guide</span>
+              <!-- <span>Last updated: 2025‑06‑12</span> -->
+            </div>
+            <div class="tags">
+              <span class="tag">Sensors</span>
+              <span class="tag">Thermal</span>
+              <span class="tag">Embedded</span>
+            </div>
+            <div class="links">
+              <a class="btn" href="assets/pdf/resources/mlx90640-quickstart.pdf" target="_blank" rel="noopener">Download PDF</a>
+            </div>
+            <details>
+              <summary>Outline</summary>
+              <ul>
+                <li>I²C wiring & addresses</li>
+                <li>Frame rates & modes</li>
+                <li>Temperature mapping & palettes</li>
+                <li>Noise/drift notes</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Simple client-side filtering (search + chips)
+    const q = document.getElementById('q');
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const cards = Array.from(document.querySelectorAll('.res'));
+    const active = new Set();
+
+    function apply(){
+      const term = (q?.value || '').toLowerCase();
+      cards.forEach(card => {
+        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const matchText = !term || title.includes(term) || tags.includes(term);
+        const matchTags = active.size === 0 || Array.from(active).some(t => tags.includes(t.toLowerCase()));
+        card.style.display = (matchText && matchTags) ? '' : 'none';
+      });
+    }
+
+    q?.addEventListener('input', apply);
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      const key = ch.getAttribute('data-filter');
+      if(ch.classList.toggle('active')) active.add(key); else active.delete(key);
+      apply();
+    }));
+  </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Random Projects — Madiyar Mukanov</title>
+  <meta name="description" content="Side projects & experiments beyond core robotics/AI. Visual‑first cards linking to one‑page, quick‑skim case studies." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    /* ===== Page header ===== */
+    .page-head{padding: .5rem 0 1rem}
+    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
+    .page-head p{color:var(--text-muted); margin:.2rem 0}
+
+    /* ===== Filter bar ===== */
+    .filters{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.6rem 0 1rem}
+    .filters input[type="search"]{width:min(360px,100%); padding:.5rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
+    .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark); cursor:pointer}
+    .chip.active{background:rgba(22,163,74,.12); border-color:var(--accent)}
+
+    /* ===== Projects grid ===== */
+    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
+    .project{grid-column: span 6; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden; position:relative}
+    .project a.cover{display:block}
+    .project img{width:100%; height:240px; object-fit:cover; display:block; filter:saturate(1.04)}
+    .project .body{padding: .9rem}
+    .project h3{margin:.1rem 0 .4rem; font-size:1.15rem}
+    .pins{position:relative; padding-left:.65rem}
+    .pins::before{content:""; position:absolute; left:0; top:.15rem; bottom:.15rem; width:3px; border-radius:2px; background:linear-gradient(180deg, rgba(22,163,74,.75) 0%, rgba(22,163,74,.2) 100%)}
+    .project .meta{display:flex; gap:.5rem; flex-wrap:wrap; color:var(--text-muted); font-size:.9rem}
+    .badge{display:inline-block; font-size:.78rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
+    .skills{display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0 0}
+    .skills .tag{font-size:.8rem; padding:.18rem .5rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark)}
+
+    .project .cta{margin-top:.6rem}
+    .btn{display:inline-block; padding:.45rem .7rem; border-radius:.55rem; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none}
+    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .project{grid-column: span 12}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html" aria-current="page">Random projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <h1>Random Projects</h1>
+      <p>Side projects and experiments.</p>
+
+      <!-- Filters -->
+      <!-- <div class="filters">
+        <input id="q" type="search" placeholder="Search title or skills…" aria-label="Search projects" />
+        <button class="chip" data-filter="DIY">DIY</button>
+        <button class="chip" data-filter="Web">Web</button>
+        <button class="chip" data-filter="Design">Design</button>
+        <button class="chip" data-filter="Photography">Photography</button>
+        <button class="chip" data-filter="Bot">Bot</button>
+      </div> -->
+    </section>
+
+    <section class="container">
+      <div id="grid" class="grid">
+        <!-- Project 1: HonestRE Bot -->
+        <article class="project" data-tags="Bot,Web,Telegram,AI">
+          <a class="cover" href="random_honestre_bot.html" title="Open: HonestRE Bot — Telegram WebApp + Bot">
+            <img src="assets/img/projects/random/randomhonestre-bot-preview.jpg" alt="HonestRE Bot interface showing residential complex reviews" />
+          </a>
+          <div class="body">
+            <h3 class="pins"><a href="random_honestre_bot.html">HonestRE Bot — Telegram WebApp + Bot</a></h3>
+            <div class="meta">
+              <span class="badge">Production Status</span>
+              <span>Bot · Web · AI</span>
+            </div>
+            <div class="skills">
+              <span class="tag">Telegram Bot</span>
+              <span class="tag">WebApp</span>
+              <span class="tag">RAG</span>
+              <span class="tag">Geosearch</span>
+            </div>
+            <div class="cta"><a class="btn" href="random_honestre_bot.html">Open→</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Simple client-side filtering (search + chips)
+    const q = document.getElementById('q');
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const projects = Array.from(document.querySelectorAll('.project'));
+    const active = new Set();
+
+    function applyFilter(){
+      const term = (q.value || '').toLowerCase();
+      projects.forEach(card => {
+        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const matchText = !term || title.includes(term) || tags.includes(term);
+        const matchTags = active.size === 0 || Array.from(active).some(t => tags.includes(t.toLowerCase()));
+        card.style.display = (matchText && matchTags) ? '' : 'none';
+      });
+    }
+
+    q?.addEventListener('input', applyFilter);
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      const key = ch.getAttribute('data-filter');
+      if(ch.classList.toggle('active')) active.add(key); else active.delete(key);
+      applyFilter();
+    }));
+  </script>
+</body>
+</html>

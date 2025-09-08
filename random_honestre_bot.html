@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HonestRE Bot — Telegram WebApp + Bot for residential-complex reviews — Madiyar Mukanov</title>
+  <meta name="description" content="Production Telegram bot for residential complex reviews with moderation, ranking, geosearch, and RAG summaries. Built with anti-spam protection and WebApp integration." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="canonical" href="https://madiyarmukanov.com/random_honestre_bot.html" />
+  <meta name="theme-color" content="#16a34a" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="HonestRE Bot — Telegram WebApp + Bot for residential-complex reviews" />
+  <meta property="og:description" content="Production Telegram bot for residential complex reviews with moderation, ranking, geosearch, and RAG summaries." />
+  <meta property="og:url" content="https://madiyarmukanov.com/random_honestre_bot.html" />
+  <meta property="og:image" content="https://madiyarmukanov.com/assets/img/projects/random/honestre-bot-preview.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    .project-header{
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 0;
+    }
+
+    .project-title{
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      line-height: 1.2;
+      margin: 0 0 1rem 0;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .project-subtitle{
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin: 0 0 1.5rem 0;
+    }
+
+    .status-badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: white;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .content-section{
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .content-section h2{
+      margin: 0 0 1.5rem 0;
+      font-size: 1.5rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .content-section h3{
+      margin: 1.5rem 0 1rem 0;
+      font-size: 1.2rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .content-section p{
+      margin: 0 0 1rem 0;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .highlight-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .highlight-card{
+      padding: 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .highlight-icon{
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .highlight-card h4{
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .highlight-card p{
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .tech-stack{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .tech-tag{
+      padding: 0.3rem 0.8rem;
+      background: rgba(22,163,74,.1);
+      color: var(--accent-dark);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .architecture-diagram{
+      background: #f8f9fa;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .architecture-diagram h4{
+      margin: 0 0 1rem 0;
+      color: var(--text);
+    }
+
+    .flow-steps{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .flow-step{
+      flex: 1;
+      min-width: 120px;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .flow-arrow{
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+
+    .screenshot-gallery{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .screenshot-item{
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .screenshot-item img{
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .screenshot-caption{
+      padding: 1rem;
+      background: var(--bg);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .links-section{
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .project-link{
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: white;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .project-link:hover{
+      background: var(--accent-dark);
+      color: white;
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .project-link.secondary{
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .project-link.secondary:hover{
+      background: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .flow-steps{
+        flex-direction: column;
+      }
+      
+      .flow-arrow{
+        transform: rotate(90deg);
+      }
+      
+      .links-section{
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .project-link{
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html">Random projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="project-header" style="margin-bottom: 0;">
+        <h1 class="project-title">HonestRE Bot</h1>
+        <p class="project-subtitle">Telegram WebApp + Bot for residential-complex reviews with moderation, ranking, geosearch, and RAG summaries</p>
+        <div class="status-badge">
+          🚀 Production Status
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>Project Overview</h2>
+        <p>HonestRE Bot is a production-ready Telegram bot that helps residents search for residential complexes, submit reviews, and enables administrators to moderate content with built-in anti-spam protection.</p>
+        
+        <!-- <div class="tech-stack">
+          <span class="tech-tag">Telegram Bot API</span>
+          <span class="tech-tag">WebApp</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">FastAPI</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">RAG</span>
+          <span class="tech-tag">Geosearch</span>
+          <span class="tech-tag">Anti-spam</span>
+        </div> -->
+      </div>
+
+      <div class="content-section">
+        <h2>Key Features</h2>
+        <div class="highlight-grid">
+          <div class="highlight-card">
+            <div class="highlight-icon">🔎</div>
+            <h4>Smart Search</h4>
+            <p>Search complexes by name using Levenshtein algorithm with fuzzy matching capabilities</p>
+          </div>
+          <!-- <div class="highlight-card">
+            <div class="highlight-icon">✍️</div>
+            <h4>Review System</h4>
+            <p>Submit reviews with rating, text, and confirmation workflow for quality control</p>
+          </div> -->
+          <!-- <div class="highlight-card">
+            <div class="highlight-icon">🛡️</div>
+            <h4>Content Moderation</h4>
+            <p>Admin moderation queue with approve/reject functionality and anti-spam protection</p>
+          </div> -->
+          <div class="highlight-card">
+            <div class="highlight-icon">🚦</div>
+            <h4>Rate Limiting</h4>
+            <p>Built-in anti-spam and rate limiting to prevent abuse and ensure quality</p>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">🔗</div>
+            <h4>WebApp Integration</h4>
+            <p>Seamless hand-off to WebApp for richer UI and enhanced user experience</p>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-icon">⚡</div>
+            <h4>Fast & Minimal</h4>
+            <p>Designed for noisy, real-world input with fast, minimal UX optimized for mobile</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>System Architecture</h2>
+        <div class="architecture-diagram">
+          <h4>Bot ↔ Core API ↔ Database</h4>
+          <div class="flow-steps">
+            <div class="flow-step">
+              <strong>Telegram Bot</strong><br>
+              User Interface
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <strong>Core API</strong><br>
+              Business Logic
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <strong>Database</strong><br>
+              Data Storage
+            </div>
+          </div>
+        </div>
+        
+        <p>The bot serves as a thin client over HTTPS, with all business logic and storage handled by the Core API.</p>
+        
+        <!-- <h3>API Endpoints</h3>
+        <ul>
+          <li><code>GET /complexes/search?q=...</code> → List of matching complexes</li>
+          <li><code>GET /complexes/{id}</code> → Complex details + recent reviews</li>
+          <li><code>POST /reviews</code> → Create review (status = pending)</li>
+          <li><code>POST /admin/moderation/{id}/decision</code> → Approve/reject review</li>
+        </ul> -->
+      </div>
+
+      <div class="content-section">
+        <h2>User Journey</h2>
+        <div class="screenshot-gallery">
+          <div class="screenshot-item">
+            <img src="assets/img/projects/random/flow_user_01_start.jpg" alt="HonestRE Bot start screen" />
+            <div class="screenshot-caption">1. Start & menu - Clean interface with main options</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="assets/img/projects/random/flow_user_02_search.jpg" alt="Search results interface" />
+            <div class="screenshot-caption">2. Search results - Fuzzy search with Levenshtein algorithm</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="assets/img/projects/random/flow_user_03_complex_card.jpg" alt="Complex details card" />
+            <div class="screenshot-caption">3. Complex card - Details and recent reviews</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="assets/img/projects/random/flow_user_04_add_review.jpg" alt="Add review interface" />
+            <div class="screenshot-caption">4. Add review - Rating and text input</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="assets/img/projects/random/flow_user_05_confirm.jpg" alt="Review confirmation" />
+            <div class="screenshot-caption">5. Confirm & submit - Review confirmation workflow</div>
+          </div>
+          <div class="screenshot-item">
+            <img src="assets/img/projects/random/flow_user_06_webapp.jpg" alt="WebApp interface" />
+            <div class="screenshot-caption">6. WebApp hand-off - Richer UI for detailed interaction</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h2>Project Status & Links</h2>
+        <p><strong>Status:</strong> Active in production, serving real users with residential complex review functionality.</p>
+        
+        <div class="links-section">
+          <a href="https://t.me/HonestREBOT" class="project-link" target="_blank" rel="noopener">
+            🤖 Try the Bot
+          </a>
+          <a href="https://github.com/MadiyarM/honestre-bot-showcase" class="project-link secondary" target="_blank" rel="noopener">
+            📚 GitHub Showcase
+          </a>
+          <a href="mailto:mmukanovm@gmail.com" class="project-link secondary">
+            📧 Contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

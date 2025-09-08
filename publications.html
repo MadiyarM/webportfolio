@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Publications — Madiyar Mukanov</title>
+  <meta name="description" content="Peer‑reviewed papers, workshops, and preprints. Visual‑first, quickly scannable, with PDF/code/DOI links and BibTeX." />
+  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Page-specific styles */
+    /* ===== Page header ===== */
+    .page-head{padding:.6rem 0 1rem}
+    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
+    .page-head p{color:var(--text-muted); margin:.2rem 0}
+    .profiles{display:flex; flex-wrap:wrap; gap:.5rem; margin:.5rem 0 0}
+    .pill{display:inline-block; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--text)}
+    .pill:hover{border-color:var(--accent); background:rgba(22,163,74,.08); text-decoration:none}
+
+    /* ===== Controls ===== */
+    .controls{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin: .6rem 0 1rem}
+    .controls input[type="search"]{width:min(360px,100%); padding:.5rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
+    .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark); cursor:pointer}
+    .chip.active{background:rgba(22,163,74,.12); border-color:var(--accent)}
+    .select{padding:.45rem .6rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
+
+    /* ===== Publications list ===== */
+    .list{display:grid; gap:1rem}
+    .pub{display:grid; grid-template-columns: 180px 1fr; gap:1rem; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden}
+    .thumb{width:100%; height:100%; min-height:160px; object-fit:cover; display:block; filter:saturate(1.02)}
+    .body{padding:.9rem}
+    .title{margin:.1rem 0 .35rem; font-size:1.1rem}
+    .title .pins{position:relative; padding-left:.65rem}
+    .title .pins::before{content:""; position:absolute; left:0; top:.2rem; bottom:.2rem; width:3px; border-radius:2px; background:linear-gradient(180deg, rgba(22,163,74,.75) 0%, rgba(22,163,74,.2) 100%)}
+    .authors{color:var(--text-muted)}
+    .meta{display:flex; gap:.5rem; flex-wrap:wrap; margin:.35rem 0; color:var(--text-muted); font-size:.92rem}
+    .badge{display:inline-block; font-size:.78rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
+    .links{display:flex; flex-wrap:wrap; gap:.45rem; margin:.5rem 0 0}
+    .btn{display:inline-block; padding:.38rem .6rem; border-radius:.55rem; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none}
+    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
+
+    details{margin-top:.5rem}
+    details > summary{cursor:pointer; color:var(--accent-dark)}
+    pre{background:#fff; border:1px solid var(--border); border-radius:12px; padding:.75rem; overflow:auto}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .pub{grid-template-columns: 1fr}
+      .thumb{min-height:180px}
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== Fixed header ===== -->
+  <header class="site-header">
+    <div class="container wrap">
+      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
+      <nav aria-label="Primary navigation">
+        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
+        <ul id="nav-list">
+          <li><a href="publications.html" aria-current="page">Publications</a></li>
+          <li><a href="technical_projects.html">Technical projects</a></li>
+          <li><a href="random_projects.html">Random projects</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contacts.html">Contacts</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container page-head">
+      <h1>Publications</h1>
+      <!-- <p>Visual‑first list of papers and preprints. Each entry includes quick links (PDF, code, DOI) and a BibTeX block.</p>
+      <div class="profiles">
+        <a class="pill" href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">Google Scholar</a>
+        <a class="pill" href="https://orcid.org/YOUR_ORCID" target="_blank" rel="noopener">ORCID</a>
+      </div>
+
+      <div class="controls">
+        <input id="q" type="search" placeholder="Search title, venue, or author…" aria-label="Search publications" />
+        <button class="chip" data-type="journal">Journal</button>
+        <button class="chip" data-type="conference">Conference</button>
+        <button class="chip" data-type="workshop">Workshop</button>
+        <button class="chip" data-type="preprint">Preprint</button>
+        <select id="year" class="select" aria-label="Filter by year">
+          <option value="">All years</option>
+          <option>2025</option>
+          <option>2024</option>
+          <option>2023</option>
+          <option>2022</option>
+        </select>
+        <select id="sort" class="select" aria-label="Sort">
+          <option value="desc">Newest first</option>
+          <option value="asc">Oldest first</option>
+        </select>
+      </div> -->
+    </section>
+
+    <section class="container">
+      <div id="list" class="list">
+        <!-- ===== Pub 1 ===== -->
+        <article class="pub" data-year="2025" data-type="conference">
+          <img class="thumb" src="assets/img/papers/certificate1.png" alt="Patient monitoring system UI thumbnail" />
+          <div class="body">
+            <a href="publication_patient_monitoring.html">
+              <h3 class="title"><span class="pins">An Intelligent System for Automated Monitoring and Control of Patient Conditions</span></h3>
+            </a>
+            <div class="authors">M. Mukanov</div>
+            <div class="meta">
+              <span>Presented at AIR 2025 · 2025</span>
+              <span class="badge">Springer publication: in press</span>
+            </div>
+            <div class="links">
+              <a class="btn" href="publication_patient_monitoring.html">Details</a>
+              <a class="btn" href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" rel="noopener">PDF</a>
+              <!-- <a class="btn" href="https://doi.org/10.1007/springer-patient-monitoring-2025" target="_blank" rel="noopener">DOI</a> -->
+            </div>
+            <!-- <details>
+              <summary>BibTeX</summary>
+              <pre>@inproceedings{mukanov2025patient,
+  title={An Intelligent System for Automated Monitoring and Control of Patient Conditions},
+  author={Mukanov, Madiyar},
+  booktitle={AIR 2025},
+  year={2025},
+  note={Springer publication: in press, 2025}
+}</pre>
+            </details> -->
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container wrap">
+      <span>© <span id="y"></span> Madiyar Mukanov</span>
+      <span>·</span>
+      <a href="sitemap.xml">sitemap</a>
+      <span>·</span>
+      <a href="robots.txt">robots.txt</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const btn = document.getElementById('menu-btn');
+    const list = document.getElementById('nav-list');
+    if(btn && list){
+      btn.addEventListener('click', () => {
+        const open = list.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    }
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Filtering & sorting
+    const q = document.getElementById('q');
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const yearSel = document.getElementById('year');
+    const sortSel = document.getElementById('sort');
+    const items = Array.from(document.querySelectorAll('.pub'));
+    const activeTypes = new Set();
+
+    function apply(){
+      const term = (q?.value || '').toLowerCase();
+      const y = yearSel?.value || '';
+      items.forEach(el => {
+        const t = (el.querySelector('.title')?.textContent || '').toLowerCase();
+        const a = (el.querySelector('.authors')?.textContent || '').toLowerCase();
+        const m = (el.querySelector('.meta')?.textContent || '').toLowerCase();
+        const matchText = !term || t.includes(term) || a.includes(term) || m.includes(term);
+        const matchYear = !y || el.dataset.year === y;
+        const type = el.dataset.type || '';
+        const matchType = activeTypes.size === 0 || activeTypes.has(type);
+        el.style.display = (matchText && matchYear && matchType) ? '' : 'none';
+      });
+      // Sort
+      const list = document.getElementById('list');
+      const visible = items.filter(el => el.style.display !== 'none');
+      visible.sort((A,B) => {
+        const ya = parseInt(A.dataset.year,10) || 0;
+        const yb = parseInt(B.dataset.year,10) || 0;
+        return sortSel.value === 'asc' ? ya - yb : yb - ya;
+      });
+      visible.forEach(el => list.appendChild(el));
+    }
+
+    q?.addEventListener('input', apply);
+    yearSel?.addEventListener('change', apply);
+    sortSel?.addEventListener('change', apply);
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      const key = ch.getAttribute('data-type');
+      if(ch.classList.toggle('active')) activeTypes.add(key); else activeTypes.delete(key);
+      apply();
+    }));
+
+    apply();
+  </script>
+</body>
+</html>
