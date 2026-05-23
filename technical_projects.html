@@ -1,144 +1,325 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Technical Projects — Madiyar Mukanov</title>
-  <meta name="description" content="A curated set of technical projects in robotics & AI. Visual-first, quickly scannable, each linking to a one‑page case study." />
-  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="manifest.webmanifest" />
-
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/includes.js" defer></script>
-  <style>
-    /* Page-specific styles */
-    /* ===== Page header ===== */
-    .page-head{padding: .5rem 0 1rem}
-    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
-    .page-head p{color:var(--text-muted); margin:.2rem 0}
-
-    /* ===== Filter bar ===== */
-    .filters{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.6rem 0 1rem}
-    .filters input[type="search"]{width:min(360px,100%); padding:.5rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
-    .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark); cursor:pointer}
-    .chip.active{background:rgba(22,163,74,.12); border-color:var(--accent)}
-
-    /* ===== Projects grid ===== */
-    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
-    .project{grid-column: span 6; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden; position:relative}
-    .project a.cover{display:block}
-    .project img{width:100%; height:240px; object-fit:cover; display:block; filter:saturate(1.04)}
-    .project .body{padding: .9rem}
-    .project h3{margin:.1rem 0 .4rem; font-size:1.15rem}
-    .project .meta{display:flex; gap:.5rem; flex-wrap:wrap; color:var(--text-muted); font-size:.9rem}
-    .badge{display:inline-block; font-size:.78rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
-    .skills{display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0 0}
-    .skills .tag{font-size:.8rem; padding:.18rem .5rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark)}
-
-    .project .cta{margin-top:.6rem}
-    .btn{display:inline-block; padding:.45rem .7rem; border-radius:.55rem; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none}
-    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
-    /* Title pins accent */
-    .pins{position:relative; padding-left:.65rem}
-    .pins::before{content:""; position:absolute; left:0; top:.15rem; bottom:.15rem; width:3px; border-radius:2px;
-      background:linear-gradient(180deg, rgba(22,163,74,.75) 0%, rgba(22,163,74,.2) 100%)}
-
-    /* Responsive */
-    @media (max-width: 860px){
-      .project{grid-column: span 12}
-    }
-  </style>
+﻿<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="canonical" href="https://madiyarmukanov.com/technical_projects.html">
+<link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml">
+<title>MADIYAR MUKANOV | Technical Projects</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#62df7d",
+                    "on-tertiary-container": "#1c2a3d",
+                    "surface-tint": "#62df7d",
+                    "background": "#0c1324",
+                    "surface-container-lowest": "#070d1f",
+                    "on-primary-fixed-variant": "#005320",
+                    "on-secondary": "#283044",
+                    "secondary-container": "#3f465c",
+                    "outline-variant": "#3e4a3d",
+                    "on-secondary-fixed": "#131b2e",
+                    "on-primary-container": "#003111",
+                    "slate-surface": "#0F172A",
+                    "error-container": "#93000a",
+                    "outline": "#879485",
+                    "secondary": "#bec6e0",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#2a3043",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-bright": "#33394c",
+                    "on-background": "#dce1fb",
+                    "inverse-surface": "#dce1fb",
+                    "surface-container": "#191f31",
+                    "grid-line": "#1E293B",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "on-primary": "#003914",
+                    "electric-blue": "#1313BD",
+                    "terminal-green": "#16A34A",
+                    "surface-container-highest": "#2e3447",
+                    "on-secondary-container": "#adb4ce",
+                    "surface-container-low": "#151b2d",
+                    "tertiary-container": "#8392a9",
+                    "tertiary-fixed": "#d5e3fd",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#23293c",
+                    "primary-container": "#1ca64d",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#b9c7e0",
+                    "on-surface-variant": "#bdcaba",
+                    "on-surface": "#dce1fb",
+                    "surface": "#0c1324",
+                    "primary-fixed-dim": "#62df7d",
+                    "on-tertiary-fixed-variant": "#3a485c",
+                    "on-primary-fixed": "#002109",
+                    "inverse-primary": "#006e2d",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "text-dim": "#6B7280",
+                    "surface-variant": "#2e3447",
+                    "surface-dim": "#0c1324",
+                    "on-tertiary-fixed": "#0d1c2f",
+                    "tertiary": "#b9c7e0",
+                    "on-tertiary": "#233144",
+                    "primary-fixed": "#7ffc97"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "grid-size": "32px",
+                    "unit": "4px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["JetBrains Mono"],
+                    "headline-xl-mobile": ["JetBrains Mono"],
+                    "headline-xl": ["JetBrains Mono"],
+                    "code-snippet": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["JetBrains Mono"],
+                    "label-sm": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-mesh {
+            background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), 
+                              linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 15px rgba(98, 223, 125, 0.2);
+            border-color: #62df7d;
+        }
+        .technical-label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 2px 8px;
+            background: #1E293B;
+            border-bottom-left-radius: 4px;
+            color: #62df7d;
+            font-size: 10px;
+            font-family: 'JetBrains Mono';
+        }
+    </style>
 </head>
-<body>
-  <div data-include="header"></div>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Bar -->
+<nav class="bg-surface/80 dark:bg-surface/80 border-b border-grid-line backdrop-blur-md docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">MADIYAR MUKANOV</div>
+<div class="hidden md:flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career.html">Career</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects.html">Random</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 font-label-sm text-label-sm hover:opacity-90 transition-all">RESUME</button>
+</nav>
+<main class="min-h-screen grid-mesh" style="background-position: 9.84375px 6.14544px;">
+<!-- Hero / Title Section -->
+<header class="pt-24 pb-12 px-margin-desktop border-b border-grid-line bg-surface/40">
+<div class="max-w-7xl mx-auto">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high border border-grid-line rounded-full mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Repository v2.04</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">Technical <br><span class="text-primary">Deployments</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    A curated collection of robotics, AI-driven applications, and embedded systems developed with a physics-first engineering philosophy.
+                </p>
+</div>
+</header>
+<!-- Project Grid -->
+<section class="py-20 px-margin-desktop">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Project 1: HonestREBot -->
+<article class="md:col-span-8 group relative bg-slate-surface border border-grid-line overflow-hidden glow-border transition-all duration-300">
+<div class="technical-label">[SYS_ID: REBOT-01]</div>
+<div class="flex flex-col md:flex-row h-full">
+<div class="w-full md:w-1/2 overflow-hidden border-r border-grid-line">
+<img alt="HonestREBot Interface" class="w-full h-64 md:h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105" data-alt="A sophisticated mobile interface mock-up of a Telegram Mini-App. The screen displays a complex real estate dashboard with green glowing geometric data visualizations and clean monospaced typography. The background is a dark, tech-oriented office with soft blue ambient lighting, reflecting a professional software development environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD23fQkezoXGeaQlIVNpStzKmE8PgPa6un5sFDbCJ9-ENBFdK058khx_hEx4LXEPV1v1qvbAko_dwPuJudCd6jKkoWv5OndDR8gCzmEPcmJGdHn-ndm_ydpKxSO-n-L2ZtmBSHDtcASdpQ4hTE5C1qQ5vdZgi0NftHKSutYC4Dune33PlaRluRx2LHFr0exLABx9DRjqu8HmY5HaLf9uZ1eER-HMHWL3bam1roVST59k1oorQyJN6XNA51XctqEll7b06yPRc6N3uV9">
+</div>
+<div class="w-full md:w-1/2 p-8 flex flex-col justify-between">
+<div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">Telegram API</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">Vue.js</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">Node.js</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">MLOps</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">Docker</span></div>
+<h2 class="font-headline-lg text-headline-lg mb-4 text-on-surface">HonestREBot</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                                    A high-performance Telegram Mini-App designed for transparent real estate transactions. Features include instantaneous data synchronization, automated escrow triggers, and a custom UI built for extreme low-latency interaction.
+                                </p><div class="mt-4 p-4 bg-surface-container-high border-l-4 border-primary">
+    <p class="font-label-sm text-label-sm text-primary mb-1 uppercase">Production Metrics</p>
+    <p class="font-code-snippet text-code-snippet text-on-surface-variant">
+        Scalability: 1000+ active users | Latency: &lt;150ms | Security: End-to-end encrypted protocol
+    </p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm hover:underline" href="#">
+<span class="material-symbols-outlined">terminal</span> VIEW REPO
+                                </a>
+<a class="inline-flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">open_in_new</span> LIVE DEMO
+                                </a>
+</div>
+</div>
+</div>
+</article>
+<!-- Project 2: Patient Monitoring Platform -->
+<article class="md:col-span-4 group relative bg-slate-surface border border-grid-line overflow-hidden glow-border transition-all duration-300">
+<div class="technical-label">[SYS_ID: MED-CV-02]</div>
+<div class="p-8 h-full flex flex-col">
+<div class="mb-6 h-48 bg-surface-container border border-grid-line relative overflow-hidden">
+<img alt="Medical CV Dashboard" class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" data-alt="A technical visualization of a medical monitoring platform. A computer monitor displays a real-time heatmap and skeletal tracking data from a thermal computer vision camera. The setting is a sterile, modern healthcare laboratory with dark blue tones and vibrant neon green data lines representing heart rate and movement signals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3zZELi1XUlFNXnGv9pIEv0SSvkIBnSiXdjPave6h2VyNfLmtRnwMwlLDXqAXn-BiVhRNHN4zfYgPf9YgBZBvia4X4MaspI_2auA7Dx45gmHp3a3RfdC9luJT1d6Yk6Z6M02bfbM0jW55acrABNqRvaCvHSONZTqYJHAZF1oi6mA-jNKjc0w7km-vBZhrE_BSuqLNkaMDVnDEf8XNqxIlXZm1AW2isFSjnDvRZ6RCg5q_FhyD_OR-M2Vz3ECXPYlJDupgrI9GfjEaq">
+</div>
+<div class="flex-grow">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">Python</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">Thermal CV</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-label-sm text-label-sm border border-primary/20">MLOps</span></div>
+<h2 class="font-headline-md text-headline-md mb-3 text-on-surface">Patient Monitoring</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                                Non-invasive monitoring system utilizing Thermal Computer Vision to track vitals and posture in elderly care.
+                            </p><div class="mt-4 p-4 bg-surface-container-high border-l-4 border-error/50">
+    <p class="font-label-sm text-label-sm text-error mb-1 uppercase">Failure Analysis</p>
+    <p class="font-body-md text-sm text-on-surface-variant">
+        <span class="font-bold">Challenge:</span> System drift in high-occlusion scenarios.<br>
+        <span class="font-bold text-primary">Resolution:</span> Integrated Kalman filtering for robust trajectory prediction.
+    </p>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 text-primary font-label-sm text-label-sm group-hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">arrow_forward</span> FULL CASE STUDY
+                        </a>
+</div>
+</article>
+<!-- Project 3: Bicycle Speedometer -->
+<article class="md:col-span-12 lg:col-span-6 group relative bg-slate-surface border border-grid-line overflow-hidden glow-border transition-all duration-300 flex flex-col md:flex-row">
+<div class="technical-label">[SYS_ID: HW-003]</div>
+<div class="md:w-1/3 h-64 md:h-auto border-r border-grid-line bg-surface-container-highest">
+<img alt="Bicycle Speedometer Hardware" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all" data-alt="A close-up high-resolution photograph of a custom-engineered electronic component for a bicycle. The device features exposed high-grade circuit boards, a small OLED display showing numeric velocity data, and brushed aluminum casing. The scene is lit with cinematic, hard-edged industrial lighting against a dark carbon-fiber background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd4JTe5l7f0ToEgqKveygXXTMg_If5kRsu8f66EVhmrzaQZ3dbgCz117Bg7OkcsCAIYk9rQbi61h_Wzfjp4f70igc7fB0Z8dYGkBj_WCtaMQ_uoy6A_sBDof4USqVNI4sWEtR6TOBI4CUL0_Oyt93xGV8cQdj06n9aVmafpUeIwwPe4B-FFqPawMlWFFoK69jqpeJIVpZgQVLKEkGncWD8I9aiynrV2lKVhXumRaBFw6k1MJCJrEkd6lUn_95RMEAjipfHywmWEfZM">
+</div>
+<div class="md:w-2/3 p-8 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-label-sm text-label-sm text-primary">KYOTO AWARD 2019 WINNER</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-4 text-on-surface">Digital Velocity Meter</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Award-winning embedded system project focused on high-precision hall-effect sensing and solar-augmented power management for long-distance cycling endurance metrics.
+                        </p>
+<div class="flex gap-4">
+<span class="px-3 py-1 border border-grid-line font-code-snippet text-code-snippet text-on-surface-variant">C++ / Arduino</span>
+<span class="px-3 py-1 border border-grid-line font-code-snippet text-code-snippet text-on-surface-variant">CAD Design</span>
+</div>
+</div>
+</article>
+<!-- Placeholder for Future Deployments (The Empty Grid) -->
+<article class="md:col-span-12 lg:col-span-6 bg-surface-container-lowest border border-grid-line border-dashed p-12 flex flex-col items-center justify-center text-center opacity-50">
+<span class="material-symbols-outlined text-primary text-4xl mb-4">add_circle</span>
+<h3 class="font-headline-md text-headline-md text-on-surface-variant">System expansion pending...</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-sm">
+                        Researching next-gen physics engines and autonomous navigation clusters.
+                    </p>
+</article>
+</div>
+</section>
+<!-- Technical Stack / Terminal Section -->
+<section class="py-24 bg-surface-container-lowest border-t border-grid-line overflow-hidden">
+<div class="max-w-7xl mx-auto px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-gutter">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Core Tech Stack</h2>
+<p class="text-on-surface-variant font-body-md">The tools used to bridge the gap between physics and software.</p>
+</div>
+<div class="font-code-snippet text-code-snippet text-primary px-4 py-2 bg-surface-container border border-grid-line">
+                        $ system_status --all
+                    </div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-gutter">
+<!-- Tech Card -->
+<div class="p-6 bg-surface border border-grid-line flex flex-col gap-4 hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">data_object</span>
+<span class="font-label-sm text-label-sm text-on-surface">Python</span>
+</div>
+<div class="p-6 bg-surface border border-grid-line flex flex-col gap-4 hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">developer_board</span>
+<span class="font-label-sm text-label-sm text-on-surface">C++</span>
+</div>
+<div class="p-6 bg-surface border border-grid-line flex flex-col gap-4 hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">view_quilt</span>
+<span class="font-label-sm text-label-sm text-on-surface">Vue.js</span>
+</div>
+<div class="p-6 bg-surface border border-grid-line flex flex-col gap-4 hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">memory</span>
+<span class="font-label-sm text-label-sm text-on-surface">ROS2</span>
+</div>
+<div class="p-6 bg-surface border border-grid-line flex flex-col gap-4 hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">settings_input_component</span>
+<span class="font-label-sm text-label-sm text-on-surface">TensorFlow</span>
+</div>
+<div class="p-6 bg-surface border border-grid-line flex flex-col gap-4 hover:border-primary transition-all">
+<span class="material-symbols-outlined text-primary">cloud_done</span>
+<span class="font-label-sm text-label-sm text-on-surface">AWS Robotics</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-grid-line">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">MADIYAR MUKANOV</div>
+<div class="flex flex-col items-center md:items-end gap-2">
+<div class="flex gap-6 mb-4">
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="mailto:mmukanovm@gmail.com">Email</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+</div>
+<p class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container">© 2025 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS</p>
+</div>
+</footer>
+<script>
+        // Subtle cursor following effect on the grid lines
+        document.addEventListener('mousemove', (e) => {
+            const mesh = document.querySelector('.grid-mesh');
+            const x = (e.clientX / window.innerWidth) * 10;
+            const y = (e.clientY / window.innerHeight) * 10;
+            mesh.style.backgroundPosition = `${x}px ${y}px`;
+        });
+    </script>
 
-  <main>
-    <section class="container page-head">
-      <h1>Technical Projects</h1>
-      <p>Visual‑first selection of my most relevant work. Each card opens a one‑page case study designed for a 30–60s skim.</p>
 
-      <!-- Filters -->
-      <div class="filters">
-        <input id="q" type="search" placeholder="Search title or skills…" aria-label="Search projects" />
-        <button class="chip" data-filter="Robotics">Robotics</button>
-        <button class="chip" data-filter="Computer Vision">Computer Vision</button>
-        <button class="chip" data-filter="Embedded">Embedded</button>
-        <button class="chip" data-filter="Sensors">Sensors</button>
-        <button class="chip" data-filter="Benchmarking">Benchmarking</button>
-      </div>
-    </section>
-
-    <section class="container">
-      <div id="grid" class="grid">
-        <!-- Project 1 -->
-        <article class="project" data-tags="Publication,AI,Computer Vision">
-          <a class="cover" href="publication_patient_monitoring.html" title="Open publication: Patient Monitoring System - AIR 2025">
-            <img src="assets/img/papers/certificate2.png" alt="Patient monitoring system with IR-RGB fusion" />
-          </a>
-          <div class="body">
-            <h3 class="pins"><a href="publication_patient_monitoring.html">An Intelligent System for Automated Monitoring and Control of Patient Conditions</a></h3>
-            <div class="meta">
-              <span class="badge">Springer publication: in press</span>
-              <span>Publication · AI · Computer Vision</span>
-            </div>
-            <div class="skills">
-              <span class="tag">IR-RGB Fusion</span>
-              <span class="tag">Face ID</span>
-              <span class="tag">Edge Computing</span>
-              <span class="tag">3D Printing</span>
-            </div>
-            <div class="cta"><a class="btn" href="publication_patient_monitoring.html">View publication →</a></div>
-          </div>
-        </article>
-        <!-- Project 2 -->
-        <article class="project" data-tags="Sensors,Tournaments,Electronics">
-          <a class="cover" href="./project_bicycle_speedometer.html" title="Open case study: Bicycle Speedometer — Kyoto Award 2019">
-            <img src="assets/img/projects/kyoto/kyoto-2019-certificate.jpg" alt="Kyoto 2019 award certificate for bicycle speedometer project" />
-          </a>
-          <div class="body">
-            <h3 class="pins"><a href="./project_bicycle_speedometer.html">Bicycle Speedometer — Kyoto Award 2019</a></h3>
-            <div class="meta">
-              <span class="badge">Outcome: Kyoto Award 2019</span>
-              <span>Sensors · Tournaments</span>
-            </div>
-            <div class="skills">
-              <span class="tag">MCU</span>
-              <span class="tag">Hall sensor</span>
-              <span class="tag">Signal processing</span>
-            </div>
-            <div class="cta"><a class="btn" href="./project_bicycle_speedometer.html">Open →</a></div>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <div data-include="footer"></div>
-
-  <script>
-    // Simple client-side filtering (search + chips)
-    const q = document.getElementById('q');
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const projects = Array.from(document.querySelectorAll('.project'));
-    const active = new Set();
-
-    function applyFilter(){
-      const term = (q.value || '').toLowerCase();
-      projects.forEach(card => {
-        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
-        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-        const matchText = !term || title.includes(term) || tags.includes(term);
-        const matchTags = active.size === 0 || Array.from(active).some(t => tags.includes(t.toLowerCase()));
-        card.style.display = (matchText && matchTags) ? '' : 'none';
-      });
-    }
-
-    q?.addEventListener('input', applyFilter);
-    chips.forEach(ch => ch.addEventListener('click', () => {
-      const key = ch.getAttribute('data-filter');
-      if(ch.classList.toggle('active')) active.add(key); else active.delete(key);
-      applyFilter();
-    }));
-  </script>
-</body>
-</html>
+</body></html>

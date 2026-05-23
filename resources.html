@@ -1,171 +1,320 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resources (Write‑Ups) — Madiyar Mukanov</title>
-  <meta name="description" content="Write‑ups, cheat sheets, templates, and guides for robotics/AI work. Visual‑first cards with fast search & tags." />
-  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="manifest.webmanifest" />
+﻿<!DOCTYPE html>
 
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/includes.js" defer></script>
-  <style>
-    /* Page-specific styles */
-    /* ===== Page header ===== */
-    .page-head{padding:.6rem 0 1rem}
-    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
-    .page-head p{color:var(--text-muted); margin:.2rem 0}
-
-    /* ===== Controls ===== */
-    .controls{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin: .6rem 0 1rem}
-    .controls input[type="search"]{width:min(360px,100%); padding:.5rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
-    .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark); cursor:pointer}
-    .chip.active{background:rgba(22,163,74,.12); border-color:var(--accent)}
-
-    /* ===== Resources grid ===== */
-    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
-    .res{grid-column: span 6; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden; position:relative}
-    .res a.cover{display:block}
-    .res img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.04)}
-    .res .body{padding:.9rem}
-    .res h3{margin:.1rem 0 .4rem; font-size:1.12rem}
-    .pins{position:relative; padding-left:.65rem}
-    .pins::before{content:""; position:absolute; left:0; top:.15rem; bottom:.15rem; width:3px; border-radius:2px; background:linear-gradient(180deg, rgba(22,163,74,.75) 0%, rgba(22,163,74,.2) 100%)}
-    .meta{display:flex; gap:.5rem; flex-wrap:wrap; color:var(--text-muted); font-size:.9rem}
-    .badge{display:inline-block; font-size:.78rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
-    .tags{display:flex; flex-wrap:wrap; gap:.4rem; margin:.45rem 0 0}
-    .tag{font-size:.8rem; padding:.18rem .5rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark)}
-
-    .links{display:flex; flex-wrap:wrap; gap:.45rem; margin:.55rem 0 0}
-    .btn{display:inline-block; padding:.45rem .7rem; border-radius:.55rem; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none}
-    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
-
-    details{margin-top:.5rem}
-    details > summary{cursor:pointer; color:var(--accent-dark)}
-
-    /* Responsive */
-    @media (max-width: 860px){
-      .res{grid-column: span 12}
-    }
-  </style>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Madiyar Mukanov | Resources &amp; News</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-mesh {
+            background-image: radial-gradient(var(--tw-colors-grid-line) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .timeline-line {
+            background: linear-gradient(to bottom, transparent, #1E293B 10%, #1E293B 90%, transparent);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#62df7d",
+                      "on-tertiary-container": "#1c2a3d",
+                      "surface-tint": "#62df7d",
+                      "background": "#0c1324",
+                      "surface-container-lowest": "#070d1f",
+                      "on-primary-fixed-variant": "#005320",
+                      "on-secondary": "#283044",
+                      "secondary-container": "#3f465c",
+                      "outline-variant": "#3e4a3d",
+                      "on-secondary-fixed": "#131b2e",
+                      "on-primary-container": "#003111",
+                      "slate-surface": "#0F172A",
+                      "error-container": "#93000a",
+                      "outline": "#879485",
+                      "secondary": "#bec6e0",
+                      "on-error": "#690005",
+                      "inverse-on-surface": "#2a3043",
+                      "secondary-fixed": "#dae2fd",
+                      "surface-bright": "#33394c",
+                      "on-background": "#dce1fb",
+                      "inverse-surface": "#dce1fb",
+                      "surface-container": "#191f31",
+                      "grid-line": "#1E293B",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-primary": "#003914",
+                      "electric-blue": "#1313BD",
+                      "terminal-green": "#16A34A",
+                      "surface-container-highest": "#2e3447",
+                      "on-secondary-container": "#adb4ce",
+                      "surface-container-low": "#151b2d",
+                      "tertiary-container": "#8392a9",
+                      "tertiary-fixed": "#d5e3fd",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-high": "#23293c",
+                      "primary-container": "#1ca64d",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "on-surface-variant": "#bdcaba",
+                      "on-surface": "#dce1fb",
+                      "surface": "#0c1324",
+                      "primary-fixed-dim": "#62df7d",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "on-primary-fixed": "#002109",
+                      "inverse-primary": "#006e2d",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "text-dim": "#6B7280",
+                      "surface-variant": "#2e3447",
+                      "surface-dim": "#0c1324",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "tertiary": "#b9c7e0",
+                      "on-tertiary": "#233144",
+                      "primary-fixed": "#7ffc97"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "grid-size": "32px",
+                      "unit": "4px",
+                      "margin-desktop": "64px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": ["JetBrains Mono"],
+                      "headline-xl-mobile": ["JetBrains Mono"],
+                      "headline-xl": ["JetBrains Mono"],
+                      "code-snippet": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["JetBrains Mono"],
+                      "label-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
 </head>
-<body>
-  <div data-include="header"></div>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 docked full-width top-0 sticky z-50 border-b border-grid-line backdrop-blur-md flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">MADIYAR MUKANOV</div>
+<nav class="hidden md:flex items-center gap-8 h-full">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career.html">Career</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects.html">Random</a>
+<a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+</nav>
+<button class="bg-primary text-black font-headline-md text-[14px] px-6 py-2 border-0 hover:shadow-[0_0_15px_rgba(98,223,125,0.5)] transition-all">RESUME</button>
+</header>
+<!-- Hero Section / Title -->
+<section class="relative border-b border-grid-line overflow-hidden">
+<div class="absolute inset-0 grid-mesh opacity-20 pointer-events-none"></div>
+<div class="px-margin-desktop py-20 relative z-10">
+<div class="flex items-center gap-4 mb-4">
+<span class="w-3 h-3 bg-primary rounded-full animate-pulse shadow-[0_0_8px_#62df7d]"></span>
+<span class="font-label-sm text-label-sm tracking-[0.2em] text-primary">SYSTEM_STATUS: LIVE_FEED</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl uppercase leading-none mb-6">Resources <span class="text-primary">&amp;</span> Updates</h1>
+<p class="max-w-2xl text-on-surface-variant font-body-lg text-body-lg">
+                Technical logs, deep-dive articles, and curated physics-first learning resources for the next generation of robotics engineering.
+            </p>
+</div>
+<!-- Technical coordinate decorative -->
+<div class="absolute bottom-4 right-margin-desktop font-label-sm text-label-sm text-grid-line">
+            LAT: 43.2389° N / LON: 76.8897° E [LOC-ALM]
+        </div>
+</section>
+<!-- Main Content Grid -->
+<main class="grid grid-cols-1 lg:grid-cols-12 px-margin-desktop min-h-screen relative">
+<!-- Sidebar / Filters -->
+<aside class="lg:col-span-3 border-r border-grid-line py-12 pr-gutter hidden lg:block sticky top-16 h-[calc(100vh-64px)]">
+<div class="space-y-12">
+<div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-6 border-b border-grid-line pb-2">Entry_Filter</h3>
+<div class="flex flex-col gap-2">
+<button class="flex items-center justify-between p-2 hover:bg-primary/10 text-primary transition-colors border border-primary/20">
+<span class="font-label-sm">ALL_ENTRIES</span>
+<span class="font-label-sm opacity-50">[24]</span>
+</button>
+<button class="flex items-center justify-between p-2 hover:bg-primary/10 text-on-surface-variant transition-colors border border-transparent">
+<span class="font-label-sm">TECH_ARTICLES</span>
+<span class="font-label-sm opacity-50">[08]</span>
+</button>
+<button class="flex items-center justify-between p-2 hover:bg-primary/10 text-on-surface-variant transition-colors border border-transparent">
+<span class="font-label-sm">LEARNING_MATH</span>
+<span class="font-label-sm opacity-50">[12]</span>
+</button>
+<button class="flex items-center justify-between p-2 hover:bg-primary/10 text-on-surface-variant transition-colors border border-transparent">
+<span class="font-label-sm">PROJECT_LOGS</span>
+<span class="font-label-sm opacity-50">[04]</span>
+</button>
+</div>
+</div>
+<div class="p-6 bg-slate-surface border border-grid-line relative">
+<div class="absolute top-0 right-0 p-1 font-label-sm text-[10px] text-grid-line">REF-SYS-01</div>
+<h4 class="font-headline-md text-[18px] mb-4 text-primary">Mentoring_Sync</h4>
+<p class="font-label-sm text-on-surface-variant leading-relaxed mb-4">
+                        Weekly physics and calculus deep-dives for aspiring robotics researchers. Open slots available for Q4.
+                    </p>
+<a class="block w-full py-2 border border-primary text-center text-primary font-label-sm hover:bg-primary hover:text-black transition-all" href="#">BOOK_SESSION</a>
+</div>
+</div>
+</aside>
+<!-- Timeline Feed -->
+<div class="lg:col-span-9 py-12 lg:pl-gutter relative">
+<div class="absolute left-0 lg:left-gutter timeline-line w-px h-full top-0"></div>
+<!-- Feed Entry 1 -->
+<article class="relative pl-10 mb-16 group">
+<div class="absolute left-[-4px] top-2 w-[9px] h-[9px] bg-primary group-hover:scale-150 transition-transform duration-300"></div>
+<div class="mb-2 flex items-center gap-4">
+<time class="font-code-snippet text-primary bg-primary/10 px-2 py-1">2024.11.02_14:30</time>
+<span class="font-label-sm text-grid-line uppercase">Type: TECH_ARTICLE</span>
+</div>
+<div class="bg-slate-surface border border-grid-line p-8 group-hover:border-primary/50 transition-colors">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-4 leading-tight group-hover:text-primary transition-colors">Dynamic Control Systems in Legged Robotics</h2>
+<p class="text-on-surface-variant mb-6 font-body-md line-clamp-3">An investigation into the stability of quadrupedal motion using physics-first principles. We explore the intersection of classical mechanics and modern MPC controllers.</p>
+<div class="flex gap-4 items-center">
+<a class="font-label-sm text-primary flex items-center gap-2 hover:translate-x-2 transition-transform" href="#">
+                                    READ_FULL_LOG
+                                    <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<span class="text-grid-line">|</span>
+<span class="font-label-sm text-on-surface-variant">8 MIN READ</span>
+</div>
+</div>
+<div class="relative overflow-hidden aspect-video border border-grid-line">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A highly detailed close-up shot of a sophisticated metallic robotic leg mechanism, showing intricate hydraulic tubes, servos, and carbon fiber plates. The lighting is cold and cinematic, coming from a high-angle source that highlights the brushed metal textures and precision engineering. The background is a dark, minimalist laboratory setting with subtle glowing green terminal interfaces in the distance, maintaining a high-tech physics-first aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDt5GRkMjuclzapOI4Jblde9VVW4DsNFCJKblmNzINvSZ5NWqWRrYGmloU7jBlJoj6JFtyZ671CQtPZvIJ2SHEvYH2Bweo0Rjx3xRPKShs8riCa3KEeuBTKx4YHoOOfzqtHrTOqW1vESFBWVof3NZaPKlxPQ1VZ1pisKE5-1hFZCBRCd-wEbTT7c1fj2S5m4G8BGhJ_WA3F4LU-w3gikIfdF3_08OX8WStVl5sT30i92Ga9YePx24FYlgkajG1U-KOtfdG8FPYaoJv"/>
+</div>
+</div>
+</div>
+</article>
+<!-- Feed Entry 2 (Resources) -->
+<article class="relative pl-10 mb-16 group">
+<div class="absolute left-[-4px] top-2 w-[9px] h-[9px] bg-electric-blue group-hover:scale-150 transition-transform duration-300"></div>
+<div class="mb-2 flex items-center gap-4">
+<time class="font-code-snippet text-electric-blue bg-electric-blue/10 px-2 py-1">2024.10.28_09:15</time>
+<span class="font-label-sm text-grid-line uppercase">Type: LEARNING_RESOURCE</span>
+</div>
+<div class="bg-slate-surface border border-grid-line p-8 group-hover:border-electric-blue/50 transition-colors">
+<h2 class="font-headline-lg text-headline-lg mb-4 text-on-surface group-hover:text-electric-blue">The Calculus of Motion: Part 01</h2>
+<p class="text-on-surface-variant mb-6 font-body-md">A curated syllabus and set of interactive notebooks for mastering the differential equations that govern autonomous vehicle trajectories. Includes open-source Python simulations.</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+<div class="p-4 border border-grid-line bg-background/50 flex flex-col items-center">
+<span class="material-symbols-outlined text-electric-blue mb-2">menu_book</span>
+<span class="font-label-sm text-[10px]">SYLLABUS.PDF</span>
+</div>
+<div class="p-4 border border-grid-line bg-background/50 flex flex-col items-center">
+<span class="material-symbols-outlined text-electric-blue mb-2">code</span>
+<span class="font-label-sm text-[10px]">NOTEBOOK.IPYNB</span>
+</div>
+<div class="p-4 border border-grid-line bg-background/50 flex flex-col items-center">
+<span class="material-symbols-outlined text-electric-blue mb-2">play_circle</span>
+<span class="font-label-sm text-[10px]">VIDEO_LEC.MP4</span>
+</div>
+<div class="p-4 border border-grid-line bg-background/50 flex flex-col items-center">
+<span class="material-symbols-outlined text-electric-blue mb-2">dataset</span>
+<span class="font-label-sm text-[10px]">SAMPLES.CSV</span>
+</div>
+</div>
+<button class="bg-transparent border border-electric-blue text-electric-blue font-label-sm px-6 py-2 hover:bg-electric-blue hover:text-white transition-all">ACCESS_REPOSITORY</button>
+</div>
+</article>
+<!-- Feed Entry 3 (Project Launch) -->
+<article class="relative pl-10 mb-16 group">
+<div class="absolute left-[-4px] top-2 w-[9px] h-[9px] bg-primary group-hover:scale-150 transition-transform duration-300"></div>
+<div class="mb-2 flex items-center gap-4">
+<time class="font-code-snippet text-primary bg-primary/10 px-2 py-1">2024.10.15_18:00</time>
+<span class="font-label-sm text-grid-line uppercase">Type: PROJECT_UPDATE</span>
+</div>
+<div class="bg-slate-surface border border-grid-line p-8 group-hover:border-primary/50 transition-colors">
+<div class="relative w-full h-64 mb-6 border border-grid-line overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-60 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" data-alt="A futuristic aerial view of a robotics testing facility at night. The scene is illuminated by glowing linear track lights embedded in the dark floor, casting a neon green and electric blue radiance. Advanced robotic chassis move along the grids in a synchronized pattern. The atmosphere is quiet, technological, and precise, with a heavy emphasis on geometric composition and high-contrast lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKvcJTshm-tFWR4V21Xlur8e46o7PtFR6jfZDtiCAfQsNWdK28FyAhgsm8_AnDx82Ulw9TojlZ6TQ0M9-zNI4E8byjOBhJzx0wawci7dkgz78hlP7K-4EhNDor1-JsRSU-y-sngp9f1hzw9hUNYdrnNz7KhFo2qMlHlhI0X70GWPz6Nr3JQo35Ngy_C5nEud889GNt9pFHJkv3QujZft2A2EGiBOS2zWHW9QZvhLZ8qp94rg60O8BjvkIURVh--Ex1jSP_8ZLpAh15"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+<div class="absolute bottom-6 left-6">
+<h2 class="font-headline-lg text-headline-lg text-white">Project: ATLAS_REFINED</h2>
+<p class="font-label-sm text-primary">STATUS: MISSION_READY</p>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-6">Successfully integrated the new perception stack into the primary research unit. Latency reduced by 40% in unstructured environments.</p>
+<a class="font-label-sm text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary transition-all" href="#">VIEW_TECHNICAL_SPECS</a>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width border-t border-grid-line w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">MADIYAR MUKANOV</div>
+<p class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container uppercase tracking-[0.2em]">© 2025 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS</p>
+</div>
+<div class="flex items-center gap-8">
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="mailto:mmukanovm@gmail.com">Email</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+</div>
+<div class="font-label-sm text-grid-line hidden md:block">
+            V.2.4.0_STABLE
+        </div>
+</footer>
+<script>
+        // Micro-interaction for the timeline entries on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-  <main>
-    <section class="container page-head">
-      <h1>Resources (Write‑Ups)</h1>
-      <p>Cheat sheets, guides, and templates I reuse across projects.</p>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
 
-      <!-- Filters -->
-      <!-- <div class="controls">
-        <input id="q" type="search" placeholder="Search title or tags…" aria-label="Search resources" />
-        <button class="chip" data-filter="Vision">Vision</button>
-        <button class="chip" data-filter="Sensors">Sensors</button>
-        <button class="chip" data-filter="Embedded">Embedded</button>
-        <button class="chip" data-filter="Evaluation">Evaluation</button>
-        <button class="chip" data-filter="Writing">Writing</button>
-        <button class="chip" data-filter="Template">Template</button>
-        <button class="chip" data-filter="Cheat Sheet">Cheat Sheet</button>
-        <button class="chip" data-filter="Guide">Guide</button>
-      </div> -->
-    </section>
+        document.querySelectorAll('article').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
 
-    <section class="container">
-      <div id="grid" class="grid">
-        <!-- Resource 1: OpenCV calibration cheat sheet -->
-        <!-- <article class="res" data-tags="Vision,OpenCV,Calibration,Cheat Sheet">
-          <a class="cover" href="assets/pdf/resources/opencv-calibration-cheatsheet.pdf" title="OpenCV Camera Calibration Cheat Sheet (PDF)" target="_blank" rel="noopener">
-            <img src="assets/img/resources/opencv-calibration.jpg" alt="OpenCV chessboard calibration diagram and equations" />
-          </a>
-          <div class="body">
-            <h3 class="pins">OpenCV Camera Calibration Cheat Sheet</h3>
-            <div class="meta">
-              <span class="badge">Cheat Sheet</span>
-              <span>Last updated: 2025‑08‑01</span>
-            </div>
-            <div class="tags">
-              <span class="tag">Vision</span>
-              <span class="tag">OpenCV</span>
-              <span class="tag">Calibration</span>
-            </div>
-            <div class="links">
-              <a class="btn" href="assets/pdf/resources/opencv-calibration-cheatsheet.pdf" target="_blank" rel="noopener">Download PDF</a>
-            </div>
-            <details>
-              <summary>Outline</summary>
-              <ul>
-                <li>Patterns (chessboard, circles)</li>
-                <li>Intrinsics/extrinsics</li>
-                <li>Distortion models</li>
-                <li>Reprojection error and tips</li>
-              </ul>
-            </details>
-          </div>
-        </article> -->
-
-        <!-- Resource 2: MLX90640 quick start guide -->
-        <article class="res" data-tags="Sensors,Thermal,Embedded,Guide">
-          <a class="cover" href="assets/pdf/resources/mlx90640-quickstart.pdf" title="MLX90640 Quick Start (PDF)" target="_blank" rel="noopener">
-            <img src="assets/img/resources/mlx90640-quickstart.jpg" alt="Thermal sensor array MLX90640 with wiring" />
-          </a>
-          <div class="body">
-            <h3 class="pins">MLX90640 Quick Start</h3>
-            <div class="meta">
-              <span class="badge">Guide</span>
-              <!-- <span>Last updated: 2025‑06‑12</span> -->
-            </div>
-            <div class="tags">
-              <span class="tag">Sensors</span>
-              <span class="tag">Thermal</span>
-              <span class="tag">Embedded</span>
-            </div>
-            <div class="links">
-              <a class="btn" href="assets/pdf/resources/mlx90640-quickstart.pdf" target="_blank" rel="noopener">Download PDF</a>
-            </div>
-            <details>
-              <summary>Outline</summary>
-              <ul>
-                <li>I²C wiring & addresses</li>
-                <li>Frame rates & modes</li>
-                <li>Temperature mapping & palettes</li>
-                <li>Noise/drift notes</li>
-              </ul>
-            </details>
-          </div>
-        </article>
-
-      </div>
-    </section>
-  </main>
-
-  <div data-include="footer"></div>
-
-  <script>
-    // Simple client-side filtering (search + chips)
-    const q = document.getElementById('q');
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const cards = Array.from(document.querySelectorAll('.res'));
-    const active = new Set();
-
-    function apply(){
-      const term = (q?.value || '').toLowerCase();
-      cards.forEach(card => {
-        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
-        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-        const matchText = !term || title.includes(term) || tags.includes(term);
-        const matchTags = active.size === 0 || Array.from(active).some(t => tags.includes(t.toLowerCase()));
-        card.style.display = (matchText && matchTags) ? '' : 'none';
-      });
-    }
-
-    q?.addEventListener('input', apply);
-    chips.forEach(ch => ch.addEventListener('click', () => {
-      const key = ch.getAttribute('data-filter');
-      if(ch.classList.toggle('active')) active.add(key); else active.delete(key);
-      apply();
-    }));
-  </script>
-</body>
-</html>
+        // Atmospheric terminal-like typing effect for the hero status line
+        const statusText = document.querySelector('.tracking-\\[0\\.2em\\]');
+        if (statusText) {
+            const original = statusText.innerText;
+            statusText.innerText = '';
+            let i = 0;
+            const timer = setInterval(() => {
+                statusText.innerText += original[i];
+                i++;
+                if (i >= original.length) clearInterval(timer);
+            }, 50);
+        }
+    </script>
+</body></html>

@@ -1,207 +1,385 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Madiyar Mukanov — Robotics / AI</title>
-  <meta name="description" content="Portfolio site highlighting robotics & AI: publications, projects, resources, news, and contacts." />
-  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="canonical" href="https://madiyarmukanov.com/" />
-  <meta name="theme-color" content="#16a34a" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Madiyar Mukanov — Robotics / AI" />
-  <meta property="og:description" content="Portfolio of robotics & AI work: publications, technical projects, resources, and news." />
-  <meta property="og:url" content="https://madiyarmukanov.com/" />
-  <meta property="og:image" content="https://madiyarmukanov.com/assets/img/avatar.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Madiyar Mukanov",
-    "url": "https://madiyarmukanov.com/",
-    "image": "https://madiyarmukanov.com/assets/img/avatar.jpg",
-    "jobTitle": "Robotics / AI Engineer",
-    "sameAs": [
-      "https://github.com/MadiyarM",
-      "https://www.linkedin.com/in/muqantegi/"
-    ]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Madiyar Mukanov",
-    "url": "https://madiyarmukanov.com/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://madiyarmukanov.com/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/includes.js" defer></script>
-  <style>
-    /* Page-specific styles */
-    :root {
-      --avatar: clamp(140px, 22vw, 240px);
-    }
-
-    /* Skip link */
-    .skip-link{position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden}
-    .skip-link:focus{left:4%; top:10px; width:auto; height:auto; padding:.4rem .6rem; background:#fff; border:1px solid var(--border); border-radius:.5rem; z-index:1001}
-
-    /* ===== Cover (Inverted Pyramid) with grid-areas ===== */
-    .cover{
-      display:grid;
-      grid-template-columns: var(--avatar) 1fr;
-      grid-template-areas:
-        "title title"
-        "avatar intro"
-        "contact contact"
-        "highlights highlights";
-      gap:1.25rem; align-items:start;
-    }
-    .title{grid-area:title}
-    .avatar{grid-area:avatar; width:var(--avatar); height:var(--avatar); border-radius:14px; object-fit:cover; border:1px solid var(--border); box-shadow:var(--shadow)}
-    .intro{grid-area:intro; display:grid; gap:.75rem; background:linear-gradient(180deg, rgba(22,163,74,.08), rgba(22,163,74,0)); padding:1rem; border:1px solid var(--border); border-radius:12px}
-    .contact{grid-area:contact}
-    .highlights{grid-area:highlights}
-
-    .kicker{font-size:.85rem; color:var(--text-muted); letter-spacing:.18em; text-transform:uppercase}
-    h1{font-size: clamp(28px, 3vw, 40px); line-height:1.15; margin:.2rem 0 .2rem}
-    .outcome{margin:.25rem 0 1rem; font-size:1.05rem}
-    .outcome strong{color:var(--accent-dark)}
-    .intro p{margin:0}
-    .skills{display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:.5rem; margin-top:.15rem}
-    .skills li{list-style:none; background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:.4rem .6rem}
-
-    /* Contact strip with icons */
-    .contact{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.2rem; color:var(--text-muted)}
-    .contact a{color:var(--text); display:inline-flex; align-items:center; gap:.4rem; padding:.15rem .35rem; border:1px solid transparent; border-radius:.5rem}
-    .contact a:hover{background:rgba(22,163,74,.08); border-color:var(--border); text-decoration:none}
-    .icon{width:18px; height:18px; fill:currentColor; opacity:.9}
-    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
-
-    /* ===== Visual‑first highlights (light overlay) ===== */
-    .highlights{margin:1.2rem 0 0; display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
-    .card{grid-column: span 4; position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--border); background:var(--panel)}
-    .card img{width:100%; height:220px; object-fit:cover; display:block; filter:saturate(1.04)}
-    .card .meta{position:absolute; inset:auto 0 0 0; padding:.75rem .9rem; color:var(--text);
-      background:linear-gradient(180deg, rgba(255,255,255,0) 0, rgba(255,255,255,.76) 70%, rgba(255,255,255,.96) 100%); border-top:1px solid rgba(22,163,74,.18)}
-    .card h3{margin:0 0 .25rem; font-size:1.05rem}
-    .badge{display:inline-block; font-size:.8rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
-    .pins{opacity: 1; color: black;}
-
-    /* Footer */
-    footer{border-top:1px solid var(--border); margin-top:2rem; background:#fafdfb}
-    footer .wrap{display:flex; gap:.6rem; align-items:center; height:64px}
-
-    /* Responsive adjustments */
-    @media (max-width: 860px){
-      :root{ --avatar: clamp(96px, 24vw, 160px); }
-      .cover{
-        grid-template-columns: 1fr;
-        grid-template-areas:
-          "avatar"
-          "title"
-          "intro"
-          "contact"
-          "highlights";
-      }
-      .avatar{justify-self:start}
-      .skills{grid-template-columns: 1fr}
-      .highlights .card{grid-column: span 6}
-    }
-    @media (max-width: 680px){
-      .highlights .card{grid-column: span 12}
-    }
-  </style>
+﻿<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="canonical" href="https://madiyarmukanov.com/">
+<link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml">
+<title>Madiyar Mukanov | Robotics &amp; AI Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-mesh {
+            background-image: 
+                linear-gradient(to right, rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .blueprint-accent {
+            position: relative;
+        }
+        .blueprint-accent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 49.5%, #1E293B 50%, transparent 50.5%);
+            background-size: 10px 10px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#233144",
+                        "error": "#ffb4ab",
+                        "error-container": "#93000a",
+                        "outline-variant": "#3e4a3d",
+                        "on-secondary-container": "#adb4ce",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#3f465c",
+                        "outline": "#879485",
+                        "surface-bright": "#33394c",
+                        "tertiary": "#b9c7e0",
+                        "tertiary-fixed": "#d5e3fd",
+                        "surface-container-highest": "#2e3447",
+                        "text-dim": "#6B7280",
+                        "on-primary": "#003914",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "secondary": "#bec6e0",
+                        "surface": "#0c1324",
+                        "on-surface": "#dce1fb",
+                        "surface-container": "#191f31",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "primary-fixed": "#7ffc97",
+                        "electric-blue": "#1313BD",
+                        "on-error": "#690005",
+                        "primary-fixed-dim": "#62df7d",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "tertiary-container": "#8392a9",
+                        "on-surface-variant": "#bdcaba",
+                        "surface-dim": "#0c1324",
+                        "surface-variant": "#2e3447",
+                        "inverse-on-surface": "#2a3043",
+                        "primary-container": "#1ca64d",
+                        "inverse-primary": "#006e2d",
+                        "secondary-fixed": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "primary": "#62df7d",
+                        "surface-container-high": "#23293c",
+                        "inverse-surface": "#dce1fb",
+                        "terminal-green": "#16A34A",
+                        "on-background": "#dce1fb",
+                        "on-secondary-fixed": "#131b2e",
+                        "surface-tint": "#62df7d",
+                        "on-primary-container": "#003111",
+                        "on-primary-fixed-variant": "#005320",
+                        "surface-container-lowest": "#070d1f",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "grid-line": "#1E293B",
+                        "surface-container-low": "#151b2d",
+                        "on-tertiary-container": "#1c2a3d",
+                        "slate-surface": "#0F172A",
+                        "on-secondary": "#283044",
+                        "background": "#0c1324",
+                        "on-primary-fixed": "#002109"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "grid-size": "32px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["JetBrains Mono"],
+                        "code-snippet": ["JetBrains Mono"],
+                        "headline-md": ["JetBrains Mono"],
+                        "headline-lg": ["JetBrains Mono"],
+                        "headline-xl": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div data-include="header"></div>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30 selection:text-primary">
+<!-- TopNavBar Shell -->
+<header class="bg-surface/80 dark:bg-surface/80 docked full-width top-0 sticky z-50 border-b border-grid-line backdrop-blur-md flat no shadows">
+<div class="flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary animate-pulse"></span>
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">MADIYAR MUKANOV</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1 transition-all duration-200" href="index.html">Home</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career.html">Career</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects.html">Random</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+</nav>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-6 py-2 border-0 hover:opacity-90 active:scale-95 transition-all">RESUME</button>
+</div>
+</header>
+<main class="relative overflow-hidden">
+<!-- Hero Section -->
+<section class="relative min-h-[70vh] flex flex-col justify-center border-b border-grid-line grid-mesh pt-12 pb-24">
+<div class="px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter items-center relative z-10">
+<div class="md:col-span-7">
+<div class="flex items-center gap-2 mb-6">
+<span class="text-primary font-label-sm text-label-sm tracking-[0.2em] uppercase">ROBOTICS · AI · MACHINE LEARNING</span>
+<div class="h-[1px] flex-grow bg-grid-line"></div>
+</div>
+<h1 class="font-headline-xl text-headline-xl mb-8 leading-none">Madiyar<br>Mukanov</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12">
+                        Applying the rigor of measurement science to learning systems and robot perception. 
+                        Building physics-first autonomy for the real world.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary text-on-primary px-8 py-3 font-label-sm text-label-sm uppercase tracking-widest hover:brightness-110 transition-all">Explore Projects</button>
+<button class="border border-primary text-primary px-8 py-3 font-label-sm text-label-sm uppercase tracking-widest hover:bg-primary/10 transition-all">View Research</button>
+</div>
+</div>
+<div class="md:col-span-5 flex justify-center md:justify-end">
+<div class="relative group">
+<div class="absolute -top-4 -left-4 font-label-sm text-label-sm text-primary p-1 bg-surface border border-grid-line">[REF: AVATAR-01]</div>
+<div class="absolute -bottom-4 -right-4 font-label-sm text-label-sm text-primary p-1 bg-surface border border-grid-line">43.23° N, 76.88° E</div>
+<div class="border border-grid-line p-3">
+<img alt="Madiyar Mukanov Profile" class="grayscale hover:grayscale-0 transition-all duration-700 w-full max-w-[320px] aspect-[0.75] object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ujMJe2uXvlONp-Pcxljsvk8pNCBRKZgPM0n-tuhOhX_bhRlLIziTQC_jYSBc58ggCeqSar0KbwYYzSBV2eWV9QXV4HhdrQ2nC_R4MDUqodoI9o2h9iNf4nb31YwbvHjFwLRd3_vOzhmceePGIb0r7AUQlNHu5eGI8Vw0RGvDe4g4Mzrzuo1_8I0zna9zZQMo3lVUo9Hz4OZuvcu_Qs6glZmMHvsj7cCD1oxt-XjVeYEE2Sj1DRPPFsMGDSF">
+</div>
+<div class="absolute inset-0 border border-primary/20 pointer-events-none group-hover:border-primary transition-all duration-500"></div>
+</div>
+</div>
+</div>
+<!-- Technical Decorative Elements -->
+<div class="absolute top-0 right-0 w-1/3 h-full border-l border-grid-line pointer-events-none overflow-hidden hidden md:block">
+<div class="absolute top-1/4 left-0 w-full h-[1px] bg-grid-line"></div>
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-grid-line"></div>
+<div class="absolute top-3/4 left-0 w-full h-[1px] bg-grid-line"></div>
+<div class="h-full w-[1px] bg-primary/20 absolute left-12 animate-pulse"></div>
+</div>
+</section>
+<!-- About Section -->
+<section class="border-b border-grid-line">
+<div class="grid grid-cols-1 md:grid-cols-12">
+<!-- Sidebar Marker -->
+<div class="hidden md:block md:col-span-1 border-r border-grid-line p-4">
+<div class="sticky top-24 flex flex-col items-center gap-8">
+<span class="rotate-90 font-label-sm text-label-sm text-text-dim whitespace-nowrap">MISSION.PROTOCOL</span>
+<div class="h-32 w-[1px] bg-grid-line"></div>
+<span class="text-primary font-label-sm text-label-sm">01</span>
+</div>
+</div>
+<div class="md:col-span-11 px-margin-desktop py-24">
+<div class="max-w-4xl">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-8 text-primary">About me</h2>
+<p class="font-body-md text-body-md text-on-surface mb-6">I am a robotics and computer-vision engineer with a physics-first mindset. I recently completed my M.Sc. in Robotics (2025) at Satbayev University, where I built an intelligent patient-monitoring platform. Specializing in Sim-to-Real (S2R) transitions, ensuring that algorithms developed in simulation maintain high fidelity in unstructured physical environments.</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 italic">
+                                    "I apply the rigor of measurement science to learning systems and robot perception."
+                                </p>
+</div>
+<div class="bg-surface-container border border-grid-line p-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 font-label-sm text-label-sm text-text-dim border-l border-b border-grid-line">FOUNDATIONS</div>
+<h3 class="font-label-sm text-label-sm text-primary mb-6 uppercase tracking-widest">Scientific Rigor</h3>
+<ul class="space-y-4 font-code-snippet text-code-snippet text-on-surface-variant">
+<li class="flex items-start gap-3">
+<span class="text-primary mt-1 material-symbols-outlined text-sm">precision_manufacturing</span>
+<span class="">Stochastic processes &amp; Monte Carlo methods for decision-making</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-primary mt-1 material-symbols-outlined text-sm">settings_input_component</span>
+<span class="">Signal theory for sensor modeling &amp; error propagation</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-primary mt-1 material-symbols-outlined text-sm">functions</span>
+<span class="">PDEs &amp; numerical methods for optimization</span>
+</li>
+<li class="flex items-start gap-3"><span class="text-primary mt-1 material-symbols-outlined text-sm">memory</span><span class="">ROS2 Humble &amp; Spatial AI architecture</span></li><li class="flex items-start gap-3"><span class="text-primary mt-1 material-symbols-outlined text-sm">box_edit</span><span class="">MLOps (Docker, DVC) for reproducible pipelines</span></li></ul>
+</div>
+</div>
+<div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="border-t border-grid-line pt-6">
+<span class="font-label-sm text-label-sm text-text-dim block mb-2">B.Sc. Foundation</span>
+<p class="font-headline-md text-headline-md leading-tight">Nuclear Physics</p>
+<span class="font-label-sm text-label-sm text-primary mt-2 block">Kazakh National University</span>
+</div>
+<div class="border-t border-grid-line pt-6">
+<span class="font-label-sm text-label-sm text-text-dim block mb-2">M.Sc. Specialization</span>
+<p class="font-headline-md text-headline-md leading-tight">Robotics &amp; AI</p>
+<span class="font-label-sm text-label-sm text-primary mt-2 block">Satbayev University</span>
+</div>
+<div class="border-t border-grid-line pt-6">
+<span class="font-label-sm text-label-sm text-text-dim block mb-2">Key Achievement</span>
+<p class="font-headline-md text-headline-md leading-tight">Electronics Winner</p>
+<span class="font-label-sm text-label-sm text-primary mt-2 block">Kyoto Inst. of Technology</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Preview Section -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="px-margin-desktop">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-2">Selected Works</h2>
+<p class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest">Engineering Artifacts &amp; Research</p>
+</div>
+<a class="hidden md:flex items-center gap-2 text-primary hover:gap-4 transition-all" href="technical_projects.html">
+<span class="font-label-sm text-label-sm">VIEW ALL TECHNICAL LOGS</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Project Card 1 -->
+<div class="group relative bg-surface border border-grid-line overflow-hidden">
+<div class="aspect-video relative overflow-hidden">
+<img alt="HonestREBot project interface" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0" src="https://lh3.googleusercontent.com/aida/ADBb0ugV1tnJtaLis6gOKL2GqugqX-Z7koN-A2IPER6kHK_lN_DvI7APkTiLn93cnC1R_2MoCiEGXI1Z-SZy2HJ5x1fptcuWzWj-po-nj9vGnCh_KpvT56SZyaC6FHFRf9_mccdlM2lRETvZYipwfCfNjLKW_66vMr5Kh97QVrTBKO0nQazraa4g3DgmM1G0D4XRNCYSx-5zZKc3DWWDQadxbQat8MCM3ZSLVtDG7eVHs-vToMHV1bXjdOfYCcbW">
+<div class="absolute inset-0 bg-surface/40 group-hover:bg-transparent transition-colors duration-500"></div>
+<div class="absolute top-4 left-4 font-label-sm text-label-sm bg-surface/80 backdrop-blur-sm px-3 py-1 border border-grid-line text-primary">PRODUCT / WEB</div>
+</div>
+<div class="p-8">
+<h3 class="font-headline-md text-headline-md mb-4 group-hover:text-primary transition-colors">HonestREBot</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-8">
+                                A Telegram Mini-App that crowdsources reviews of residential complexes in Kazakhstan. Built to provide transparent real-estate insights through community-driven data.
+                            </p>
+<div class="mb-4 p-3 bg-error-container/10 border-l-2 border-error text-[12px] font-code-snippet text-on-surface-variant"><span class="text-error font-bold uppercase">Technical Challenge:</span> Handling asynchronous API rate-limiting during peak residential data scraping bursts.</div><div class="flex gap-3">
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-label-sm uppercase tracking-tighter border border-grid-line">Telegram API</span>
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-label-sm uppercase tracking-tighter border border-grid-line">Product Design</span>
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-label-sm uppercase tracking-tighter border border-grid-line">Vue.js</span>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="group relative bg-surface border border-grid-line overflow-hidden flex flex-col">
+<div class="blueprint-accent aspect-video border-b border-grid-line flex items-center justify-center p-12">
+<div class="relative w-full h-full border border-primary/20 border-dashed flex items-center justify-center">
+<span class="absolute top-2 left-2 text-[10px] text-primary/40 font-code-snippet">THERMAL_IMAGING_STREAM</span>
+<span class="absolute bottom-2 right-2 text-[10px] text-primary/40 font-code-snippet">SIGNAL_QUALITY_98%</span>
+<span class="material-symbols-outlined text-primary text-6xl animate-pulse" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+<div class="absolute w-12 h-12 border-l border-t border-primary -top-1 -left-1"></div>
+<div class="absolute w-12 h-12 border-r border-b border-primary -bottom-1 -right-1"></div>
+</div>
+</div>
+<div class="p-8 flex-grow">
+<div class="font-label-sm text-label-sm bg-surface/80 backdrop-blur-sm px-3 py-1 border border-grid-line text-primary inline-block mb-4">RESEARCH / HEALTHCARE</div>
+<h3 class="font-headline-md text-headline-md mb-4 group-hover:text-primary transition-colors">Patient Monitoring Platform</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mb-8">
+                                M.Sc. Thesis project focused on thermal-imaging-based monitoring. Presented at AIR2025, utilizing computer vision for non-invasive vital sign tracking.
+                            </p>
+<div class="mb-4 p-3 bg-error-container/10 border-l-2 border-error text-[12px] font-code-snippet text-on-surface-variant"><span class="text-error font-bold uppercase">Edge Case Analysis:</span> Mitigating false positives in vital sign detection caused by varying ambient thermal noise in clinical settings.</div><div class="flex gap-3">
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-label-sm uppercase tracking-tighter border border-grid-line">Thermal CV</span>
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-label-sm uppercase tracking-tighter border border-grid-line">Robotics</span>
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-label-sm uppercase tracking-tighter border border-grid-line">Python</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Motivation & CTA -->
+<section class="py-24 border-y border-grid-line relative overflow-hidden">
+<div class="px-margin-desktop relative z-10 text-center max-w-3xl mx-auto">
+<h2 class="font-label-sm text-label-sm text-primary mb-8 tracking-[0.3em] uppercase">Core Motivation</h2>
+<p class="font-headline-lg text-headline-lg leading-snug mb-12">
+                    "Make ideas touch reality—turning physics and code into reliable decisions that help people in messy, real-world environments."
+                </p>
+<div class="h-[1px] w-24 bg-primary mx-auto mb-12"></div>
+<div class="flex flex-col md:flex-row justify-center gap-8">
+<a class="flex items-center justify-center gap-3 group" href="mailto:mmukanovm@gmail.com">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">mail</span>
+<span class="font-label-sm text-label-sm border-b border-transparent group-hover:border-primary">mmukanovm@gmail.com</span>
+</a>
+<a class="flex items-center justify-center gap-3 group" href="https://github.com/MadiyarM">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">terminal</span>
+<span class="font-label-sm text-label-sm border-b border-transparent group-hover:border-primary">GitHub Profile</span>
+</a>
+<a class="flex items-center justify-center gap-3 group" href="https://www.linkedin.com/in/muqantegi/">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">diversity_3</span>
+<span class="font-label-sm text-label-sm border-b border-transparent group-hover:border-primary">Connect on LinkedIn</span>
+</a>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 p-8 font-code-snippet text-[10px] text-text-dim opacity-30 select-none">
+                BUILD_ID: 2025.RBT.PROD<br>
+                KERNEL: PHYSICS_CORE_V2<br>
+                STATUS: DEPLOYED
+            </div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width border-t border-grid-line">
+<div class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">MADIYAR MUKANOV</span>
+<p class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container">© 2025 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="mailto:mmukanovm@gmail.com">Email</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+</div>
+<div class="flex flex-col items-end gap-1 md:text-right">
+<span class="font-label-sm text-label-sm text-text-dim uppercase tracking-tighter">Availability</span>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(98,223,125,0.8)]"></span>
+<span class="font-label-sm text-label-sm text-on-surface uppercase">Open to Technical Collaboration</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Subtle micro-interactions
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                // Add atmospheric hover logic if needed
+            });
+        });
 
-  <main id="main">
-    <!-- ===== Cover: Inverted Pyramid with avatar aligned to intro on desktop; avatar first on mobile ===== -->
-    <section class="container cover" style="margin-top:.3rem">
-      <div class="title">
-        <div class="kicker">robotics·ai·machine learning</div>
-        <h1>Madiyar Mukanov</h1>
-        <p class="outcome"><strong>Outcome:</strong> Built field‑tested perception systems that fuse <em>thermal</em> (MLX90640) and <em>RGB</em> (Pi Camera) data for patient monitoring and mobile robots.</p>
-      </div>
+        // Sticky header opacity on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('backdrop-blur-xl', 'bg-surface/90');
+            } else {
+                header.classList.remove('backdrop-blur-xl', 'bg-surface/90');
+            }
+        });
+    </script>
 
-      <img class="avatar" src="assets/img/avatar.jpg" alt="Portrait of Madiyar Mukanov" loading="lazy" decoding="async" />
 
-      <div class="intro">
-        <div class="about">
-          <p><strong>About me:</strong> I am a robotics and computer-vision engineer with a physics-first mindset. I recently completed my M.Sc. in Robotics (2025) at Satbayev University, where I built an intelligent patient-monitoring platform.</p>
-        
-          <p>My foundation is a B.Sc. in Nuclear Physics from Al-Farabi Kazakh National University. That training directly powers my AI/ML and robotics work: stochastic processes &amp; Monte Carlo → Bayesian filters and uncertainty quantification; signal/measurement theory → calibration, sensor models, and error propagation; instrumentation &amp; radiation/thermal physics → practical sensing and embedded drivers; PDEs &amp; numerical methods → simulation, optimization, and differentiable programming. In short, I bring the rigor of measurement science to learning systems and robot perception.</p>
-          
-          <p>I chose robotics after the Kyoto Institute of Technology Summer School, where hands-on labs with sensors, embedded systems, and mobile robots showed me how physics becomes autonomy in the real world—and where I won the program’s electronics tournament. That experience made the shift to MSc in Robotics both natural and necessary.</p>
-          
-          <p>Beyond research, I build products and teach. I founded HonestREBot, a Telegram Mini-App that crowdsources reviews of residential complexes in Kazakhstan. I’ve also taught math and physics and mentor students.</p>
-          
-          <p>I have presented my Springer-indexed paper on thermal-imaging–based patient monitoring at AIR2025 (organized by Nazarbayev University and SCRS), and the article is in press.</p>
-        </div>
-        <p><strong>Motivation:</strong> make ideas touch reality—turning physics and code into reliable decisions that help people in messy, real-world environments.</p>
-        <!-- <ul class="skills" aria-label="Technical skills">
-          <li>Sensor fusion (thermal+RGB), OpenCV, camera calibration</li>
-          <li>Embedded Linux (Raspberry Pi), Python/C++, performance tuning</li>
-          <li>Data logging/telemetry, evaluation at the edge</li>
-          <li>Experiment design, metrics, ablations</li>
-        </ul> -->
-        <p>Résumé/CV: <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener noreferrer" style="color: #1313bd;">PDF</a></p>
-      </div>
-
-      <div class="contact" role="contentinfo">
-        <span>Contact me</span>·
-        <a class="contact-link" href="mailto:mmukanovm@gmail.com">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm0 2v.217l10 6.25 10-6.25V6L12 12.25 2 6z"/></svg>
-          <span class="sr-only">Email:</span> mmukanovm@gmail.com
-        </a>·
-        <a class="contact-link" href="https://github.com/MadiyarM" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.85 3.14 8.96 7.49 10.41.55.1.75-.24.75-.53 0-.26-.01-1.11-.02-2.02-3.05.66-3.7-1.3-3.7-1.3-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.08-.67.08-.67 1.09.08 1.66 1.12 1.66 1.12.98 1.67 2.58 1.19 3.2.91.1-.71.38-1.19.69-1.47-2.44-.28-5.01-1.22-5.01-5.43 0-1.2.43-2.18 1.13-2.95-.11-.28-.49-1.41.11-2.94 0 0 .92-.29 3.02 1.13.87-.24 1.8-.35 2.73-.35.93 0 1.86.12 2.73.35 2.1-1.42 3.02-1.13 3.02-1.13.6 1.53.22 2.66.11 2.94.7.77 1.12 1.75 1.12 2.95 0 4.22-2.58 5.15-5.04 5.42.39.34.74 1.01.74 2.04 0 1.47-.01 2.66-.01 3.02 0 .29.2.64.76.53 4.34-1.45 7.48-5.56 7.48-10.41C23.02 5.24 18.27.5 12 .5z"/></svg>
-          GitHub
-        </a>·
-        <a class="contact-link" href="https://www.linkedin.com/in/muqantegi/" target="_blank" rel="noopener noreferrer">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8.5h4V24h-4V8.5zm7.5 0h3.8v2.1h.05c.53-1 1.83-2.1 3.77-2.1 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.3c0-1.74-.03-3.98-2.43-3.98-2.43 0-2.8 1.9-2.8 3.86V24h-4V8.5z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-
-      <!-- ===== Visual‑first highlights (3–4) ===== -->
-      <div class="highlights" role="navigation" aria-label="Highlighted work">
-        <a class="card" href="publication_patient_monitoring.html" title="Patient Monitoring System - AIR 2025">
-          <img src="assets/img/papers/certificate.png" alt="Patient monitoring system with IR-RGB fusion" loading="lazy" decoding="async" />
-          <div class="meta">
-            <span class="badge">Publication · Computer Vision · Healthcare</span>
-          </div>
-        </a>
-        <a class="card" href="technical_projects.html" title="HonestREBot — Telegram Mini‑App">
-          <img src="assets/img/projects/random/randomhonestre-bot-preview.jpg" alt="Telegram mini app interface and moderation tools" loading="lazy" decoding="async" />
-          <div class="meta">
-            <h3 class="pins">HonestREBot — Telegram Web‑App</h3>
-            <span class="badge">Product · Web</span>
-          </div>
-        </a>
-        <a class="card" href="technical_projects.html" title="Bicycle Speedometer">
-          <img src="assets/img/projects/kyoto/kyoto-2019-certificate.jpg" alt="Graphs comparing sensor accuracy and response" loading="lazy" decoding="async" />
-          <div class="meta">
-            <h3 class="pins">Bicycle Speedometer — Kyoto Award 2019</h3>
-            <span class="badge">Sensors · Tournaments</span>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <div data-include="footer"></div>
-</body>
-</html>
+</body></html>
