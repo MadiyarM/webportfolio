@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/includes.js" defer></script>
   <style>
     /* Page-specific styles */
     .project-header{
@@ -264,23 +265,7 @@
   </style>
 </head>
 <body>
-  <!-- ===== Fixed header ===== -->
-  <header class="site-header">
-    <div class="container wrap">
-      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
-      <nav aria-label="Primary navigation">
-        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
-        <ul id="nav-list">
-          <li><a href="publications.html">Publications</a></li>
-          <li><a href="technical_projects.html">Technical projects</a></li>
-          <li><a href="random_projects.html">Random projects</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="contacts.html">Contacts</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-include="header"></div>
 
   <main>
     <div class="container">
@@ -427,29 +412,6 @@
     </div>
   </main>
 
-  <footer>
-    <div class="container wrap">
-      <span>© <span id="y"></span> Madiyar Mukanov</span>
-      <span>·</span>
-      <a href="sitemap.xml">sitemap</a>
-      <span>·</span>
-      <a href="robots.txt">robots.txt</a>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const btn = document.getElementById('menu-btn');
-    const list = document.getElementById('nav-list');
-    if(btn && list){
-      btn.addEventListener('click', () => {
-        const open = list.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(open));
-        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      });
-    }
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <div data-include="footer"></div>
 </body>
 </html>

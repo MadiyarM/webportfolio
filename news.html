@@ -9,6 +9,7 @@
   <link rel="manifest" href="manifest.webmanifest" />
 
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/includes.js" defer></script>
   <style>
     /* Page-specific styles */
     /* ===== Page header ===== */
@@ -50,23 +51,7 @@
   </style>
 </head>
 <body>
-  <!-- ===== Fixed header ===== -->
-  <header class="site-header">
-    <div class="container wrap">
-      <a class="brand" href="index.html"><span class="dot" aria-hidden="true"></span> Robotics / AI</a>
-      <nav aria-label="Primary navigation">
-        <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-list" aria-label="Open menu">≡</button>
-        <ul id="nav-list">
-          <li><a href="publications.html">Publications</a></li>
-          <li><a href="technical_projects.html">Technical projects</a></li>
-          <li><a href="random_projects.html">Random projects</a></li>
-          <li><a href="resources.html">Resources</a></li>
-          <li><a href="news.html" aria-current="page">News</a></li>
-          <li><a href="contacts.html">Contacts</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <div data-include="header"></div>
 
   <main>
     <section class="container page-head">
@@ -308,29 +293,9 @@
   </main>
   
 
-  <footer>
-    <div class="container wrap">
-      <span>© <span id="y"></span> Madiyar Mukanov</span>
-      <span>·</span>
-      <a href="sitemap.xml">sitemap</a>
-      <span>·</span>
-      <a href="robots.txt">robots.txt</a>
-    </div>
-  </footer>
+  <div data-include="footer"></div>
 
   <script>
-    // Mobile menu toggle
-    const btn = document.getElementById('menu-btn');
-    const list = document.getElementById('nav-list');
-    if(btn && list){
-      btn.addEventListener('click', () => {
-        const open = list.classList.toggle('open');
-        btn.setAttribute('aria-expanded', String(open));
-      });
-    }
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
     // Filtering (search + chips + year)
     const q = document.getElementById('q');
     const chips = Array.from(document.querySelectorAll('.chip'));
