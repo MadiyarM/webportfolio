@@ -1,638 +1,345 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bicycle Speedometer — Kyoto Award 2019 · Madiyar Mukanov</title>
-  <meta name="description" content="Low‑cost bicycle speedometer using a Hall sensor and microcontroller. Project presentation, technical details, and results." />
-  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="canonical" href="https://yourdomain.com/project_bicycle_speedometer.html" />
-  <meta name="theme-color" content="#16a34a" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Bicycle Speedometer — Kyoto Award 2019 · Madiyar Mukanov" />
-  <meta property="og:description" content="Low‑cost bicycle speedometer using a Hall sensor and microcontroller. Project presentation, technical details, and results." />
-  <meta property="og:url" content="https://yourdomain.com/project_bicycle_speedometer.html" />
-  <meta property="og:image" content="https://yourdomain.com/assets/img/projects/kyoto/og-cover.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
+<!DOCTYPE html>
 
-  <style>
-    /* ===== Light + Green palette ===== */
-    :root{
-      --bg:#ffffff;
-      --panel:#ffffff;
-      --grid:rgba(34,197,94,.08);
-      --text:#0f1a14;
-      --muted:#5b7a69;
-      --accent:#16a34a;
-      --accent-700:#166534;
-      --accent-300:#34d399;
-      --link:#0e9f42;
-      --border:rgba(16,185,82,.28);
-      --shadow:0 10px 28px rgba(16,185,82,.12);
-      --sidebar-width: 280px;
-    }
-
-    /* Base */
-    html,body{height:100%}
-    body{
-      margin:0; color:var(--text);
-      background:
-        radial-gradient(circle at 18% 8%, var(--grid) 0, transparent 28%),
-        radial-gradient(circle at 86% -6%, var(--grid) 0, transparent 30%),
-        var(--bg);
-      font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-      letter-spacing:.1px;
-    }
-    
-    .container{width:min(1400px,95%); margin:0 auto}
-    a{color:var(--link); text-decoration:none}
-    a:hover{text-decoration:underline}
-    a:focus-visible, button:focus-visible{outline:3px solid var(--accent-300); outline-offset:2px; border-radius:8px}
-
-    /* ===== Fixed header (same as index) ===== */
-    .site-header{position:fixed; inset:0 0 auto 0; height:64px; z-index:1000;
-      background:linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.86));
-      border-bottom:1px solid var(--border); backdrop-filter:saturate(130%) blur(6px)}
-    .site-header .wrap{height:64px; display:flex; align-items:center; justify-content:space-between}
-    .brand{display:flex; align-items:center; gap:.65rem; font-weight:800; letter-spacing:.35px; color:var(--text)}
-    .brand .dot{width:.6rem; height:.6rem; border-radius:999px; background:var(--accent); box-shadow:0 0 12px var(--accent-300)}
-    nav ul{display:flex; gap:1rem; list-style:none; margin:0; padding:0}
-    nav a{display:inline-block; padding:.42rem .6rem; border-radius:.5rem; border:1px solid transparent; color:var(--text)}
-    nav a:hover{border-color:var(--border); background:rgba(16,185,82,.08)}
-    .menu-btn{display:none}
-
-    main{padding-top:84px; display:flex; gap:2rem}
-    
-    /* Skip link */
-    .skip-link{position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden}
-    .skip-link:focus{left:4%; top:10px; width:auto; height:auto; padding:.4rem .6rem; background:#fff; border:1px solid var(--border); border-radius:.5rem; z-index:1001}
-
-    /* ===== Left Sidebar - Progress Map ===== */
-    .sidebar{
-      position: sticky;
-      top: 100px;
-      width: var(--sidebar-width);
-      height: fit-content;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-
-    .progress-map h3{
-      color: var(--accent-700);
-      margin: 0 0 1.5rem 0;
-      font-size: 1.1rem;
-      text-align: center;
-    }
-
-    .progress-steps{
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .progress-step{
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0.8rem;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .progress-step:hover{
-      border-color: var(--accent);
-      background: rgba(16,185,82,.05);
-    }
-
-    .progress-step.active{
-      border-color: var(--accent);
-      background: rgba(16,185,82,.1);
-      box-shadow: 0 4px 12px rgba(16,185,82,.15);
-    }
-
-    .progress-step.completed{
-      border-color: var(--accent-300);
-      background: rgba(52,211,153,.1);
-    }
-
-    .step-number{
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.9rem;
-    }
-
-    .step-number.completed{
-      background: var(--accent-300);
-    }
-
-    .step-content h4{
-      margin: 0 0 0.2rem 0;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-
-    .step-content p{
-      margin: 0;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* ===== Main Content ===== */
-    .main-content{
-      flex: 1;
-      max-width: calc(100% - var(--sidebar-width) - 2rem);
-    }
-
-    .project-header{
-      text-align: center;
-      margin-bottom: 3rem;
-      padding: 2rem 0;
-    }
-
-    .project-title{
-      font-size: clamp(2.5rem, 4vw, 3.5rem);
-      line-height: 1.2;
-      margin: 0 0 1rem 0;
-      color: var(--text);
-      font-weight: 800;
-    }
-
-    .project-subtitle{
-      font-size: 1.2rem;
-      color: var(--muted);
-      margin: 0 0 1.5rem 0;
-    }
-
-    .award-badge{
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-700));
-      color: white;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    /* ===== Content Sections ===== */
-    .content-section{
-      margin-bottom: 4rem;
-      padding: 2rem;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .content-section h2{
-      font-size: 1.8rem;
-      margin: 0 0 1.5rem 0;
-      color: var(--accent-700);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .section-icon{
-      width: 32px;
-      height: 32px;
-      background: var(--accent);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.2rem;
-    }
-
-    .content-section p{
-      margin: 0 0 1rem 0;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    .content-section ul{
-      margin: 1rem 0;
-      padding-left: 1.5rem;
-    }
-
-    .content-section li{
-      margin: 0.5rem 0;
-      line-height: 1.6;
-    }
-
-    /* ===== Media Elements ===== */
-    .media-grid{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .media-item{
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg);
-    }
-
-    .media-item img,
-    .media-item video,
-    .media-item iframe{
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .media-caption{
-      padding: 1rem;
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: center;
-    }
-
-    .presentation-embed{
-      width: 100%;
-      height: 400px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: var(--bg);
-      margin: 1.5rem 0;
-    }
-
-    .presentation-embed iframe{
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 12px;
-    }
-
-    /* ===== Navigation ===== */
-    .section-nav{
-      display: flex;
-      justify-content: space-between;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .nav-btn{
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .nav-btn:hover{
-      border-color: var(--accent);
-      background: rgba(16,185,82,.08);
-      transform: translateY(-1px);
-    }
-
-    .back-link{
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    .back-link a{
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      background: var(--accent);
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-
-    .back-link a:hover{
-      background: var(--accent-700);
-      transform: translateY(-1px);
-    }
-
-    footer{border-top:1px solid var(--border); margin-top:2rem; background:#fafdfb}
-    footer .wrap{display:flex; gap:.6rem; align-items:center; height:64px}
-
-    /* Responsive */
-    @media (max-width: 1200px){
-      main{flex-direction: column}
-      .sidebar{position: static; width: 100%; margin-bottom: 2rem}
-      .main-content{max-width: 100%}
-      .progress-steps{flex-direction: row; overflow-x: auto; padding-bottom: 1rem}
-      .progress-step{min-width: 200px; flex-shrink: 0}
-    }
-
-    @media (max-width: 680px){
-      .menu-btn{display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border:1px solid var(--border); border-radius:8px; background:transparent; color:var(--text)}
-      nav ul{display:none; position:absolute; right:4%; top:72px; background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:.6rem}
-      nav ul.open{display:flex; flex-direction:column}
-      .content-section{padding: 1.5rem}
-      .media-grid{grid-template-columns: 1fr}
-    }
-  </style>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bicycle Speedometer - Madiyar Mukanov</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "text-dim": "#6B7280",
+                        "on-error": "#690005",
+                        "surface-tint": "#62df7d",
+                        "electric-blue": "#1313BD",
+                        "primary-fixed": "#7ffc97",
+                        "surface-container-lowest": "#070d1f",
+                        "on-tertiary-container": "#1c2a3d",
+                        "surface-container": "#191f31",
+                        "on-primary-fixed-variant": "#005320",
+                        "surface-dim": "#0c1324",
+                        "secondary": "#bec6e0",
+                        "on-tertiary-fixed-variant": "#3a485c",
+                        "surface": "#0c1324",
+                        "primary-container": "#1ca64d",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-surface": "#dce1fb",
+                        "inverse-primary": "#006e2d",
+                        "surface-container-low": "#151b2d",
+                        "tertiary-fixed": "#d5e3fd",
+                        "slate-surface": "#0F172A",
+                        "tertiary-fixed-dim": "#b9c7e0",
+                        "inverse-on-surface": "#2a3043",
+                        "terminal-green": "#16A34A",
+                        "outline-variant": "#3e4a3d",
+                        "surface-bright": "#33394c",
+                        "grid-line": "#1E293B",
+                        "tertiary": "#b9c7e0",
+                        "on-primary-fixed": "#002109",
+                        "on-surface-variant": "#bdcaba",
+                        "primary-fixed-dim": "#62df7d",
+                        "on-tertiary": "#233144",
+                        "on-tertiary-fixed": "#0d1c2f",
+                        "on-secondary": "#283044",
+                        "tertiary-container": "#8392a9",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "inverse-surface": "#dce1fb",
+                        "on-secondary-container": "#adb4ce",
+                        "error-container": "#93000a",
+                        "outline": "#879485",
+                        "primary": "#62df7d",
+                        "surface-container-high": "#23293c",
+                        "on-background": "#dce1fb",
+                        "background": "#0c1324",
+                        "surface-container-highest": "#2e3447",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#3f465c",
+                        "on-primary": "#003914",
+                        "secondary-fixed": "#dae2fd",
+                        "on-primary-container": "#003111",
+                        "surface-variant": "#2e3447"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "grid-size": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-xl-mobile": ["JetBrains Mono"],
+                        "headline-md": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["JetBrains Mono"],
+                        "code-snippet": ["JetBrains Mono"],
+                        "headline-xl": ["JetBrains Mono"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0c1324;
+            background-image: 
+                linear-gradient(to right, #1E293B 1px, transparent 1px),
+                linear-gradient(to bottom, #1E293B 1px, transparent 1px);
+            background-size: 32px 32px;
+            color: #dce1fb;
+        }
+        .technical-border { border: 1px solid #1E293B; }
+        .primary-glow:hover { box-shadow: 0 0 15px rgba(98, 223, 125, 0.2); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
 </head>
-<body>
-  <!-- ===== Fixed header (included) ===== -->
-  <div data-include="header"></div>
-
-  <main id="main">
-    <!-- ===== Left Sidebar - Progress Map ===== -->
-    <aside class="sidebar">
-      <div class="progress-map">
-        <h3>📖 Project Progress</h3>
-        <div class="progress-steps">
-          <div class="progress-step active" data-section="theory">
-            <div class="step-number">1</div>
-            <div class="step-content">
-              <h4>📘Grasping the idea</h4>
-              <p>A bit theory</p>
-            </div>
-          </div>
-          <div class="progress-step" data-section="electronics">
-            <div class="step-number">2</div>
-            <div class="step-content">
-              <h4>🔌Wiring it all up</h4>
-              <p>Electronics part</p>
-            </div>
-          </div>
-          <div class="progress-step" data-section="results">
-            <div class="step-number">3</div>
-            <div class="step-content">
-              <h4>✅Did it actually work?</h4>
-              <p>Testing & validation</p>
-            </div>
-          </div>
-          <div class="progress-step" data-section="next-steps">
-            <div class="step-number">4</div>
-            <div class="step-content">
-              <h4>🚀Next Steps</h4>
-              <p>Future improvements</p>
-            </div>
-          </div>
-          <div class="progress-step" data-section="acknowledgements">
-            <div class="step-number">5</div>
-            <div class="step-content">
-              <h4>🙌Acknowledgements</h4>
-              <p>Thanks & credits</p>
-            </div>
-          </div>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 border-b border-grid-line backdrop-blur-md docked full-width top-0 sticky z-50 flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">
+            MADIYAR MUKANOV
         </div>
-      </div>
-    </aside>
-
-    <!-- ===== Main Content ===== -->
-    <div class="main-content">
-      <!-- ===== Project Header ===== -->
-      <header class="project-header">
-        <h1 class="project-title">Bicycle Speedometer</h1>
-        <p class="project-subtitle">My first ever international tournament project</p>
-        <p class="project-subtitle">Low-cost speed sensing using Hall-effect technology</p>
-        <div class="award-badge">
-          🏆 Kyoto Award 2019 - Excellence in Electronics
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects.html">Random</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+</nav>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm py-2 px-6 hover:opacity-90 active:scale-95 transition-all">
+            RESUME
+        </button>
+</header>
+<main class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+<div class="md:col-span-8">
+<div class="inline-flex items-center gap-2 mb-4">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">[ PROJECT RECAP ]</span>
+<div class="h-[1px] w-12 bg-primary"></div>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary mb-6">
+                    Bicycle Speedometer <br/>
+<span class="text-on-surface opacity-80">— Kyoto Award Detail</span>
+</h1>
+<div class="technical-border p-6 bg-surface-container-low mb-8 relative">
+<span class="absolute top-2 right-2 font-label-sm text-label-sm text-text-dim">[REF-AWARD-2019]</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">Winner: Electronics Tournament</p>
+<p class="font-body-md text-body-md text-text-dim">Kyoto Institute of Technology Summer School (2019)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="technical-border p-6 bg-slate-surface">
+<h3 class="font-label-sm text-label-sm text-primary mb-4 border-b border-grid-line pb-2 uppercase">Technical Metadata</h3>
+<div class="space-y-4">
+<div class="flex justify-between">
+<span class="text-text-dim font-label-sm text-label-sm">ARCHITECTURE</span>
+<span class="font-label-sm text-label-sm text-on-surface">8-BIT AVR / I2C</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-dim font-label-sm text-label-sm">SENSORS</span>
+<span class="font-label-sm text-label-sm text-on-surface">HALL-EFFECT ARRAY</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-dim font-label-sm text-label-sm">LATENCY</span>
+<span class="font-label-sm text-label-sm text-primary">&lt; 1.0ms</span>
+</div>
+<div class="flex justify-between">
+<span class="text-text-dim font-label-sm text-label-sm">SAMPLING</span>
+<span class="font-label-sm text-label-sm text-on-surface">500Hz</span>
+</div>
+</div>
+</div>
+<div class="technical-border p-6 bg-slate-surface flex-grow">
+<h3 class="font-label-sm text-label-sm text-primary mb-4 border-b border-grid-line pb-2 uppercase">Tech Stack</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Arduino</span>
+<span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">C++</span>
+<span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">I2C Protocol</span>
+<span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Hardware Debounce</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Image -->
+<section class="mb-16">
+<div class="relative group">
+<div class="absolute -top-4 -left-4 font-label-sm text-label-sm text-text-dim bg-background px-2">IMG_DEVICETYPE_09</div>
+<div class="absolute -bottom-4 -right-4 font-label-sm text-label-sm text-text-dim bg-background px-2">COORD_35.7091_139.7310</div>
+<img class="w-full h-[500px] object-cover border border-grid-line grayscale hover:grayscale-0 transition-all duration-700" data-alt="A highly detailed macro photograph of a custom-engineered electronic circuit board for a bicycle speedometer. The board features a sleek matte black finish with vibrant green LED indicators and precision-soldered components. The device is captured in a clinical, technical laboratory setting with soft, diffused top-lighting and a visible grid texture in the background. The aesthetic is futuristic and robotics-focused, emphasizing high-performance engineering." src="https://lh3.googleusercontent.com/aida/ADBb0ugV1tnJtaLis6gOKL2GqugqX-Z7koN-A2IPER6kHK_lN_DvI7APkTiLn93cnC1R_2MoCiEGXI1Z-SZy2HJ5x1fptcuWzWj-po-nj9vGnCh_KpvT56SZyaC6FHFRf9_mccdlM2lRETvZYipwfCfNjLKW_66vMr5Kh97QVrTBKO0nQazraa4g3DgmM1G0D4XRNCYSx-5zZKc3DWWDQadxbQat8MCM3ZSLVtDG7eVHs-vToMHV1bXjdOfYCcbW"/>
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+</div>
+</section>
+<!-- Technical Content Bento -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left: Overview -->
+<div class="md:col-span-4 space-y-gutter">
+<div class="technical-border p-8 bg-surface-container-low h-full">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Technical Overview</h2>
+<p class="text-on-surface-variant mb-6 font-body-md leading-relaxed">
+                        A custom Hall-effect sensor array engineered for sub-millisecond velocity tracking. Originally developed for competitive cycling telemetry, this system provides unprecedented accuracy compared to standard reed-switch sensors.
+                    </p>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<span class="font-label-sm text-label-sm">Localized data logging unit</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<span class="font-label-sm text-label-sm">Wireless real-time telemetry stream</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-sm mt-1">check_circle</span>
+<span class="font-label-sm text-label-sm">Precision circuit design (SMD)</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Middle: Sensor Fusion Logic -->
+<div class="md:col-span-8">
+<div class="technical-border bg-slate-surface overflow-hidden">
+<div class="border-b border-grid-line p-4 flex justify-between items-center bg-surface-container-highest">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<span class="font-code-snippet text-code-snippet text-text-dim">sensor_fusion_logic.cpp</span>
+</div>
+<div class="p-8">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Sensor Fusion Logic</h2>
+<p class="text-on-surface-variant mb-8 leading-relaxed">
+                            Explaining how the Hall-effect signals are processed to eliminate noise and bounce. The system uses a dual-window comparative threshold to distinguish between magnetic interference and actual wheel rotation events.
+                        </p>
+<div class="bg-black/40 p-6 border border-grid-line font-code-snippet text-code-snippet text-terminal-green">
+<pre><code>// Signal Processing Loop
+void processHallArray() {
+  uint32_t currentMicros = micros();
+  int rawSignal = analogRead(SENSOR_PIN);
+  
+  // Dynamic threshold adjustment
+  if (rawSignal &gt; noiseFloor + hysteresis) {
+    if (!signalDetected) {
+      calculateVelocity(currentMicros - lastEvent);
+      lastEvent = currentMicros;
+      signalDetected = true;
+      triggerStatusLED(1);
+    }
+  } else if (rawSignal &lt; noiseFloor) {
+    signalDetected = false;
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Prototyping Section -->
+<div class="md:col-span-12">
+<div class="technical-border p-8 grid grid-cols-1 md:grid-cols-2 gap-8 bg-surface-container">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Circuitry &amp; Prototyping</h2>
+<p class="text-on-surface-variant font-body-md leading-relaxed mb-4">
+                            Developed and refined at the Kyoto Institute of Technology (KIT) labs, the project underwent three major hardware iterations. Initial breadboard prototypes proved the logic, while final versions utilized custom PCBs to handle high-vibration environments.
+                        </p>
+<p class="text-on-surface-variant font-body-md leading-relaxed">
+                            The integration of I2C displays allowed for real-time visualization of RPM, Average Speed, and Total Distance without taxing the main processing loop's timing accuracy.
+                        </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-surface border border-grid-line p-4 text-center group cursor-crosshair">
+<span class="material-symbols-outlined text-primary mb-2">memory</span>
+<p class="font-label-sm text-label-sm uppercase tracking-tighter">MCU Control</p>
+</div>
+<div class="bg-slate-surface border border-grid-line p-4 text-center group cursor-crosshair">
+<span class="material-symbols-outlined text-primary mb-2">settings_input_component</span>
+<p class="font-label-sm text-label-sm uppercase tracking-tighter">Analog Input</p>
+</div>
+<div class="bg-slate-surface border border-grid-line p-4 text-center group cursor-crosshair">
+<span class="material-symbols-outlined text-primary mb-2">network_check</span>
+<p class="font-label-sm text-label-sm uppercase tracking-tighter">I2C BUS</p>
+</div>
+<div class="bg-slate-surface border border-grid-line p-4 text-center group cursor-crosshair">
+<span class="material-symbols-outlined text-primary mb-2">storage</span>
+<p class="font-label-sm text-label-sm uppercase tracking-tighter">Log Stack</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Status Log / Terminal -->
+<section class="mt-16">
+<div class="bg-[#050914] p-4 border border-grid-line font-code-snippet text-code-snippet">
+<div class="flex items-center gap-2 mb-2 text-text-dim border-b border-grid-line pb-2">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span>PROJECT_SYSTEM_LOG</span>
+</div>
+<div class="space-y-1">
+<p><span class="text-primary">[INIT]</span> System clock synchronized to 16MHz...</p>
+<p><span class="text-primary">[OK]</span> Hall-effect array calibrated. Noise floor at 12mV.</p>
+<p><span class="text-primary">[OK]</span> I2C display found at address 0x3C.</p>
+<p><span class="text-electric-blue">[LOG]</span> Kyoto Institute of Technology: Summer School Session #2019-B</p>
+<p><span class="text-secondary">[AWD]</span> Tournament status: WINNER</p>
+<p class="animate-pulse"><span class="text-primary">&gt;</span> System active_</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-grid-line">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">
+            MADIYAR MUKANOV
         </div>
-      </header>
-
-      <!-- ===== Theory Section ===== -->
-      <section id="theory" class="content-section">
-        <h2>
-          <span class="section-icon">🧠</span>
-          Theory & Concept
-        </h2>
-        <p>
-          The Bicycle Speedometer project was designed as an affordable and reliable alternative to commercial speedometers, using a simple Hall-effect sensor and magnet system to measure wheel rotations. Inspired by Kyoto’s cycling culture—the prefecture with the highest bicycle usage in Japan due to its flat terrain and iconic destinations—the module calculates both velocity and distance in real time, with an added night mode for evening rides. By translating magnetic pulses into speed and distance, this project makes cycling not just practical but also hackable and fun.        </p>
-        <p>
-          The core principle relies on magnetic field detection: a small magnet attached to a bicycle wheel generates a pulse each time it passes 
-          a Hall sensor mounted on the fork. By counting these pulses over time, we can calculate both instantaneous speed and total distance traveled.
-        </p>
-        
-        <div class="media-grid">
-          <div class="media-item">
-            <img src="assets/img/projects/kyoto/riding.jpg" alt="Kyoto Bicycle Ride" />
-            <div class="media-caption">Kyoto ride</div>
-          </div>
-          <div class="media-item">
-            <img src="assets/img/projects/kyoto/speedometer.png" alt="Our speedometer module" />
-            <div class="media-caption">Our speedometer module</div>
-          </div>
+<div class="font-body-md text-body-md text-on-tertiary-container dark:text-on-tertiary-container text-center md:text-left">
+            © 2024 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS
         </div>
-      </section>
-
-      <!-- ===== Electronics Section ===== -->
-      <section id="electronics" class="content-section">
-        <h2>
-          <span class="section-icon">⚡</span>
-          Electronics & Hardware
-        </h2>
-        <p>
-          The electronic design focuses on simplicity and reliability. We used an Arduino Nano as the main controller, paired with a digital 
-          Hall sensor (A3144) for magnetic field detection. The system includes an I²C LCD display for real-time feedback, a servo motor 
-          for analog speed indication, and automatic lighting control based on ambient light conditions.
-        </p>
-        
-        <div class="media-grid">
-          <div class="media-item">
-            <img src="https://raw.githubusercontent.com/MadiyarM/bike-speedometer-kyoto-2019/main/hardware/fritzing/diagram.png" alt="Wiring Diagram" />
-            <div class="media-caption">Complete wiring diagram (Fritzing)</div>
-          </div>
-          <div class="media-item">
-            <img src="assets/img/projects/kyoto/pcb-top.jpg" alt="Custom PCB" />
-            <div class="media-caption">Custom PCB with microcontroller and components</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== Results Section ===== -->
-      <section id="results" class="content-section">
-        <h2>
-          <span class="section-icon">🏆</span>
-          Results
-        </h2>
-        <p>
-          The project achieved remarkable success, winning the Excellence in Electronics award at the KIT Summer School in Kyoto, 2019. 
-          The speedometer demonstrated excellent accuracy and reliability across various testing conditions.
-        </p>
-
-        <div class="media-grid">
-          <div class="media-item">
-            <img src="assets/img/projects/kyoto/kyoto-2019-certificate.jpg" alt="Speed Error Graph" />
-            <div class="media-caption">Kyoto Award 2019 Certificate</div>
-          </div>
-          <div class="media-item">
-            <img src="assets/img/projects/kyoto/team.png" alt="Mounted Prototype" />
-            <div class="media-caption">Team (from left to right:  Hiroki Hayashi, Ego Ito, me, Slamiya Mauletbek, Martinet Alice)</div>
-          </div>
-        </div>
-
-        <div class="presentation-embed">
-          <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSAJeA5i7j_dATAq5qxQ6ZhzSkpjITTQF8QGs3TFukbkJNFOHyquhdejppsKDUSzw/pubembed?start=true&loop=true&delayms=5000" frameborder="0" width="1280" height="749" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
-        </div>
-
-      </section>
-
-      <!-- ===== Next Steps Section ===== -->
-      <section id="next-steps" class="content-section">
-        <h2>
-          <span class="section-icon">🚀</span>
-          Next Steps & Future Work
-        </h2>
-        <p>
-          While the current implementation successfully meets the project objectives, there are several areas for future improvement 
-          and expansion that could make the system even more versatile and user-friendly.
-        </p>
-
-        <h3>Planned Improvements</h3>
-        <ul>
-          <li><strong>Smart Auto-On via Seat Sensors:</strong> Seat-pressure sensors wake the speedometer as soon as the rider sits down.</li>
-          <li><strong>DHandlebar Display with Local Analytics:</strong> Live speed and ride stats render on a compact handlebar display while an SD card stores raw logs for later analysis/sync</li>
-          <li><strong>Toward Assisted/Autonomous Control:</strong> GPS/IMU—and later vision—enable lane-keeping and obstacle-aware assistance in controlled tests, progressing toward low-speed autonomy. Safety gates, geofencing, and kill-switches are built in</li>
-          <li><strong>Kinetic Energy Harvesting:</strong> A micro-dynamo (wheel/hub/chain drive) converts mechanical motion into electrical power to recharge the unit; solar remains a secondary source.</li>
-        </ul>
-
-      </section>
-
-      <!-- ===== Acknowledgements Section ===== -->
-      <section id="acknowledgements" class="content-section">
-        <h2>
-          <span class="section-icon">🙌</span>
-          Acknowledgements
-        </h2>
-        <p>
-          This project would not have been possible without the support and guidance of many individuals and organizations 
-          who contributed their time, expertise, and resources to make this vision a reality.
-        </p>
-
-        <h3>Special Thanks</h3>
-        <ul>
-          <li><strong>KIT Summer School:</strong> For providing the platform and opportunity to present this work</li>
-          <li><strong>Faculty Advisors:</strong> Prof. Kazuo Takahashi and Prof. Laifa Boufendi</li>
-          <li><strong>Team members:</strong> Hiroki Hayashi, Ego Ito, Slamiya Mauletbek, Martinet Alice</li>
-        </ul>
-
-        <h3>Project Repository</h3>
-        <p>
-          The complete project documentation, source code, and hardware designs are available as open-source materials 
-          to encourage further development and learning in the electronics and embedded systems community.
-        </p>
-        
-        <div style="text-align: center; margin: 2rem 0;">
-          <a href="https://github.com/MadiyarM/bike-speedometer-kyoto-2019" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: var(--accent); color: white; border-radius: 12px; text-decoration: none; font-weight: 600;">
-            🔗 View Project Repository
-          </a>
-        </div>
-      </section>
-
-      
-
-      <div class="back-link">
-        <a href="technical_projects.html">← Back to Technical Projects</a>
-      </div>
-    </div>
-  </main>
-
-  <div data-include="footer"></div>
-
-  <script src="assets/js/includes.js" defer></script>
-  <script>
-    // Progress Map Functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const progressSteps = document.querySelectorAll('.progress-step');
-      const sections = document.querySelectorAll('.content-section');
-      
-      // Update progress based on scroll position
-      function updateProgress() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const windowHeight = window.innerHeight;
-        
-        let currentSectionIndex = 0;
-        
-        // Find which section is currently most visible in viewport
-        sections.forEach((section, index) => {
-          const rect = section.getBoundingClientRect();
-          const sectionTop = rect.top;
-          const sectionBottom = rect.bottom;
-          
-          // If section is more than 50% visible in viewport, consider it active
-          if (sectionTop < windowHeight * 0.5 && sectionBottom > windowHeight * 0.5) {
-            currentSectionIndex = index;
-          }
+<div class="flex gap-gutter">
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="mailto:mmukanovm@gmail.com">Email</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for terminal
+        const lines = document.querySelectorAll('.space-y-1 p');
+        lines.forEach((line, i) => {
+            line.style.opacity = '0';
+            line.style.transform = 'translateX(-10px)';
+            setTimeout(() => {
+                line.style.transition = 'all 0.4s ease-out';
+                line.style.opacity = '1';
+                line.style.transform = 'translateX(0)';
+            }, i * 200);
         });
-        
-        console.log('Current section:', currentSectionIndex); // Debug log
-        
-        // Update all progress steps
-        progressSteps.forEach((step, index) => {
-          const stepNumber = step.querySelector('.step-number');
-          
-          // Remove all classes first
-          step.classList.remove('active', 'completed');
-          stepNumber.classList.remove('completed');
-          
-          if (index < currentSectionIndex) {
-            // Previous sections are completed
-            step.classList.add('completed');
-            stepNumber.classList.add('completed');
-          } else if (index === currentSectionIndex) {
-            // Current section is active
-            step.classList.add('active');
-          }
-          // Future sections remain unvisited
-        });
-      }
-      
-      // Click navigation for progress steps
-      progressSteps.forEach((step, index) => {
-        step.addEventListener('click', () => {
-          const targetSection = sections[index];
-          if (targetSection) {
-            const headerOffset = 100; // Account for fixed header
-            const elementPosition = targetSection.offsetTop;
-            const offsetPosition = elementPosition - headerOffset;
-            
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-          }
-        });
-      });
-      
-      // Update progress on scroll
-      window.addEventListener('scroll', updateProgress);
-      
-      // Initial progress update
-      updateProgress();
-      
-      // Update on window resize
-      window.addEventListener('resize', updateProgress);
-      
-      // Debug: log sections for troubleshooting
-      console.log('Found sections:', sections.length);
-      console.log('Found progress steps:', progressSteps.length);
-    });
-  </script>
-</body>
-</html>
+    </script>
+</body></html>

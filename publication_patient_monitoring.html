@@ -1,469 +1,346 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>An Intelligent System for Automated Monitoring and Control of Patient Conditions — AIR 2025 · Madiyar Mukanov</title>
-  <meta name="description" content="Real-time IR-RGB fusion for contactless temperature screening with face identification, on-device logging (SQLite), alerts, and compact 3D-printed enclosure. Springer publication in press, 2025." />
-  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="canonical" href="https://yourdomain.com/publication_patient_monitoring.html" />
-  <meta name="theme-color" content="#16a34a" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="An Intelligent System for Automated Monitoring and Control of Patient Conditions — AIR 2025" />
-  <meta property="og:description" content="Real-time IR-RGB fusion for contactless temperature screening with face identification, on-device logging (SQLite), alerts, and compact 3D-printed enclosure." />
-  <meta property="og:url" content="https://yourdomain.com/publication_patient_monitoring.html" />
-  <meta property="og:image" content="https://yourdomain.com/assets/img/papers/patient-monitoring-system.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
+<!DOCTYPE html>
 
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/includes.js" defer></script>
-  <style>
-    /* Page-specific styles */
-    :root {
-      --sidebar-width: 280px;
-    }
-
-    /* ===== Layout ===== */
-    .content-layout{
-      display: flex;
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-
-    .sidebar{
-      width: var(--sidebar-width);
-      flex-shrink: 0;
-    }
-
-    .main-content{
-      flex: 1;
-      max-width: calc(100% - var(--sidebar-width) - 2rem);
-    }
-
-    /* ===== Sidebar ===== */
-    .sidebar-card{
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      box-shadow: var(--shadow);
-    }
-
-    .sidebar-card h3{
-      margin: 0 0 1rem 0;
-      font-size: 1.1rem;
-      color: var(--text);
-    }
-
-    .publication-meta{
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .meta-item{
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .meta-label{
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .meta-value{
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-
-    .badge{
-      display: inline-block;
-      padding: 0.3rem 0.8rem;
-      background: rgba(22,163,74,.1);
-      color: var(--accent-dark);
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    .download-links{
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .download-btn{
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .download-btn:hover{
-      border-color: var(--accent);
-      background: rgba(22,163,74,.05);
-    }
-
-    .external-links{
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .external-link{
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0;
-      color: var(--link);
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .external-link:hover{
-      text-decoration: underline;
-    }
-
-    /* ===== Main Content ===== */
-    .publication-header{
-      text-align: center;
-      margin-bottom: 3rem;
-      padding: 2rem 0;
-    }
-
-    .publication-title{
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      line-height: 1.2;
-      margin: 0 0 1rem 0;
-      color: var(--text);
-      font-weight: 800;
-    }
-
-    .publication-subtitle{
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin: 0 0 1.5rem 0;
-    }
-
-    .venue-badge{
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: white;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    /* ===== Content Sections ===== */
-    .content-section{
-      margin-bottom: 3rem;
-      padding: 2rem;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .content-section h2{
-      margin: 0 0 1.5rem 0;
-      font-size: 1.5rem;
-      color: var(--text);
-      font-weight: 700;
-    }
-
-    .content-section h3{
-      margin: 1.5rem 0 1rem 0;
-      font-size: 1.2rem;
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .content-section p{
-      margin: 0 0 1rem 0;
-      line-height: 1.7;
-      color: var(--text);
-    }
-
-    .abstract{
-      font-style: italic;
-      background: rgba(22,163,74,.05);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border-left: 4px solid var(--accent);
-    }
-
-    .keywords{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 1rem 0;
-    }
-
-    .keyword{
-      padding: 0.3rem 0.8rem;
-      background: rgba(22,163,74,.1);
-      color: var(--accent-dark);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 500;
-    }
-
-    .feature-grid{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .feature-card{
-      padding: 1.5rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .feature-icon{
-      width: 48px;
-      height: 48px;
-      background: var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
-      color: white;
-      font-size: 1.2rem;
-    }
-
-    .feature-card h4{
-      margin: 0 0 0.5rem 0;
-      font-size: 1rem;
-      color: var(--text);
-    }
-
-    .feature-card p{
-      margin: 0;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .image-gallery{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .gallery-item{
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .gallery-item img{
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .gallery-caption{
-      padding: 1rem;
-      background: var(--bg);
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .bibtex-container{
-      background: #f8f9fa;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      overflow-x: auto;
-    }
-
-    .bibtex-container pre{
-      margin: 0;
-      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-      font-size: 0.85rem;
-      line-height: 1.4;
-      color: var(--text);
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 1024px){
-      .content-layout{
-        flex-direction: column;
-      }
-      .sidebar{
-        width: 100%;
-      }
-      .main-content{
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 680px){
-      .content-section{padding: 1.5rem}
-      .publication-title{font-size: 2rem}
-    }
-  </style>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --grid-size: 32px;
+        }
+        body {
+            background-color: #0c1324;
+            background-image: 
+                linear-gradient(to right, #1E293B 1px, transparent 1px),
+                linear-gradient(to bottom, #1E293B 1px, transparent 1px);
+            background-size: var(--grid-size) var(--grid-size);
+            color: #dce1fb;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-border {
+            position: relative;
+        }
+        .kinetic-border::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid #1E293B;
+            pointer-events: none;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 15px rgba(98, 223, 125, 0.2);
+            border-color: #62df7d;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #62df7d, transparent);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: scan 4s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0c1324",
+                      "primary-fixed-dim": "#62df7d",
+                      "surface-container-highest": "#2e3447",
+                      "surface-tint": "#62df7d",
+                      "terminal-green": "#16A34A",
+                      "surface-container-high": "#23293c",
+                      "primary-fixed": "#7ffc97",
+                      "on-primary-fixed-variant": "#005320",
+                      "surface-container": "#191f31",
+                      "on-tertiary": "#233144",
+                      "on-primary": "#003914",
+                      "tertiary-container": "#8392a9",
+                      "on-primary-fixed": "#002109",
+                      "slate-surface": "#0F172A",
+                      "surface": "#0c1324",
+                      "electric-blue": "#1313BD",
+                      "grid-line": "#1E293B",
+                      "on-tertiary-container": "#1c2a3d",
+                      "on-surface-variant": "#bdcaba",
+                      "outline-variant": "#3e4a3d",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "on-secondary": "#283044",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "on-primary-container": "#003111",
+                      "tertiary": "#b9c7e0",
+                      "tertiary-fixed": "#d5e3fd",
+                      "secondary-container": "#3f465c",
+                      "inverse-on-surface": "#2a3043",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "surface-container-lowest": "#070d1f",
+                      "inverse-surface": "#dce1fb",
+                      "surface-variant": "#2e3447",
+                      "text-dim": "#6B7280",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "primary": "#62df7d",
+                      "secondary-fixed": "#dae2fd",
+                      "primary-container": "#1ca64d",
+                      "secondary": "#bec6e0",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "error-container": "#93000a",
+                      "surface-dim": "#0c1324",
+                      "on-secondary-fixed": "#131b2e",
+                      "inverse-primary": "#006e2d",
+                      "outline": "#879485",
+                      "on-error": "#690005",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#33394c",
+                      "on-secondary-container": "#adb4ce",
+                      "on-background": "#dce1fb",
+                      "surface-container-low": "#151b2d",
+                      "on-surface": "#dce1fb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "grid-size": "32px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["JetBrains Mono"],
+                      "headline-lg": ["JetBrains Mono"],
+                      "code-snippet": ["JetBrains Mono"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-md": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+            },
+          },
+        }
+    </script>
 </head>
-<body>
-  <div data-include="header"></div>
-
-  <main>
-    <div class="container">
-      <div class="content-layout">
-        <!-- ===== Sidebar ===== -->
-        <aside class="sidebar">
-          <div class="sidebar-card">
-            <h3>Publication Details</h3>
-            <div class="publication-meta">
-              <div class="meta-item">
-                <div class="meta-label">Authors</div>
-                <div class="meta-value">Madiyar Mukanov</div>
-              </div>
-              <div class="meta-item">
-                <div class="meta-label">Venue</div>
-                <div class="meta-value">AIR 2025</div>
-              </div>
-              <div class="meta-item">
-                <div class="meta-label">Year</div>
-                <div class="meta-value">2025</div>
-              </div>
-              <div class="meta-item">
-                <div class="meta-label">Status</div>
-                <div class="meta-value">
-                  <span class="badge">Springer publication: in press</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sidebar-card">
-            <h3>External Links</h3>
-            <div class="external-links">
-              <!-- <a href="https://doi.org/10.1007/springer-patient-monitoring-2025" class="external-link" target="_blank">
-                🔗 DOI
-              </a>
-              <a href="https://arxiv.org/abs/2501.01234" class="external-link" target="_blank">
-                📚 arXiv
-              </a> -->
-              <a href="https://github.com/MadiyarM/patient-monitoring-raspi-mlx90640" class="external-link" target="_blank">
-                💻 GitHub Repository
-              </a>
-              <!-- <a href="https://demo.patient-monitoring.ai" class="external-link" target="_blank">
-                🎮 Live Demo
-              </a> -->
-            </div>
-          </div>
-
-          <div class="sidebar-card">
-            <h3>Keywords</h3>
-            <div class="keywords">
-              <span class="keyword">Patient monitoring</span>
-              <span class="keyword">IR-RGB fusion</span>
-              <span class="keyword">Thermal imaging</span>
-              <span class="keyword">Face identification</span>
-              <span class="keyword">Edge computing</span>
-              <span class="keyword">Healthcare automation</span>
-              <span class="keyword">Contactless screening</span>
-              <span class="keyword">Real-time processing</span>
-            </div>
-          </div>
-        </aside>
-
-        <!-- ===== Main Content ===== -->
-        <main class="main-content">
-          <div class="publication-header" style="margin-bottom: 0;">
-            <h1 class="publication-title">An Intelligent System for Automated Monitoring and Control of Patient Conditions</h1>
-            <p class="publication-subtitle">Real-time IR-RGB fusion for contactless temperature screening with face identification, on-device logging (SQLite), alerts, and compact 3D-printed enclosure</p>
-            <div class="venue-badge">
-              🏆 Presented at AIR 2025
-            </div>
-            <p style="margin-top: 1.5rem; color: var(--muted); font-size: 1rem;">Please see our paper for additional details on the project. (pdf link <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" style="color: #2563eb; text-decoration: underline;">here</a>)</p>
-          </div>
-
-          <div class="content-section">
-            <h2>Abstract</h2>
-            <div class="abstract">
-              <p>This paper presents a contactless temperature monitoring and patient identification system intended to meet stringent sanitary requirements in modern healthcare. By integrating a Raspberry Pi 4, an MLX90640 thermal sensor accurate to ±1 °C, and a Pi Camera Module 2 with 90–95% face recognition accuracy, it enables rapid, noninvasive detection of abnormal temperatures while minimizing staff-patient contact. The sensor’s 24 × 32 infrared array is fused with RGB frames for temperature assessment and identity verification. Controlled trials at ambient temperatures of 16 °C, 24 °C, and 26 °C consistently record ~33 °C on healthy foreheads, closely matching results from standard infrared thermometers. Minor temperature reductions occur with increasing distance, highlighting the need for proper alignment. Automated logging in a local SQLite database streamlines clinical workflows, allowing immediate retrieval of recorded data. Additionally, the approach significantly lowers staff workload by automating identification tasks, promoting safer, more efficient procedures. The findings underscore cost-effectiveness and scalability for continuous screening in diverse clinical environments, while reducing cross-contamination risks through rapid, contactless operation. Future efforts will broaden the dataset for enhanced algorithmic robustness, incorporate multi-parameter assessments of vital signs, and refine sensor calibration across variable conditions. 
-                Overall, this solution offers a promising avenue toward improved operational efficiency and infection control, aligning with contemporary standards for data-driven medical practice.</p>              
-            </div>
-          </div>
-
-          <div class="content-section">
-            <h2>Paper PDF</h2>
-            <div class="pdf-viewer-container">
-              <iframe 
-                src="assets/pdf/papers/mukanov2025-patient-monitoring.pdf#toolbar=1&navpanes=1&scrollbar=1&page=1&view=FitH" 
-                width="100%" 
-                height="600px" 
-                frameborder="0"
-                title="Patient Monitoring System Paper PDF"
-                style="border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow);">
-                <p>Your browser does not support PDFs. 
-                  <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" rel="noopener">
-                    Download the PDF instead
-                  </a>
-                </p>
-              </iframe>
-              <div class="pdf-actions" style="margin-top: 1rem; text-align: center;">
-                <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" rel="noopener" class="btn btn-primary">
-                  📄 Open PDF in New Tab
-                </a>
-                <a href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" download="mukanov2025-patient-monitoring.pdf" class="btn">
-                  💾 Download PDF
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="content-section">
-            <h2>Key Features</h2>
-            <div class="feature-grid">
-              <div class="feature-card">
-                <div class="feature-icon">🌡️</div>
-                <h4>Real-time Temperature Monitoring</h4>
-                <p>Contactless temperature screening using advanced thermal imaging technology with high accuracy and reliability.</p>
-              </div>
-              <div class="feature-card">
-                <div class="feature-icon">👤</div>
-                <h4>Face Identification</h4>
-                <p>Advanced computer vision algorithms for reliable patient identification and tracking across different conditions.</p>
-              </div>
-              <div class="feature-card">
-                <div class="feature-icon">🔗</div>
-                <h4>IR-RGB Fusion</h4>
-                <p>Sophisticated sensor fusion combining thermal and visual data for enhanced monitoring capabilities.</p>
-              </div>
-              <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h4>Real-time Processing</h4>
-                <p>Low-latency processing pipeline optimized for immediate response and alert generation.</p>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-  </main>
-
-  <div data-include="footer"></div>
-</body>
-</html>
+<body class="bg-background">
+<!-- Top Navigation -->
+<nav class="docked full-width top-0 sticky z-50 bg-surface/80 border-b border-grid-line backdrop-blur-md flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">MADIYAR MUKANOV</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects.html">Random</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+<button class="bg-primary text-background font-label-sm px-6 py-2 font-bold hover:opacity-80 transition-all">RESUME</button>
+</div>
+</nav>
+<main class="max-w-[1440px] mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Header Section -->
+<header class="grid grid-cols-1 lg:grid-cols-12 gap-gutter border-b border-grid-line pb-12">
+<div class="lg:col-span-8 flex flex-col justify-end">
+<div class="flex items-center gap-4 mb-4">
+<span class="bg-primary/10 text-primary border border-primary px-3 py-1 font-label-sm text-label-sm uppercase tracking-widest">Conference Accepted</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">[AIR 2025]</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface leading-none mb-8">Thermal-Imaging Patient Monitoring: A Physics-First Approach</h1>
+<div class="flex flex-wrap gap-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Published: Oct 2024</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+<span>DOI: 10.1109/AIR.2025.1042</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>Citations: 14</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 relative group">
+<div class="aspect-square bg-surface-container border border-grid-line overflow-hidden relative kinetic-border">
+<div class="scanline"></div>
+<img alt="Thermal Vision Visualization" class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-700" data-alt="A technical visualization of a thermal imaging feed rendered in high-contrast cyan and orange heat signatures against a dark, tech-oriented background. The image displays infrared data of a medical environment with visible heat plumes and digital diagnostic overlays including heart rate graphs and skeletal tracking markers. The lighting is low-key and moody, emphasizing a state-of-the-art robotic sensing lab aesthetic with sharp edges and minimal UI elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOL2dNHnf8b9Sd8jOUMGx6ilAipGHX_P9AoIWq6gtdcm10hP0SS_ST42g5rcqtlQU7sDAa_3W4i2yLga2IlPt0p_HSjox10Y0SS_qCALYd33tWH7Y6eb4nBSgp6zooDnpa_jgPWmCjAvOPPnyx_PcrOSI6oolp2ge9FmRy31bHOf_97lLkDyh0d5opZ2dluqXHy2RCAlrsyGTiunGk064tLcF50aNsN8DkTHR1WIj2292c48QqgSzGyrQulY7h_iaDGWvlT7vN1X-l"/>
+<div class="absolute bottom-4 left-4 font-label-sm text-label-sm text-primary bg-background/80 px-2 py-1 border border-primary/20">
+                        [SENSOR_FEED_01]
+                    </div>
+</div>
+</div>
+</header>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter py-12 border-b border-grid-line">
+<!-- Sidebar: Metadata -->
+<aside class="lg:col-span-3 order-2 lg:order-1 flex flex-col gap-12">
+<section>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary"></span> Keywords
+                    </h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 border border-grid-line text-on-surface-variant font-label-sm hover:border-primary transition-colors cursor-default">Thermal CV</span>
+<span class="px-3 py-1 border border-grid-line text-on-surface-variant font-label-sm hover:border-primary transition-colors cursor-default">Robotics</span>
+<span class="px-3 py-1 border border-grid-line text-on-surface-variant font-label-sm hover:border-primary transition-colors cursor-default">Signal Theory</span>
+<span class="px-3 py-1 border border-grid-line text-on-surface-variant font-label-sm hover:border-primary transition-colors cursor-default">Kalman Filters</span>
+<span class="px-3 py-1 border border-grid-line text-on-surface-variant font-label-sm hover:border-primary transition-colors cursor-default">Python</span>
+</div>
+</section>
+<section class="p-6 bg-surface-container-low border border-grid-line border-l-4 border-l-primary">
+<h4 class="font-label-sm text-label-sm text-primary uppercase mb-2">Conference Detail</h4>
+<p class="font-body-md text-body-md text-on-surface">Accepted for oral presentation at the <span class="text-primary font-bold">2025 AI in Robotics (AIR)</span> conference in Tokyo, Japan.</p>
+</section>
+<section>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="w-2 h-2 bg-primary"></span> Artifacts
+                    </h3>
+<ul class="flex flex-col gap-4">
+<li>
+<a class="flex items-center justify-between p-4 border border-grid-line hover:bg-primary/5 hover:border-primary transition-all group" href="assets/pdf/papers/mukanov2025-patient-monitoring.pdf" target="_blank" rel="noopener">
+<span class="font-label-sm text-on-surface">Download PDF</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">download</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between p-4 border border-grid-line hover:bg-primary/5 hover:border-primary transition-all group" href="https://github.com/MadiyarM/patient-monitoring-raspi-mlx90640" target="_blank" rel="noopener">
+<span class="font-label-sm text-on-surface">Source Code</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">code</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between p-4 border border-grid-line hover:bg-primary/5 hover:border-primary transition-all group" href="#">
+<span class="font-label-sm text-on-surface">Dataset [Restricted]</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">database</span>
+</a>
+</li>
+</ul>
+</section>
+</aside>
+<!-- Main Content: Abstract & Analysis -->
+<div class="lg:col-span-9 order-1 lg:order-2">
+<section class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8 italic tracking-tight">"Traditional RGB monitoring fails in occlusion and low-light environments. We solve this by modeling heat propagation as a primary signal."</h2>
+<div class="space-y-6 text-on-surface-variant font-body-lg text-body-lg leading-relaxed max-w-4xl">
+<p>
+                            Abstract: This paper introduces a robust framework for continuous patient monitoring using non-contact thermal imaging sensors. By leveraging a <span class="text-primary">physics-first approach</span>, we interpret thermal radiation patterns as fluid dynamics signals, allowing for high-fidelity detection of respiratory rates and subtle heart rate oscillations without the privacy concerns of visual spectrum data.
+                        </p>
+<p>
+                            Our method utilizes a custom-trained Transformer architecture optimized for low-resolution infrared feeds, achieving a 98.4% accuracy rate in detecting apnea events across varied patient body types and environmental thermal noise levels.
+                        </p>
+</div>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-16">
+<div class="p-8 bg-surface-container border border-grid-line relative group">
+<div class="absolute top-4 right-4 text-primary opacity-20 group-hover:opacity-100 transition-opacity font-label-sm">
+                            [ARCH-STACK]
+                        </div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6">The AI/CV Stack</h3>
+<ul class="space-y-4 font-code-snippet text-code-snippet">
+<li class="flex items-start gap-3">
+<span class="text-primary">&gt;</span>
+<span>Thermal CV: Custom convolution kernels for edge detection in high-noise IR frames.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-primary">&gt;</span>
+<span>Robotics: Integration with ROS2 for mobile monitoring platforms.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="text-primary">&gt;</span>
+<span>Stack: Python 3.11, PyTorch 2.0, CUDA-accelerated signal processing.</span>
+</li>
+</ul>
+</div>
+<div class="p-8 bg-surface-container border border-grid-line relative group">
+<div class="absolute top-4 right-4 text-primary opacity-20 group-hover:opacity-100 transition-opacity font-label-sm">
+                            [PHYSICS-CORE]
+                        </div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Signal Philosophy</h3>
+<ul class="space-y-4 font-body-md text-body-md text-on-surface-variant">
+<li><strong>Signal Theory:</strong> Treating heat as a periodic wave function to filter ambient interference.</li>
+<li><strong>Kalman Filters:</strong> Multi-state predictive modeling for motion compensation during patient movement.</li>
+<li><strong>Optimization:</strong> Zero-latency inference on edge devices via TensorRT.</li>
+</ul>
+</div>
+</section>
+<!-- Engineering Perspective Section -->
+<section class="border-t border-grid-line pt-12">
+<div class="flex flex-col md:flex-row gap-12">
+<div class="md:w-1/3">
+<div class="sticky top-24">
+<h2 class="font-headline-lg text-headline-lg text-on-surface leading-none mb-4">Engineering Perspective</h2>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-widest">A Deep-Tech Deep Dive</p>
+</div>
+</div>
+<div class="md:w-2/3 space-y-8">
+<div class="space-y-4">
+<h4 class="font-headline-md text-headline-md text-primary">Thermal Noise as Information</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                    In classical computer vision, thermal noise is discarded. Our approach treats noise as a stochastic variable that encodes information about the patient's distance and local atmospheric humidity. By integrating a physics-based model of infrared propagation, we reconstructed 3D heat maps from 2D sensors with minimal error.
+                                </p>
+</div>
+<div class="space-y-4">
+<h4 class="font-headline-md text-headline-md text-primary">Real-time Robotics Implementation</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                    The CV pipeline was containerized for deployment on autonomous bedside assistants. Using a lightweight version of the Kalman Filter, we maintained tracking lock even when the robot was rotating at speeds up to 45°/sec.
+                                </p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Technical Appendix Request -->
+<section class="py-24 flex flex-col items-center text-center">
+<div class="max-w-2xl w-full p-12 border border-primary/30 bg-primary/5 relative overflow-hidden kinetic-border">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-6">Technical Appendix Access</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">Request full signal processing logs, mathematical derivations, and early-stage CAD designs for the thermal sensor enclosure.</p>
+<div class="flex flex-col md:flex-row gap-4 justify-center">
+<input class="bg-background border border-grid-line px-6 py-3 font-code-snippet text-primary focus:outline-none focus:border-primary md:w-80" placeholder="professional@email.com" type="email"/>
+<button class="bg-primary text-background px-8 py-3 font-bold font-label-sm hover:scale-95 transition-transform">REQUEST ACCESS</button>
+</div>
+<p class="mt-6 font-label-sm text-label-sm text-on-surface-variant/50 uppercase tracking-tighter">Verified Research/Engineering Credentials Required</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-grid-line bg-surface-container-lowest">
+<div class="font-headline-md text-headline-md font-bold text-on-surface">MADIYAR MUKANOV</div>
+<div class="font-label-sm text-label-sm text-on-tertiary-container uppercase tracking-widest">
+            © 2024 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS
+        </div>
+<div class="flex gap-8">
+<a class="text-on-tertiary-container hover:text-primary transition-colors duration-300 font-label-sm" href="mailto:mmukanovm@gmail.com">Email</a>
+<a class="text-on-tertiary-container hover:text-primary transition-colors duration-300 font-label-sm" href="https://github.com/MadiyarM">GitHub</a>
+<a class="text-on-tertiary-container hover:text-primary transition-colors duration-300 font-label-sm" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+</div>
+</footer>
+<script>
+        // Micro-interaction for technical cards
+        document.querySelectorAll('.kinetic-border').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

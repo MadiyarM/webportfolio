@@ -1,123 +1,408 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Random Projects — Madiyar Mukanov</title>
-  <meta name="description" content="Side projects & experiments beyond core robotics/AI. Visual‑first cards linking to one‑page, quick‑skim case studies." />
-  <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="manifest" href="manifest.webmanifest" />
+<!DOCTYPE html>
 
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/js/includes.js" defer></script>
-  <style>
-    /* Page-specific styles */
-    /* ===== Page header ===== */
-    .page-head{padding: .5rem 0 1rem}
-    .page-head h1{margin:.2rem 0 .4rem; font-size: clamp(28px, 3vw, 40px); line-height:1.2}
-    .page-head p{color:var(--text-muted); margin:.2rem 0}
-
-    /* ===== Filter bar ===== */
-    .filters{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.6rem 0 1rem}
-    .filters input[type="search"]{width:min(360px,100%); padding:.5rem .65rem; border:1px solid var(--border); border-radius:.55rem; background:#fff; color:var(--text)}
-    .chip{display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark); cursor:pointer}
-    .chip.active{background:rgba(22,163,74,.12); border-color:var(--accent)}
-
-    /* ===== Projects grid ===== */
-    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem}
-    .project{grid-column: span 6; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden; position:relative}
-    .project a.cover{display:block}
-    .project img{width:100%; height:240px; object-fit:cover; display:block; filter:saturate(1.04)}
-    .project .body{padding: .9rem}
-    .project h3{margin:.1rem 0 .4rem; font-size:1.15rem}
-    .pins{position:relative; padding-left:.65rem}
-    .pins::before{content:""; position:absolute; left:0; top:.15rem; bottom:.15rem; width:3px; border-radius:2px; background:linear-gradient(180deg, rgba(22,163,74,.75) 0%, rgba(22,163,74,.2) 100%)}
-    .project .meta{display:flex; gap:.5rem; flex-wrap:wrap; color:var(--text-muted); font-size:.9rem}
-    .badge{display:inline-block; font-size:.78rem; padding:.15rem .45rem; border:1px solid var(--border); border-radius:999px; color:var(--accent-dark); background:rgba(22,163,74,.08)}
-    .skills{display:flex; flex-wrap:wrap; gap:.4rem; margin:.5rem 0 0}
-    .skills .tag{font-size:.8rem; padding:.18rem .5rem; border:1px solid var(--border); border-radius:999px; background:#fff; color:var(--accent-dark)}
-
-    .project .cta{margin-top:.6rem}
-    .btn{display:inline-block; padding:.45rem .7rem; border-radius:.55rem; border:1px solid var(--border); background:#fff; color:var(--text); text-decoration:none}
-    .btn:hover{border-color:var(--accent); background:rgba(22,163,74,.08)}
-
-    /* Responsive */
-    @media (max-width: 860px){
-      .project{grid-column: span 12}
-    }
-  </style>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Madiyar Mukanov | Experimental Archive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0c1324",
+                      "primary-fixed-dim": "#62df7d",
+                      "surface-container-highest": "#2e3447",
+                      "surface-tint": "#62df7d",
+                      "terminal-green": "#16A34A",
+                      "surface-container-high": "#23293c",
+                      "primary-fixed": "#7ffc97",
+                      "on-primary-fixed-variant": "#005320",
+                      "surface-container": "#191f31",
+                      "on-tertiary": "#233144",
+                      "on-primary": "#003914",
+                      "tertiary-container": "#8392a9",
+                      "on-primary-fixed": "#002109",
+                      "slate-surface": "#0F172A",
+                      "surface": "#0c1324",
+                      "electric-blue": "#1313BD",
+                      "grid-line": "#1E293B",
+                      "on-tertiary-container": "#1c2a3d",
+                      "on-surface-variant": "#bdcaba",
+                      "outline-variant": "#3e4a3d",
+                      "on-error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#0d1c2f",
+                      "on-secondary": "#283044",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "on-primary-container": "#003111",
+                      "tertiary": "#b9c7e0",
+                      "tertiary-fixed": "#d5e3fd",
+                      "secondary-container": "#3f465c",
+                      "inverse-on-surface": "#2a3043",
+                      "on-tertiary-fixed-variant": "#3a485c",
+                      "surface-container-lowest": "#070d1f",
+                      "inverse-surface": "#dce1fb",
+                      "surface-variant": "#2e3447",
+                      "text-dim": "#6B7280",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "primary": "#62df7d",
+                      "secondary-fixed": "#dae2fd",
+                      "primary-container": "#1ca64d",
+                      "secondary": "#bec6e0",
+                      "tertiary-fixed-dim": "#b9c7e0",
+                      "error-container": "#93000a",
+                      "surface-dim": "#0c1324",
+                      "on-secondary-fixed": "#131b2e",
+                      "inverse-primary": "#006e2d",
+                      "outline": "#879485",
+                      "on-error": "#690005",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#33394c",
+                      "on-secondary-container": "#adb4ce",
+                      "on-background": "#dce1fb",
+                      "surface-container-low": "#151b2d",
+                      "on-surface": "#dce1fb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "grid-size": "32px"
+              },
+              "fontFamily": {
+                      "headline-xl": ["JetBrains Mono"],
+                      "headline-xl-mobile": ["JetBrains Mono"],
+                      "headline-lg": ["JetBrains Mono"],
+                      "code-snippet": ["JetBrains Mono"],
+                      "label-sm": ["JetBrains Mono"],
+                      "headline-md": ["JetBrains Mono"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0c1324;
+            background-image: 
+                linear-gradient(to right, #1E293B 1px, transparent 1px),
+                linear-gradient(to bottom, #1E293B 1px, transparent 1px);
+            background-size: 32px 32px;
+            scroll-behavior: smooth;
+        }
+        .technical-card {
+            position: relative;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+        }
+        .technical-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #1E293B;
+            pointer-events: none;
+        }
+        .technical-card:hover::before {
+            border-color: #62df7d;
+            box-shadow: 0 0 10px rgba(98, 223, 125, 0.2);
+        }
+        .glitch-hover:hover {
+            text-shadow: 1px 0 #62df7d, -1px 0 #1313BD;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .status-running { background-color: #62df7d; box-shadow: 0 0 8px #62df7d; }
+        .status-processing { background-color: #1313BD; box-shadow: 0 0 8px #1313BD; }
+        .status-halted { background-color: #EF4444; box-shadow: 0 0 8px #EF4444; }
+    </style>
 </head>
-<body>
-  <div data-include="header"></div>
+<body class="text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 docked full-width top-0 sticky z-50 border-b border-grid-line backdrop-blur-md">
+<nav class="flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">MADIYAR MUKANOV</div>
+<div class="hidden md:flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="random_projects.html">Random</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+</div>
+<button class="bg-primary px-4 py-2 font-headline-md text-label-sm font-bold text-on-primary-fixed hover:opacity-80 transition-all active:scale-95">RESUME</button>
+</nav>
+</header>
+<main class="min-h-screen px-margin-mobile md:px-margin-desktop py-12">
+<!-- Page Title -->
+<div class="mb-16 border-l-4 border-primary pl-6">
+<div class="font-label-sm text-label-sm text-primary mb-2 opacity-70 uppercase tracking-widest">[ ACCESSING: EXPERIMENTAL_ARCHIVE.DB ]</div>
+<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface mb-4">Random Projects</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                A non-linear collection of hardware experiments, mathematical proofs, and unoptimized logic bridges. 
+                This sandbox represents the physics-first playground where hardware meets chaos.
+            </p>
+</div>
+<!-- Filter / Stats Bar -->
+<div class="flex flex-wrap gap-4 mb-12 border-y border-grid-line py-6 font-code-snippet text-code-snippet">
+<div class="flex items-center gap-2 px-4 py-1 border border-primary/20 bg-primary/5">
+<span class="text-primary font-bold">TOTAL_EXP:</span>
+<span>42</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-1 border border-grid-line">
+<span class="text-on-surface-variant">ACTIVE_NODES:</span>
+<span class="flex items-center gap-2">
+<span class="status-dot status-running"></span>
+<span>12</span>
+</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-1 border border-grid-line">
+<span class="text-on-surface-variant">ARCHIVED:</span>
+<span>30</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-1 border border-grid-line ml-auto cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+<span>FILTER_BY_TAG</span>
+</div>
+</div>
+<!-- Bento Grid for Projects -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Project 1: Bicycle Speedometer (Featured Wide) -->
+<div class="md:col-span-8 technical-card group p-6 flex flex-col md:flex-row gap-6">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-01_KYOTO]</div>
+<div class="w-full md:w-1/2 aspect-video overflow-hidden border border-grid-line relative">
+<img alt="Bicycle speed measurement hardware" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A high-precision bicycle speedometer hardware prototype mounted on a carbon fiber frame. The device features an exposed circuit board, a small glowing OLED display showing real-time velocity vectors, and copper-plated sensors. The setting is a clean, dark laboratory with cinematic green backlighting that accentuates the metallic textures and technical components. Modern technical minimalism aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATJjcFBWPVmK2N5DjuKbSKVIDxlNzoY7KKTycNISdJ5FylHjTy2QGYOUvZfV_cMtOwiWlN2DzvVZfb-jkuhZva_7pck34RTmODhwIqZWInSz7M2s-gMCeYDVfzwAVynDkqf_JeOuMMgzofV1ZjEr_I91oK9SRg-GyzYq0UCx20rCx4pYDggTwt4F_W-nOHBKdkgtgGvZIRfSDx8RMe0NK8kMHO4SBDYz800G-XzHOPxBzrWYs_5GRJbwIW7PXFJaqFvoxwYD1WyaBN"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-overlay"></div>
+</div>
+<div class="w-full md:w-1/2 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="bg-primary/20 text-primary text-[10px] px-2 py-0.5 font-bold">AWARD: KYOTO PRIZE</span>
+<div class="flex items-center gap-2">
+<span class="status-dot status-running"></span>
+<span class="font-label-sm text-label-sm uppercase">Status: Live</span>
+</div>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-3 glitch-hover">Bicycle Speedometer</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                            Custom Hall-effect sensor array for sub-millisecond velocity tracking. Developed for competitive cycling telemetry, featuring a localized data logging unit and wireless real-time stream.
+                        </p>
+</div>
+<div>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[11px] text-primary">Arduino</span>
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[11px] text-primary">C++</span>
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[11px] text-primary">I2C</span>
+</div>
+<button class="w-full border border-primary text-primary py-2 font-label-sm text-label-sm hover:bg-primary/10 transition-all uppercase tracking-widest">View Schematic</button>
+</div>
+</div>
+</div>
+<!-- Project 2: Math/Physics Mentoring -->
+<div class="md:col-span-4 technical-card group p-6 flex flex-col justify-between">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-02_EDU]</div>
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="status-dot status-processing"></span>
+<span class="font-label-sm text-label-sm uppercase">Active Sessions</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-3">Physics Mentoring</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Preparing the next generation of engineers for Olympiad-level physics and advanced calculus. Focused on intuitive visualization of Maxwell's equations and classical mechanics.
+                    </p>
+</div>
+<div class="mt-6">
+<div class="font-code-snippet text-code-snippet text-primary/60 mb-2">curriculum_modules:</div>
+<ul class="font-code-snippet text-[11px] space-y-1 text-on-surface-variant">
+<li>&gt; Vector_Calculus.py</li>
+<li>&gt; Lagrangian_Mechanics.c</li>
+<li>&gt; Quantum_Foundations.m</li>
+</ul>
+</div>
+</div>
+<!-- Project 3: Micro-Lidar Mapping -->
+<div class="md:col-span-4 technical-card group p-6">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-03_OPT]</div>
+<div class="aspect-square bg-surface-container border border-grid-line mb-4 relative overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-6xl opacity-20">sensors</span>
+</div>
+<!-- Mock Radar Animation -->
+<div class="absolute inset-0 border-2 border-primary/20 rounded-full scale-0 animate-ping"></div>
+<img alt="Lidar sensor point cloud" class="w-full h-full object-cover mix-blend-screen opacity-60 group-hover:opacity-100 transition-opacity" data-alt="A detailed 3D point cloud visualization generated from a micro-Lidar sensor, showing the internal geometry of a structured room. The digital points are rendered in vibrant neon green against a deep charcoal background. The composition is technical and abstract, suggesting high-precision spatial mapping. The lighting is dark with fluorescent accents, reflecting a high-tech engineering environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgyDJ_T0HRSb16HXJisrHhtRkWzo7SMAEYSQS84sUXGCVihyKgHuD8FdJUXzAtim2YP1D7H9OTRVvii03LuaaJE1iZkNoGAu3Z4I-lTJB6zuQZpAu6_Tro8ritfWKz4zO5JPVXXtzOP2d8k5YvWlrW_3aqmIkyHRmFV9x1jPyvzFEILO6Tp63VP-VNmHbGkHAsf5sEdF6U01f-e9LeeHhSODpki9shziJXKOdbrQ8xMbUxjEsBSulD_bCvjlxpBhl8euu0aVwKjDPO"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Micro-Lidar</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                    Low-cost 2D mapping using time-of-flight sensors.
+                </p>
+<div class="flex gap-2">
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[10px]">ROS2</span>
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[10px]">Python</span>
+</div>
+</div>
+<!-- Project 4: Experimental Logic Lab -->
+<div class="md:col-span-8 technical-card group p-6 relative">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-04_LOGIC]</div>
+<div class="flex flex-col md:flex-row gap-6 h-full">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-4">
+<span class="status-dot status-halted"></span>
+<span class="font-label-sm text-label-sm uppercase">Branch: Suspended</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Discrete Logic GPU</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            An ambitious attempt to build a functional 8-bit graphics processor entirely from discrete transistors and logic gates. Exploring the fundamental physical constraints of computing architecture.
+                        </p>
+<div class="grid grid-cols-2 gap-4 font-code-snippet text-code-snippet border-t border-grid-line pt-4">
+<div>
+<span class="text-primary block">GATE_COUNT</span>
+<span class="text-on-surface">1,240+ Units</span>
+</div>
+<div>
+<span class="text-primary block">CLOCK_SPEED</span>
+<span class="text-on-surface">120.0 kHz</span>
+</div>
+</div>
+</div>
+<div class="md:w-1/3 bg-background border border-grid-line p-4 overflow-hidden relative">
+<div class="text-[9px] font-code-snippet text-primary/40 leading-tight">
+                            01101001 01100101 01110100<br/>
+                            01110011 01101111 01101101<br/>
+                            01100101 00100000 01101110<br/>
+                            01101111 01100100 01100101<br/>
+                            01110011 00100000 01100110<br/>
+                            01101001 01101110 01100001<br/>
+                            01101100 01101111 01110111<br/>
+                            01100101 01100100 00100000
+                        </div>
+<div class="absolute bottom-4 left-4 right-4 text-[10px] font-bold text-primary animate-pulse">
+                            [ HARDWARE_FAILURE_LOG_V2 ]
+                        </div>
+</div>
+</div>
+</div>
+<!-- Project 5: Automated Greenhouse -->
+<div class="md:col-span-4 technical-card group p-6">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-05_BIO]</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Bio-Logic v1</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                    Automated hydroponics system controlled via ESP32.
+                </p>
+<div class="space-y-3 mb-6">
+<div class="h-1 bg-grid-line w-full relative">
+<div class="h-full bg-primary w-3/4"></div>
+<span class="absolute right-0 -top-4 text-[9px] font-code-snippet">MOISTURE: 75%</span>
+</div>
+<div class="h-1 bg-grid-line w-full relative">
+<div class="h-full bg-electric-blue w-1/2"></div>
+<span class="absolute right-0 -top-4 text-[9px] font-code-snippet">PH_LVL: 6.2</span>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[10px]">C++</span>
+<span class="px-2 py-1 border border-grid-line font-code-snippet text-[10px]">MQTT</span>
+</div>
+</div>
+<!-- Project 6: CFD Simulations -->
+<div class="md:col-span-4 technical-card group p-6 border-l-4 border-l-electric-blue">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-06_AERO]</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">CFD Sandbox</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                    OpenFOAM explorations into aerodynamic efficiency for small-scale drones.
+                </p>
+<div class="aspect-video bg-surface-container relative mb-4">
+<img alt="Computational fluid dynamics visualization" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A sophisticated scientific visualization of fluid flow vectors passing over a sleek drone wing profile. The image features a spectrum of colors from deep blue to vibrant red, representing different pressure zones and turbulence patterns. The background is a clean, dark engineering workstation interface with technical data readouts on the margins. The mood is precise, analytical, and representative of high-end computational research." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhP1CkYeiqrlLCXbQQiPdfbzFeVkr7ANUsJA7mATpH1XzV6ztkhV9ABYT_JzE5GLtbyLdU9dljk58P_aMMK1sGIYUP0JwtAovABfMqtfwYySVIFi28oNEAN5asRs9kVWIg1mQG3QWutFflG8-_g7wF6Gv2VmV4qHbGiH7hmBPUz3BIc5plZVRwnupvjey8WrFV2UmMSY6A_BUMgSQ7jTLlE5Foya1b8crXN4en3AzG7LWDDM0FqKyl3GHNNrdg7mcefG1TuWAuas06"/>
+</div>
+<div class="font-code-snippet text-[10px] text-primary">KERNEL_STABILITY: 0.982</div>
+</div>
+<!-- Project 7: Terminal Interface -->
+<div class="md:col-span-4 technical-card group p-6 border-b-4 border-b-primary/50">
+<div class="absolute top-2 right-2 font-label-sm text-[10px] text-primary/40">[REF-07_UI]</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Portfol-OS</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                    This exact interface. Built to simulate a hardware monitoring system.
+                </p>
+<div class="p-3 bg-surface-container-low border border-grid-line font-code-snippet text-[10px] space-y-1">
+<div class="flex justify-between"><span>CPU_LOAD</span><span class="text-primary">0.02%</span></div>
+<div class="flex justify-between"><span>RENDER_TIME</span><span class="text-primary">12ms</span></div>
+<div class="flex justify-between"><span>STYLING</span><span class="text-primary">TAILWIND_V3</span></div>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="mt-20 p-12 technical-card border-dashed border-2 border-primary/30 text-center">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Have an Idea?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-xl mx-auto">
+                I'm always looking for weird hardware to hack or physics puzzles to solve. Let's build something theoretically impossible.
+            </p>
+<button class="bg-primary hover:bg-primary/80 text-on-primary font-bold px-10 py-4 font-headline-md text-headline-md transition-all active:scale-95">START_COLLAB()</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-grid-line">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">MADIYAR MUKANOV</div>
+<div class="font-body-md text-body-md text-on-tertiary-container dark:text-on-tertiary-container text-center md:text-left">
+            © 2024 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS
+        </div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="mailto:contact@madiyar.tech">Email</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+</div>
+</footer>
+<script>
+        // Subtle terminal typing effect for the title
+        const titles = ["[ ACCESSING: EXPERIMENTAL_ARCHIVE.DB ]", "[ ARCHIVE_READY ]", "[ STATUS: NOMINAL ]"];
+        let counter = 0;
+        const terminalText = document.querySelector('.text-primary.mb-2');
+        
+        setInterval(() => {
+            counter = (counter + 1) % titles.length;
+            terminalText.textContent = titles[counter];
+        }, 5000);
 
-  <main>
-    <section class="container page-head">
-      <h1>Random Projects</h1>
-      <p>Side projects and experiments.</p>
-
-      <!-- Filters -->
-      <!-- <div class="filters">
-        <input id="q" type="search" placeholder="Search title or skills…" aria-label="Search projects" />
-        <button class="chip" data-filter="DIY">DIY</button>
-        <button class="chip" data-filter="Web">Web</button>
-        <button class="chip" data-filter="Design">Design</button>
-        <button class="chip" data-filter="Photography">Photography</button>
-        <button class="chip" data-filter="Bot">Bot</button>
-      </div> -->
-    </section>
-
-    <section class="container">
-      <div id="grid" class="grid">
-        <!-- Project 1: HonestRE Bot -->
-        <article class="project" data-tags="Bot,Web,Telegram,AI">
-          <a class="cover" href="random_honestre_bot.html" title="Open: HonestRE Bot — Telegram WebApp + Bot">
-            <img src="assets/img/projects/random/randomhonestre-bot-preview.jpg" alt="HonestRE Bot interface showing residential complex reviews" />
-          </a>
-          <div class="body">
-            <h3 class="pins"><a href="random_honestre_bot.html">HonestRE Bot — Telegram WebApp + Bot</a></h3>
-            <div class="meta">
-              <span class="badge">Production Status</span>
-              <span>Bot · Web · AI</span>
-            </div>
-            <div class="skills">
-              <span class="tag">Telegram Bot</span>
-              <span class="tag">WebApp</span>
-              <span class="tag">RAG</span>
-              <span class="tag">Geosearch</span>
-            </div>
-            <div class="cta"><a class="btn" href="random_honestre_bot.html">Open→</a></div>
-          </div>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <div data-include="footer"></div>
-
-  <script>
-    // Simple client-side filtering (search + chips)
-    const q = document.getElementById('q');
-    const chips = Array.from(document.querySelectorAll('.chip'));
-    const projects = Array.from(document.querySelectorAll('.project'));
-    const active = new Set();
-
-    function applyFilter(){
-      const term = (q.value || '').toLowerCase();
-      projects.forEach(card => {
-        const tags = (card.getAttribute('data-tags')||'').toLowerCase();
-        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
-        const matchText = !term || title.includes(term) || tags.includes(term);
-        const matchTags = active.size === 0 || Array.from(active).some(t => tags.includes(t.toLowerCase()));
-        card.style.display = (matchText && matchTags) ? '' : 'none';
-      });
-    }
-
-    q?.addEventListener('input', applyFilter);
-    chips.forEach(ch => ch.addEventListener('click', () => {
-      const key = ch.getAttribute('data-filter');
-      if(ch.classList.toggle('active')) active.add(key); else active.delete(key);
-      applyFilter();
-    }));
-  </script>
-</body>
-</html>
+        // Add a parallax mouse effect for the grid
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.technical-card');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            cards.forEach(card => {
+                const shiftX = (x - 0.5) * 10;
+                const shiftY = (y - 0.5) * 10;
+                // card.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+            });
+        });
+    </script>
+</body></html>
