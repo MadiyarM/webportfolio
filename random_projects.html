@@ -151,15 +151,17 @@
 <header class="bg-surface/80 dark:bg-surface/80 docked full-width top-0 sticky z-50 border-b border-grid-line backdrop-blur-md">
 <nav class="flex justify-between items-center w-full px-margin-desktop h-16 max-w-full">
 <div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-primary">MADIYAR MUKANOV</div>
-<div class="hidden md:flex gap-8">
-<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+<div class="hidden md:flex gap-8 items-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="index.html">Home</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career.html">Career</a>
 <a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="random_projects.html">Random</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
-<a class="font-label-sm text-label-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+<button class="ml-4 bg-primary text-surface px-4 py-1.5 font-code-snippet font-bold text-sm hover:brightness-110 active:scale-95 transition-all">RESUME</button>
 </div>
-<button class="bg-primary px-4 py-2 font-headline-md text-label-sm font-bold text-on-primary-fixed hover:opacity-80 transition-all active:scale-95">RESUME</button>
 </nav>
 </header>
 <main class="min-h-screen px-margin-mobile md:px-margin-desktop py-12">
@@ -194,18 +196,55 @@
 </div>
 <a class="mt-auto flex items-center justify-center w-full py-2 border border-grid-line font-code-snippet text-sm text-on-surface-variant hover:text-primary hover:border-primary transition-all" href="project_bicycle_speedometer.html">Open -></a>
 </div>
+
+<!-- Project 2: CodiBit -->
+<div class="technical-card group p-6 flex flex-col">
+<div class="w-full aspect-video overflow-hidden border border-grid-line mb-5 relative bg-slate-900 flex items-center justify-center">
+<img alt="CodiBit — ESP32 educational board front" class="h-full object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" src="assets/img/projects/codiplay/codibit/codibit-front.jpg"/>
+</div>
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 border border-primary/20 font-code-snippet uppercase">CodiPlay · 2025–2026</span>
+<span class="text-on-surface-variant text-[10px] font-code-snippet uppercase">Hardware · Firmware</span>
+</div>
+<a class="font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors mb-3 block" href="project_codibit.html">CodiBit</a>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-1">ESP32-based educational microcontroller with MicroPython API. LCD display, buttons, accelerometer, compass, BLE, buzzer, and alligator-clip I/O pins — designed to make physical computing accessible to students.</p>
+<div class="flex flex-wrap gap-2 mb-5">
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">ESP32</span>
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">MicroPython</span>
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">BLE</span>
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">Accelerometer</span>
+</div>
+<a class="mt-auto flex items-center justify-center w-full py-2 border border-grid-line font-code-snippet text-sm text-on-surface-variant hover:text-primary hover:border-primary transition-all" href="project_codibit.html">Open -></a>
+</div>
+
+<!-- Project 3: CodiEditor -->
+<div class="technical-card group p-6 flex flex-col">
+<div class="w-full aspect-video overflow-hidden border border-grid-line mb-5 relative">
+<img alt="CodiEditor — block programming IDE for CodiBit" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500" src="assets/img/projects/codiplay/codiEditor/codieditor.jpg"/>
+</div>
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 border border-primary/20 font-code-snippet uppercase">CodiPlay · 2025–2026</span>
+<span class="text-on-surface-variant text-[10px] font-code-snippet uppercase">Web · Education</span>
+</div>
+<a class="font-headline-md text-headline-md text-on-surface hover:text-primary transition-colors mb-3 block" href="project_codiEditor.html">CodiEditor</a>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 flex-1">Browser-based IDE for learning programming. Students assemble drag-and-drop blocks, see the corresponding MicroPython code update in real time, and run it on a connected CodiBit — all in one interface.</p>
+<div class="flex flex-wrap gap-2 mb-5">
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">Block Programming</span>
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">MicroPython</span>
+<span class="px-2 py-1 bg-grid-line/30 border border-grid-line font-code-snippet text-[10px] text-on-surface-variant">Web IDE</span>
+</div>
+<a class="mt-auto flex items-center justify-center w-full py-2 border border-grid-line font-code-snippet text-sm text-on-surface-variant hover:text-primary hover:border-primary transition-all" href="project_codiEditor.html">Open -></a>
+</div>
+
 </div>
 </main>
 <!-- Footer -->
 <footer class="w-full py-12 px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-grid-line">
-<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">MADIYAR MUKANOV</div>
-<div class="font-body-md text-body-md text-on-tertiary-container dark:text-on-tertiary-container text-center md:text-left">
-            © 2024 MADIYAR MUKANOV | PHYSICS-FIRST ROBOTICS
-        </div>
+<div class="font-label-sm text-label-sm text-text-dim font-code-snippet">© 2025 MADIYAR MUKANOV</div>
 <div class="flex gap-8">
-<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="mailto:mmukanovm@gmail.com">Email</a>
-<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
-<a class="font-label-sm text-label-sm text-on-tertiary-container dark:text-on-tertiary-container hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+<a class="font-label-sm text-label-sm text-text-dim hover:text-primary transition-colors duration-300" href="mailto:mmukanovm@gmail.com">Email</a>
+<a class="font-label-sm text-label-sm text-text-dim hover:text-primary transition-colors duration-300" href="https://github.com/MadiyarM">GitHub</a>
+<a class="font-label-sm text-label-sm text-text-dim hover:text-primary transition-colors duration-300" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
 </div>
 </footer>
 <script>
