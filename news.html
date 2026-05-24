@@ -1,285 +1,511 @@
-﻿<!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="canonical" href="https://madiyarmukanov.com/news.html">
+<link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml">
+<title>Madiyar Mukanov | Activity Stream</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .grid-bg {
-            background-image: linear-gradient(to right, #1E293B 1px, transparent 1px),
-                              linear-gradient(to bottom, #1E293B 1px, transparent 1px);
-            background-size: 32px 32px;
-        }
-        .terminal-glow:hover {
-            box-shadow: 0 0 15px rgba(98, 223, 125, 0.2);
-        }
-    </style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .grid-bg {
+        background-image: radial-gradient(circle, #1E293B 1px, transparent 1px);
+        background-size: 32px 32px;
+    }
+    .scanline {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to bottom, rgba(98, 223, 125, 0), rgba(98, 223, 125, 0.2), rgba(98, 223, 125, 0));
+        position: absolute;
+        animation: scan 4s linear infinite;
+    }
+    @keyframes scan {
+        0% { top: -10%; }
+        100% { top: 110%; }
+    }
+    .terminal-glow:hover {
+        box-shadow: 0 0 15px rgba(98, 223, 125, 0.15);
+    }
+</style>
 <script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "surface-container-low": "#151b2d",
-                      "on-background": "#dce1fb",
-                      "secondary-fixed-dim": "#bec6e0",
-                      "text-dim": "#6B7280",
-                      "on-error-container": "#ffdad6",
-                      "on-primary-container": "#003111",
-                      "secondary-fixed": "#dae2fd",
-                      "on-tertiary-fixed": "#0d1c2f",
-                      "inverse-on-surface": "#2a3043",
-                      "primary-fixed-dim": "#62df7d",
-                      "on-secondary-fixed": "#131b2e",
-                      "surface": "#0c1324",
-                      "inverse-surface": "#dce1fb",
-                      "on-tertiary": "#233144",
-                      "on-secondary-container": "#adb4ce",
-                      "surface-container": "#191f31",
-                      "on-primary": "#003914",
-                      "surface-container-high": "#23293c",
-                      "on-primary-fixed": "#002109",
-                      "slate-surface": "#0F172A",
-                      "on-tertiary-fixed-variant": "#3a485c",
-                      "surface-variant": "#2e3447",
-                      "terminal-green": "#16A34A",
-                      "on-secondary": "#283044",
-                      "on-primary-fixed-variant": "#005320",
-                      "error-container": "#93000a",
-                      "tertiary-fixed": "#d5e3fd",
-                      "inverse-primary": "#006e2d",
-                      "outline": "#879485",
-                      "tertiary": "#b9c7e0",
-                      "surface-container-highest": "#2e3447",
-                      "electric-blue": "#1313BD",
-                      "primary-container": "#1ca64d",
-                      "outline-variant": "#3e4a3d",
-                      "on-error": "#690005",
-                      "grid-line": "#1E293B",
-                      "surface-bright": "#33394c",
-                      "on-tertiary-container": "#1c2a3d",
-                      "on-secondary-fixed-variant": "#3f465c",
-                      "on-surface-variant": "#bdcaba",
-                      "tertiary-fixed-dim": "#b9c7e0",
-                      "tertiary-container": "#8392a9",
-                      "primary-fixed": "#7ffc97",
-                      "surface-tint": "#62df7d",
-                      "primary": "#62df7d",
-                      "error": "#ffb4ab",
-                      "surface-dim": "#0c1324",
-                      "secondary-container": "#3f465c",
-                      "surface-container-lowest": "#070d1f",
-                      "secondary": "#bec6e0",
-                      "background": "#0c1324",
-                      "on-surface": "#dce1fb"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.125rem",
-                      "lg": "0.25rem",
-                      "xl": "0.5rem",
-                      "full": "0.75rem"
-              },
-              "spacing": {
-                      "unit": "4px",
-                      "grid-size": "32px",
-                      "margin-desktop": "64px",
-                      "margin-mobile": "16px",
-                      "gutter": "24px"
-              },
-              "fontFamily": {
-                      "body-md": ["Inter"],
-                      "headline-md": ["JetBrains Mono"],
-                      "body-lg": ["Inter"],
-                      "headline-xl": ["JetBrains Mono"],
-                      "label-sm": ["JetBrains Mono"],
-                      "headline-xl-mobile": ["JetBrains Mono"],
-                      "code-snippet": ["JetBrains Mono"],
-                      "headline-lg": ["JetBrains Mono"]
-              },
-              "fontSize": {
-                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                      "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                      "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                      "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
-                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
-              }
-            },
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-container-low": "#151b2d",
+                  "on-background": "#dce1fb",
+                  "secondary-fixed-dim": "#bec6e0",
+                  "text-dim": "#6B7280",
+                  "on-error-container": "#ffdad6",
+                  "on-primary-container": "#003111",
+                  "secondary-fixed": "#dae2fd",
+                  "on-tertiary-fixed": "#0d1c2f",
+                  "inverse-on-surface": "#2a3043",
+                  "primary-fixed-dim": "#62df7d",
+                  "on-secondary-fixed": "#131b2e",
+                  "surface": "#0c1324",
+                  "inverse-surface": "#dce1fb",
+                  "on-tertiary": "#233144",
+                  "on-secondary-container": "#adb4ce",
+                  "surface-container": "#191f31",
+                  "on-primary": "#003914",
+                  "surface-container-high": "#23293c",
+                  "on-primary-fixed": "#002109",
+                  "slate-surface": "#0F172A",
+                  "on-tertiary-fixed-variant": "#3a485c",
+                  "surface-variant": "#2e3447",
+                  "terminal-green": "#16A34A",
+                  "on-secondary": "#283044",
+                  "on-primary-fixed-variant": "#005320",
+                  "error-container": "#93000a",
+                  "tertiary-fixed": "#d5e3fd",
+                  "inverse-primary": "#006e2d",
+                  "outline": "#879485",
+                  "tertiary": "#b9c7e0",
+                  "surface-container-highest": "#2e3447",
+                  "electric-blue": "#1313BD",
+                  "primary-container": "#1ca64d",
+                  "outline-variant": "#3e4a3d",
+                  "on-error": "#690005",
+                  "grid-line": "#1E293B",
+                  "surface-bright": "#33394c",
+                  "on-tertiary-container": "#1c2a3d",
+                  "on-secondary-fixed-variant": "#3f465c",
+                  "on-surface-variant": "#bdcaba",
+                  "tertiary-fixed-dim": "#b9c7e0",
+                  "tertiary-container": "#8392a9",
+                  "primary-fixed": "#7ffc97",
+                  "surface-tint": "#62df7d",
+                  "primary": "#62df7d",
+                  "error": "#ffb4ab",
+                  "surface-dim": "#0c1324",
+                  "secondary-container": "#3f465c",
+                  "surface-container-lowest": "#070d1f",
+                  "secondary": "#bec6e0",
+                  "background": "#0c1324",
+                  "on-surface": "#dce1fb"
           },
-        }
-    </script>
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "unit": "4px",
+                  "grid-size": "32px",
+                  "margin-desktop": "64px",
+                  "margin-mobile": "16px",
+                  "gutter": "24px"
+          },
+          "fontFamily": {
+                  "body-md": ["Inter"],
+                  "headline-md": ["JetBrains Mono"],
+                  "body-lg": ["Inter"],
+                  "headline-xl": ["JetBrains Mono"],
+                  "label-sm": ["JetBrains Mono"],
+                  "headline-xl-mobile": ["JetBrains Mono"],
+                  "code-snippet": ["JetBrains Mono"],
+                  "headline-lg": ["JetBrains Mono"]
+          },
+          "fontSize": {
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                  "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                  "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+</script>
 </head>
-<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col grid-bg">
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-surface">
+
 <!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-grid-line h-16 flex justify-between items-center px-margin-mobile md:px-margin-desktop">
-<div class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">
-            MADIYAR MUKANOV
-        </div>
-<nav class="hidden md:flex items-center space-x-gutter">
-<a class="text-on-surface-variant font-code-snippet text-code-snippet hover:text-primary transition-colors duration-200" href="publications.html">Publications</a>
-<a class="text-on-surface-variant font-code-snippet text-code-snippet hover:text-primary transition-colors duration-200" href="technical_projects.html">Technical</a>
-<a class="text-primary font-bold border-b-2 border-primary pb-1 font-code-snippet text-code-snippet" href="news.html">News</a>
-<a class="text-on-surface-variant font-code-snippet text-code-snippet hover:text-primary transition-colors duration-200" href="contacts.html">Contacts</a>
-<button class="bg-primary text-surface px-6 py-2 font-code-snippet text-code-snippet font-bold transition-transform active:scale-95">Hire Me</button>
-</nav>
-<button class="md:hidden text-primary">
-<span class="material-symbols-outlined">menu</span>
-</button>
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-grid-line flex justify-between items-center px-6 md:px-margin-desktop h-16">
+    <div class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">
+        MADIYAR MUKANOV
+    </div>
+    <nav class="hidden md:flex gap-8 items-center">
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="index.html">Home</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career.html">Career</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects.html">Random</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
+        <a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1 transition-all duration-200" href="news.html">News</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+        <button class="ml-4 bg-primary text-surface px-4 py-1.5 font-code-snippet font-bold text-sm hover:brightness-110 active:scale-95 transition-all">
+            RESUME
+        </button>
+    </nav>
+    <button class="md:hidden text-primary">
+        <span class="material-symbols-outlined">menu</span>
+    </button>
 </header>
-<main class="mt-16 flex-grow px-margin-mobile md:px-margin-desktop py-12">
-<!-- Page Header -->
-<div class="mb-12 border-l-4 border-primary pl-6">
-<div class="flex items-center gap-2 mb-2">
-<span class="w-2 h-2 bg-primary animate-pulse"></span>
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">System_Feed.v2</span>
-</div>
-<h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-on-surface uppercase">Activity Stream</h1>
-<p class="font-code-snippet text-code-snippet text-on-surface-variant max-w-2xl mt-4">
-                Real-time updates from the robotics laboratory. Tracking technical breakthroughs, peer-reviewed publications, and industrial engagements.
-            </p>
-</div>
-<!-- News Feed Container (System Activity Pattern) -->
-<div class="relative space-y-0">
-<!-- Feed Vertical Line -->
-<div class="absolute left-0 md:left-48 top-0 bottom-0 w-px bg-grid-line"></div>
-<!-- News Item 1 -->
-<div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-12 group">
-<!-- Timestamp Column -->
-<div class="md:w-48 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4">
-<span class="font-label-sm text-label-sm text-text-dim md:text-right bg-surface px-2">2025.01.12_09:15</span>
-<div class="hidden md:block w-3 h-3 bg-primary absolute -right-1.5 top-1 border border-surface"></div>
-</div>
-<!-- Content Card -->
-<div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all relative overflow-hidden">
-<div class="absolute top-0 right-0 p-2 font-label-sm text-label-sm text-text-dim border-l border-b border-grid-line">
-                        [REF-2025-001]
-                    </div>
-<div class="flex items-center gap-4 mb-4">
-<span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">RESEARCH</span>
-<span class="text-text-dim material-symbols-outlined text-[18px]">sensors</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface mb-3 group-hover:text-primary transition-colors">AIR 2025: Publication in Press</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">
-                        Thermal Imaging Monitoring: A novel approach to asynchronous robot sensory fusion. Peer-reviewed for the upcoming AIR Conference. Exploring the optimization of heat-signature recognition in low-visibility industrial zones.
-                    </p>
-<div class="h-48 w-full bg-surface-container overflow-hidden">
-<img class="w-full h-full object-cover opacity-60 hover:opacity-100 transition-opacity duration-500" data-alt="A highly technical close-up of a robotic vision system sensor, rendered in a cold dark-mode aesthetic with vibrant green data overlays. The lighting is low-key, emphasizing the intricate metallic textures and lens reflections. The composition is precise and structural, echoing a laboratory environment with subtle blueprint lines in the background. The mood is high-performance and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUCwXdljPW5JR_eMJo8R51mq_6RT5e1lScSWgtQpp3hjr071NSjcz2ttssF-1DoV1DdkV69iFo0kRvarSqNhNZbwntZ3dLdiULcBN77Ecj0WJ2AEi3qutd1LsUoY2jv0RZoT5yFl__7y2dqaWbQyhkC0wggTbX_68DHw-KkWXRZqvhRgtRiIcaBIsEebuVDZUfo3GH_4mWAkfKvw7UOY20FcfPp6GbG6yb1jsS2DbygRmMizfaW8sIaL-qbWPRXh6mGKsxTd1uO4xV"/>
-</div>
-<div class="mt-6 flex justify-end">
-<button class="font-code-snippet text-code-snippet text-primary flex items-center gap-2 group/btn">
-                            FETCH_FULL_TEXT <span class="material-symbols-outlined group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-</button>
-</div>
-</div>
-</div>
-<!-- News Item 2 -->
-<div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-12 group">
-<div class="md:w-48 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4">
-<span class="font-label-sm text-label-sm text-text-dim md:text-right bg-surface px-2">2024.12.05_16:45</span>
-<div class="hidden md:block w-3 h-3 bg-on-surface-variant absolute -right-1.5 top-1 border border-surface"></div>
-</div>
-<div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all relative">
-<div class="absolute top-0 right-0 p-2 font-label-sm text-label-sm text-text-dim border-l border-b border-grid-line">
-                        [LOG-2024-082]
-                    </div>
-<div class="flex items-center gap-4 mb-4">
-<span class="px-2 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm">LOG</span>
-<span class="text-text-dim material-symbols-outlined text-[18px]">precision_manufacturing</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface mb-3 group-hover:text-primary transition-colors">New Technical Log: Legged Robotics Stability</h2>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
-                        Internal testing results for quadruped locomotion controllers on uneven terrain. Achieved a 14% improvement in recovery latency using a hybrid reinforcement learning model.
-                    </p>
-<div class="font-code-snippet text-code-snippet bg-surface-container-lowest p-4 text-terminal-green border-l-2 border-primary">
-<span class="text-text-dim">&gt; run diagnostic_v4.sh</span><br/>
-<span class="text-on-surface">CALIBRATING JOINTS... [OK]</span><br/>
-<span class="text-on-surface">STABILITY INDEX: 0.941</span>
-</div>
-</div>
-</div>
-<!-- News Item 3 -->
-<div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-12 group">
-<div class="md:w-48 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4">
-<span class="font-label-sm text-label-sm text-text-dim md:text-right bg-surface px-2">2024.11.15_10:00</span>
-<div class="hidden md:block w-3 h-3 bg-tertiary absolute -right-1.5 top-1 border border-surface"></div>
-</div>
-<div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all relative">
-<div class="absolute top-0 right-0 p-2 font-label-sm text-label-sm text-text-dim border-l border-b border-grid-line">
-                        [PRM-2024-004]
-                    </div>
-<div class="flex items-center gap-4 mb-4">
-<span class="px-2 py-1 bg-tertiary/10 border border-tertiary/30 text-tertiary font-label-sm text-label-sm">PROJECT</span>
-<span class="text-text-dim material-symbols-outlined text-[18px]">group</span>
-</div>
-<h2 class="font-headline-md text-headline-md text-on-surface mb-3 group-hover:text-primary transition-colors">Mentorship Q4 Slots Open</h2>
-<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                        Opening 3 slots for technical mentorship focusing on control systems and ROS2 integration. Application period ends in 14 days. Ideal for PhD candidates or R&amp;D engineers.
-                    </p>
-<button class="mt-6 border border-primary text-primary px-4 py-2 font-code-snippet text-code-snippet hover:bg-primary hover:text-surface transition-all">
-                        INITIALIZE_APPLICATION
-                    </button>
-</div>
-</div>
-</div>
-<!-- Pagination / Load More -->
-<div class="mt-12 flex justify-center border-t border-grid-line pt-12">
-<button class="flex items-center gap-3 font-code-snippet text-code-snippet text-on-surface-variant hover:text-primary transition-colors group">
-<span class="material-symbols-outlined animate-bounce">expand_more</span>
-                LOAD_MORE_ARCHIVED_LOGS
-            </button>
-</div>
-</main>
-<!-- Footer -->
-<footer class="w-full mt-auto border-t border-grid-line bg-surface dark:bg-surface">
-<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter w-full gap-4">
-<div class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim">
-                © 2025 MADIYAR MUKANOV. [COORD-PRM-01]
+
+<main class="min-h-screen pt-24 pb-16 grid-bg relative overflow-hidden">
+    <div class="scanline"></div>
+    <div class="container mx-auto px-6 md:px-margin-desktop relative">
+
+        <!-- Page Header -->
+        <div class="mb-16 border-l-4 border-primary pl-6">
+            <span class="font-code-snippet text-primary text-label-sm block mb-2">[ACTIVITY_STREAM_v2.0]</span>
+            <h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl uppercase">Activity Stream</h1>
+            <p class="font-body-lg text-body-lg text-text-dim max-w-2xl mt-4">Chronological log of positions, publications, conference appearances, and projects.</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative">
+            <!-- Vertical line -->
+            <div class="absolute left-0 md:left-44 top-0 bottom-0 w-px bg-grid-line"></div>
+
+            <!-- ── 2026 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2026</span>
+                </div>
             </div>
-<div class="flex gap-gutter">
-<a class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim hover:text-primary underline transition-all" href="https://github.com/MadiyarM">GitHub</a>
-<a class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim hover:text-primary underline transition-all" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
-<a class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim hover:text-primary underline transition-all" href="#">ResearchGate</a>
-<a class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim hover:text-primary underline transition-all" href="#">Twitter</a>
-</div>
-</div>
+
+            <!-- EnterAR LLC -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2026.04</span>
+                    <div class="hidden md:block w-3 h-3 bg-primary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">CAREER</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Present</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Robotics Engineer — EnterAR LLC</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Almaty, Kazakhstan. Robotics engineering role at EnterAR LLC.</p>
+                </div>
+            </div>
+
+            <!-- ── 2025 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2025</span>
+                </div>
+            </div>
+
+            <!-- Springer Publication -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2025.11.22</span>
+                    <div class="hidden md:block w-3 h-3 bg-tertiary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-tertiary/10 border border-tertiary/30 text-tertiary font-label-sm text-label-sm">RESEARCH</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Springer</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Publication: Intelligent Patient Monitoring System</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+                        "An Intelligent System for Automated Monitoring and Control of Patient Conditions" — published in Springer. Thermal imaging via MLX90640, Raspberry Pi, edge inference pipeline.
+                    </p>
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="publication_patient_monitoring.html" class="font-code-snippet text-code-snippet text-primary flex items-center gap-1 hover:underline">
+                            VIEW PAGE <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                        <a href="https://github.com/MadiyarM/patient-monitoring-raspi-mlx90640" target="_blank" rel="noopener" class="font-code-snippet text-code-snippet text-text-dim flex items-center gap-1 hover:text-primary transition-colors">
+                            GITHUB <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CodiPlay -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2025.07</span>
+                    <div class="hidden md:block w-3 h-3 bg-on-surface-variant absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">CAREER</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Jul 2025 – Apr 2026 · 10 mos</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Robotics Engineer — CodiPlay</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Abu Dhabi Emirate, UAE. Robotics engineering for educational robotics platform. Projects: CodiBit hardware, CodiEditor software environment.</p>
+                </div>
+            </div>
+
+            <!-- AIR 2025 -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2025.05</span>
+                    <div class="hidden md:block w-3 h-3 bg-tertiary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-tertiary/10 border border-tertiary/30 text-tertiary font-label-sm text-label-sm">RESEARCH</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Conference</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">AIR 2025 — Paper Presentation</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+                        Presented "An Intelligent System for Automated Monitoring and Control of Patient Conditions" at the AIR 2025 conference, Nazarbayev University, Astana, Kazakhstan.
+                    </p>
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="https://github.com/MadiyarM/patient-monitoring-raspi-mlx90640/blob/main/docs/awards/air2025_certificate.webp" target="_blank" rel="noopener" class="font-code-snippet text-code-snippet text-text-dim flex items-center gap-1 hover:text-primary transition-colors">
+                            CERTIFICATE <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shanghai Jiao Tong / TCT Asia -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2025.03</span>
+                    <div class="hidden md:block w-3 h-3 bg-on-surface-variant absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">CAREER</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Research Intern</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Research Intern — Shanghai Jiao Tong University</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Research internship at SJTU. Participated in TCT Asia 2025.</p>
+                </div>
+            </div>
+
+            <!-- ── 2024 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2024</span>
+                </div>
+            </div>
+
+            <!-- KazNPU Publication -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2024.06</span>
+                    <div class="hidden md:block w-3 h-3 bg-tertiary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-tertiary/10 border border-tertiary/30 text-tertiary font-label-sm text-label-sm">RESEARCH</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">KazNPU</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Publication: Psychological Profile of Graduate Students</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        "Psychological Profile of Graduate Students of Technical Specialties" — published at KazNPU.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Thermal-Vision Telehealth Camera -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2024</span>
+                    <div class="hidden md:block w-3 h-3 bg-secondary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm">PROJECT</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Thermal-Vision Telehealth Camera — Prototype</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Built a thermal imaging telehealth device using MLX90640 and Raspberry Pi. Edge inference pipeline for remote patient condition monitoring.
+                    </p>
+                    <div class="flex gap-4 mt-4">
+                        <a href="https://github.com/MadiyarM/patient-monitoring-raspi-mlx90640" target="_blank" rel="noopener" class="font-code-snippet text-code-snippet text-text-dim flex items-center gap-1 hover:text-primary transition-colors">
+                            GITHUB <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── 2023 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2023</span>
+                </div>
+            </div>
+
+            <!-- Talk Nov 2023 -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2023.11</span>
+                    <div class="hidden md:block w-3 h-3 bg-tertiary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-tertiary/10 border border-tertiary/30 text-tertiary font-label-sm text-label-sm">RESEARCH</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Talk</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Talk: Mechanisms of Robot Motion Parameter Control</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Presented research on robot motion parameter control mechanisms.</p>
+                </div>
+            </div>
+
+            <!-- M.Sc. + Satbayev RE -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2023.09</span>
+                    <div class="hidden md:block w-3 h-3 bg-on-surface-variant absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">CAREER</span>
+                        <span class="px-2 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm">EDUCATION</span>
+                        <span class="text-text-dim font-label-sm text-label-sm">Sep 2023 – Jul 2025</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">M.Sc. Robotics + Research Engineer — Satbayev University</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Started M.Sc. in Robotics at Satbayev University, Almaty. Concurrently worked as Research Engineer at the university's robotics lab (Sep 2023 – Jul 2025).</p>
+                </div>
+            </div>
+
+            <!-- ── 2022 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2022</span>
+                </div>
+            </div>
+
+            <!-- B.Sc. -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2022</span>
+                    <div class="hidden md:block w-3 h-3 bg-secondary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm">EDUCATION</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">B.Sc. Graduated — Full Academic Scholarship</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Completed Bachelor of Science degree. Graduated on Full Academic Scholarship.</p>
+                </div>
+            </div>
+
+            <!-- ── 2021 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2021</span>
+                </div>
+            </div>
+
+            <!-- EXPO Dubai + Plasma Simulation -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2020.12 – 2021.01</span>
+                    <div class="hidden md:block w-3 h-3 bg-secondary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-label-sm">PROJECT</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">EXPO Dubai — Plasma Simulation Toolkit</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Represented Kazakhstan at EXPO 2020 Dubai. Developed a Plasma Simulation Toolkit as part of the exhibition.</p>
+                </div>
+            </div>
+
+            <!-- ── 2020 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2020</span>
+                </div>
+            </div>
+
+            <!-- KazNU RA -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2020</span>
+                    <div class="hidden md:block w-3 h-3 bg-on-surface-variant absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">CAREER</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Undergraduate Research Assistant — KazNU &amp; KBTU</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Research assistant positions at Al-Farabi Kazakh National University and Kazakh-British Technical University.</p>
+                </div>
+            </div>
+
+            <!-- ── 2019 ── -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-4">
+                <div class="md:w-44 flex-shrink-0"></div>
+                <div class="flex-grow">
+                    <span class="font-headline-lg text-headline-lg text-primary/20 uppercase select-none">2019</span>
+                </div>
+            </div>
+
+            <!-- Kyoto Bike Speedometer + Sakura Science + SBI -->
+            <div class="relative flex flex-col md:flex-row gap-6 md:gap-12 pb-10 group">
+                <div class="md:w-44 flex-shrink-0 relative z-10 flex md:flex-col justify-between md:justify-start items-center md:items-end pr-4 pt-1">
+                    <span class="font-label-sm text-label-sm text-text-dim md:text-right bg-background px-2">2019</span>
+                    <div class="hidden md:block w-3 h-3 bg-primary absolute -right-1.5 top-1.5 border-2 border-background"></div>
+                </div>
+                <div class="flex-grow bg-slate-surface border border-grid-line p-6 terminal-glow transition-all">
+                    <div class="flex items-center gap-3 mb-4 flex-wrap">
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">AWARD</span>
+                        <span class="px-2 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-label-sm">CAREER</span>
+                    </div>
+                    <h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Bicycle Speedometer — 1st Place, Kyoto</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+                        1st place at hardware competition in Kyoto, Japan. KIT Internship via Sakura Science Program. Also: 3rd place at Student Business Incubator.
+                    </p>
+                    <div class="flex gap-4 flex-wrap">
+                        <a href="project_bicycle_speedometer.html" class="font-code-snippet text-code-snippet text-primary flex items-center gap-1 hover:underline">
+                            VIEW PROJECT <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </a>
+                        <a href="https://github.com/MadiyarM/bike-speedometer-kyoto-2019" target="_blank" rel="noopener" class="font-code-snippet text-code-snippet text-text-dim flex items-center gap-1 hover:text-primary transition-colors">
+                            GITHUB <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full border-t border-grid-line bg-surface">
+    <div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-margin-desktop py-gutter w-full gap-4">
+        <div class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim">
+            © 2025 MADIYAR MUKANOV
+        </div>
+        <div class="flex gap-gutter">
+            <a class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim hover:text-primary underline transition-all" href="https://github.com/MadiyarM">GitHub</a>
+            <a class="font-label-sm text-label-sm font-code-snippet text-code-snippet text-text-dim hover:text-primary underline transition-all" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+        </div>
+    </div>
 </footer>
+
 <!-- Back to Top FAB -->
 <button class="fixed bottom-8 right-8 w-12 h-12 bg-surface-container border border-primary text-primary flex items-center justify-center hover:bg-primary hover:text-surface transition-all transform translate-y-24 opacity-0" id="back-to-top">
-<span class="material-symbols-outlined">north</span>
+    <span class="material-symbols-outlined">north</span>
 </button>
-<script>
-        const fab = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                fab.classList.remove('translate-y-24', 'opacity-0');
-            } else {
-                fab.classList.add('translate-y-24', 'opacity-0');
-            }
-        });
-        fab.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
 
-        // Simple terminal-style reveal effect for the headline
-        const headline = document.querySelector('h1');
-        const originalText = headline.innerText;
-        headline.innerText = '';
-        let i = 0;
-        const typeWriter = () => {
-            if (i < originalText.length) {
-                headline.innerText += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        };
-        typeWriter();
-    </script>
+<script>
+    const fab = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            fab.classList.remove('translate-y-24', 'opacity-0');
+        } else {
+            fab.classList.add('translate-y-24', 'opacity-0');
+        }
+    });
+    fab.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 </body></html>
