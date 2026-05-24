@@ -175,10 +175,7 @@
 <div class="lg:col-span-4 relative group">
 <div class="aspect-square bg-surface-container border border-grid-line overflow-hidden relative kinetic-border">
 <div class="scanline"></div>
-<div class="w-full h-full flex flex-col items-center justify-center bg-surface-container-low p-6 gap-4">
-<span class="material-symbols-outlined text-primary text-6xl" style="font-variation-settings: 'FILL' 0, 'wght' 200;">monitor_heart</span>
-<span class="font-code-snippet text-code-snippet text-on-surface-variant text-center">THERMAL_PATIENT_MONITOR.sys</span>
-</div>
+<img src="assets/img/papers/patient-monitoring/fig3_face_temp_result.png" alt="Face recognition and temperature output: Patient Mr. Madiyar, Temp 36.1°C" class="w-full h-full object-cover">
 <div class="absolute bottom-4 left-4 font-label-sm text-label-sm text-primary bg-background/80 px-2 py-1 border border-primary/20">
                         [SENSOR_FEED_01]
                     </div>
@@ -204,7 +201,7 @@
 </section>
 <section class="p-6 bg-surface-container-low border border-grid-line border-l-4 border-l-primary">
 <h4 class="font-label-sm text-label-sm text-primary uppercase mb-2">Conference Detail</h4>
-<p class="font-body-md text-body-md text-on-surface">Accepted for oral presentation at the <span class="text-primary font-bold">2025 AI in Robotics (AIR)</span> conference in Tokyo, Japan.</p>
+<p class="font-body-md text-body-md text-on-surface">Presented at the <span class="text-primary font-bold">International Conference on AI and Robotics (AIR 2025)</span>, Nazarbayev University, Astana, Kazakhstan.</p>
 </section>
 <section>
 <h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
@@ -241,6 +238,29 @@
 <p>
                             This paper presents a contactless temperature monitoring and patient identification system intended to meet stringent sanitary requirements in modern healthcare. By integrating a Raspberry Pi 4, an MLX90640 thermal sensor accurate to ±1 °C, and a Pi Camera Module 2 with 90–95% face recognition accuracy, it enables rapid, noninvasive detection of abnormal temperatures while minimizing staff-patient contact. The sensor's 24 × 32 infrared array is fused with RGB frames for temperature assessment and identity verification. Controlled trials at ambient temperatures of 16, 24, and 26 °C consistently record ~33 °C on healthy foreheads, closely matching results from standard infrared thermometers. Minor temperature reductions occur with increasing distance, highlighting the need for proper alignment. Automated logging in a local SQLite database streamlines clinical workflows, allowing immediate retrieval of recorded data. Additionally, the approach significantly lowers staff workload by automating identification tasks, promoting safer, more efficient procedures. The findings underscore cost-effectiveness and scalability for continuous screening in diverse clinical environments, while reducing cross-contamination risks through rapid, contactless operation. Future efforts will broaden the dataset for enhanced algorithmic robustness, incorporate multi-parameter assessments of vital signs, and refine sensor calibration across variable conditions. Overall, this solution offers a promising avenue toward improved operational efficiency and infection control, aligning with contemporary standards for data-driven medical practice.
                         </p>
+</div>
+</section>
+
+<!-- Key Figures -->
+<section class="mb-16">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Key Figures</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<figure class="border border-grid-line bg-surface-container-low p-4 flex flex-col gap-3">
+<img src="assets/img/papers/patient-monitoring/fig2_hardware_layout.png" alt="Hardware layout: Raspberry Pi 4, MLX90640, Pi Camera 2, LCD screen" class="w-full object-contain bg-white">
+<figcaption class="font-label-sm text-label-sm text-on-surface-variant">Fig. 2 — Hardware layout: RPi4 + MLX90640 + Pi Camera 2</figcaption>
+</figure>
+<figure class="border border-grid-line bg-surface-container-low p-4 flex flex-col gap-3">
+<img src="assets/img/papers/patient-monitoring/fig5_distances_grid.png" alt="RGB and thermal outputs at 50cm, 100cm, 150cm distances" class="w-full object-contain">
+<figcaption class="font-label-sm text-label-sm text-on-surface-variant">Fig. 5 — RGB and thermal imaging at 50 / 100 / 150 cm</figcaption>
+</figure>
+<figure class="border border-grid-line bg-surface-container-low p-4 flex flex-col gap-3">
+<img src="assets/img/papers/patient-monitoring/fig1_system_architecture.png" alt="System architecture diagram" class="w-full object-contain bg-white">
+<figcaption class="font-label-sm text-label-sm text-on-surface-variant">Fig. 1 — System architecture</figcaption>
+</figure>
+<figure class="border border-grid-line bg-surface-container-low p-4 flex flex-col gap-3">
+<img src="assets/img/papers/patient-monitoring/fig6_ambient_bars.png" alt="Effect of ambient temperature on MLX90640 measurement accuracy" class="w-full object-contain bg-white">
+<figcaption class="font-label-sm text-label-sm text-on-surface-variant">Fig. 6 — Mean error vs. ambient temperature (16 / 24 / 26 °C)</figcaption>
+</figure>
 </div>
 </section>
 </div>
