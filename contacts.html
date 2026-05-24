@@ -258,18 +258,19 @@
             <!-- Contact Form -->
             <div class="md:col-span-12 border border-grid-line bg-slate-surface p-8 relative">
                 <div class="absolute top-4 left-4 text-primary font-label-sm tracking-widest">TRANSMISSION_PROTOCOL</div>
-                <form class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-8" action="mailto:mmukanovm@gmail.com" method="post" enctype="text/plain">
+                <form class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-8" action="https://formspree.io/f/mdajlkeb" method="post">
+                    <input type="hidden" name="_subject" value="Portfolio contact from madiyarmukanov.com">
                     <div class="flex flex-col gap-2">
                         <label class="font-label-sm text-on-surface-variant uppercase tracking-tighter">IDENTIFIER (NAME)</label>
-                        <input name="name" class="bg-transparent border-0 border-b border-grid-line text-on-surface focus:ring-0 focus:border-primary font-code-snippet placeholder:text-text-dim py-2 transition-all" placeholder="John_Doe_v1" type="text">
+                        <input name="name" required class="bg-transparent border-0 border-b border-grid-line text-on-surface focus:ring-0 focus:border-primary font-code-snippet placeholder:text-text-dim py-2 transition-all" placeholder="John_Doe_v1" type="text">
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="font-label-sm text-on-surface-variant uppercase tracking-tighter">ENDPOINT (EMAIL)</label>
-                        <input name="email" class="bg-transparent border-0 border-b border-grid-line text-on-surface focus:ring-0 focus:border-primary font-code-snippet placeholder:text-text-dim py-2 transition-all" placeholder="user@remote.host" type="email">
+                        <input name="email" required class="bg-transparent border-0 border-b border-grid-line text-on-surface focus:ring-0 focus:border-primary font-code-snippet placeholder:text-text-dim py-2 transition-all" placeholder="user@remote.host" type="email">
                     </div>
                     <div class="md:col-span-2 flex flex-col gap-2">
                         <label class="font-label-sm text-on-surface-variant uppercase tracking-tighter">DATA_PAYLOAD (MESSAGE)</label>
-                        <textarea name="message" class="bg-transparent border-0 border-b border-grid-line text-on-surface focus:ring-0 focus:border-primary font-code-snippet placeholder:text-text-dim py-2 transition-all resize-none" placeholder="Input message data here..." rows="4"></textarea>
+                        <textarea name="message" required class="bg-transparent border-0 border-b border-grid-line text-on-surface focus:ring-0 focus:border-primary font-code-snippet placeholder:text-text-dim py-2 transition-all resize-none" placeholder="Input message data here..." rows="4"></textarea>
                     </div>
                     <div class="md:col-span-2 flex justify-end">
                         <button class="bg-transparent border border-primary text-primary px-10 py-3 font-headline-md text-label-sm font-bold tracking-[0.2em] hover:bg-primary/10 transition-all uppercase" type="submit">
