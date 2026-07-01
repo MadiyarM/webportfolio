@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="dark" lang="en">
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<link rel="canonical" href="https://madiyar.engineer/project_bicycle_speedometer.html">
+<link rel="canonical" href="https://madiyar.engineer/project_bicycle_speedometer">
 <link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml">
 <title>Madiyar Mukanov | Bicycle Speedometer</title>
 <meta name="description" content="Bicycle speedometer project by Madiyar Mukanov — ESP32-based device with Hall sensor, OLED display, and live speed tracking.">
 <meta property="og:title" content="Bicycle Speedometer | Madiyar Mukanov">
 <meta property="og:description" content="Bicycle speedometer project by Madiyar Mukanov — ESP32-based device with Hall sensor, OLED display, and live speed tracking.">
-<meta property="og:url" content="https://madiyar.engineer/project_bicycle_speedometer.html">
+<meta property="og:url" content="https://madiyar.engineer/project_bicycle_speedometer">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://madiyar.engineer/assets/img/projects/bicycle-speedometer/speedometer.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -132,28 +132,28 @@
 <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-grid-line flex justify-between items-center px-6 md:px-margin-desktop h-16">
     <div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">MADIYAR MUKANOV</div>
     <nav class="hidden md:flex items-center gap-8">
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="index.html">Home</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications.html">Publications</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects.html">Technical</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career.html">Career</a>
-        <a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="random_projects.html">Random</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources.html">Resources</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news.html">News</a>
-        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts.html">Contacts</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="/">Home</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications">Publications</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="technical_projects">Technical</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career">Career</a>
+        <a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="random_projects">Random</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources">Resources</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news">News</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts">Contacts</a>
         <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener" class="ml-4 bg-primary text-surface px-4 py-1.5 font-code-snippet font-bold text-sm hover:brightness-110 active:scale-95 transition-all">RÉSUMÉ/CV</a>
     </nav>
     <button id="mobile-menu-btn" class="md:hidden text-primary" aria-label="Toggle menu"><span class="material-symbols-outlined">menu</span></button>
 </header>
 <div id="mobile-menu" class="hidden fixed top-16 left-0 w-full z-40 bg-surface border-b border-grid-line md:hidden">
     <nav class="flex flex-col px-6 py-4 gap-1">
-        <a href="index.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Home</a>
-        <a href="publications.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Publications</a>
-        <a href="technical_projects.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Technical</a>
-        <a href="career.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Career</a>
-        <a href="random_projects.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Random</a>
-        <a href="resources.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Resources</a>
-        <a href="news.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">News</a>
-        <a href="contacts.html" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Contacts</a>
+        <a href="/" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Home</a>
+        <a href="publications" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Publications</a>
+        <a href="technical_projects" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Technical</a>
+        <a href="career" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Career</a>
+        <a href="random_projects" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Random</a>
+        <a href="resources" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Resources</a>
+        <a href="news" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">News</a>
+        <a href="contacts" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Contacts</a>
         <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener" class="mt-2 bg-primary text-surface px-4 py-3 font-code-snippet font-bold text-sm text-center">RÉSUMÉ/CV</a>
     </nav>
 </div>
@@ -422,7 +422,7 @@
 
             <!-- Back link -->
             <div>
-                <a href="random_projects.html" class="inline-flex items-center gap-2 font-code-snippet text-code-snippet text-primary hover:underline">
+                <a href="random_projects" class="inline-flex items-center gap-2 font-code-snippet text-code-snippet text-primary hover:underline">
                     <span class="material-symbols-outlined text-[16px]">arrow_back</span> Back to Projects
                 </a>
             </div>
