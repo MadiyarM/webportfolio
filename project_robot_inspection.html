@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="canonical" href="https://madiyar.engineer/project_robot_inspection">
+<link rel="icon" href="assets/img/icons/favicon.svg" type="image/svg+xml">
+<title>Madiyar Mukanov | Autonomous Robot Inspection</title>
+<meta name="description" content="A behavior-tree layer, zone-based robot coordination, and a vision-based instrument-reading module built on top of an existing navigation stack — running on an NVIDIA Jetson onboard a real inspection robot.">
+<meta property="og:title" content="Autonomous Robot Inspection | Madiyar Mukanov">
+<meta property="og:description" content="A behavior-tree layer, zone-based robot coordination, and a vision-based instrument-reading module built on top of an existing navigation stack — running on an NVIDIA Jetson onboard a real inspection robot.">
+<meta property="og:url" content="https://madiyar.engineer/project_robot_inspection">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://madiyar.engineer/assets/img/avatar.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Autonomous Robot Inspection | Madiyar Mukanov">
+<meta name="twitter:description" content="A behavior-tree layer, zone-based robot coordination, and a vision-based instrument-reading module built on top of an existing navigation stack — running on an NVIDIA Jetson onboard a real inspection robot.">
+<meta name="twitter:image" content="https://madiyar.engineer/assets/img/avatar.jpg">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+    body {
+        background-color: #0c1324;
+        background-image:
+            linear-gradient(to right, #1E293B 1px, transparent 1px),
+            linear-gradient(to bottom, #1E293B 1px, transparent 1px);
+        background-size: 32px 32px;
+        color: #dce1fb;
+    }
+    .technical-border { border: 1px solid #1E293B; }
+    .primary-glow:hover { box-shadow: 0 0 15px rgba(98, 223, 125, 0.2); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+    /* Progress sidebar */
+    .progress-step {
+        border-left: 2px solid #1E293B;
+        padding-left: 1rem;
+        margin-bottom: 1.5rem;
+        transition: border-color 0.3s;
+        cursor: pointer;
+    }
+    .progress-step:hover .step-label { color: #62df7d; }
+    .progress-step:focus-visible { outline: 1px solid #62df7d; outline-offset: 4px; }
+    .progress-step.active { border-left-color: #62df7d; }
+    .progress-step .step-num { font-size: 10px; font-family: 'JetBrains Mono', monospace; color: #6B7280; margin-bottom: 2px; }
+    .progress-step .step-label { font-size: 12px; font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; color: #bdcaba; transition: color 0.3s; }
+    .progress-step.active .step-label { color: #62df7d; }
+    .progress-step.completed .step-label { color: #6B7280; }
+    .progress-step .step-desc { font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #6B7280; margin-top: 2px; }
+
+    /* Layer diagram */
+    .layer-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+    .layer-box { flex: 1 1 180px; }
+    .layer-arrow { color: #62df7d; font-family: 'JetBrains Mono', monospace; flex: 0 0 auto; }
+</style>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "text-dim": "#9CA3AF",
+                    "surface-tint": "#62df7d",
+                    "electric-blue": "#1313BD",
+                    "surface-container-lowest": "#070d1f",
+                    "surface-container": "#191f31",
+                    "surface-dim": "#0c1324",
+                    "secondary": "#bec6e0",
+                    "surface": "#0c1324",
+                    "primary-container": "#1ca64d",
+                    "on-surface": "#dce1fb",
+                    "inverse-primary": "#006e2d",
+                    "surface-container-low": "#151b2d",
+                    "slate-surface": "#0F172A",
+                    "terminal-green": "#16A34A",
+                    "outline-variant": "#3e4a3d",
+                    "surface-bright": "#33394c",
+                    "grid-line": "#1E293B",
+                    "tertiary": "#b9c7e0",
+                    "on-surface-variant": "#bdcaba",
+                    "primary-fixed-dim": "#62df7d",
+                    "on-secondary": "#283044",
+                    "tertiary-container": "#8392a9",
+                    "error": "#ffb4ab",
+                    "primary": "#62df7d",
+                    "surface-container-high": "#23293c",
+                    "on-background": "#dce1fb",
+                    "background": "#0c1324",
+                    "surface-container-highest": "#2e3447",
+                    "secondary-container": "#3f465c",
+                    "on-primary": "#003914",
+                    "on-primary-container": "#003111"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+                },
+                "spacing": {
+                    "unit": "4px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "grid-size": "32px"
+                },
+                "fontFamily": {
+                    "headline-xl-mobile": ["JetBrains Mono"],
+                    "headline-md": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-lg": ["JetBrains Mono"],
+                    "code-snippet": ["JetBrains Mono"],
+                    "headline-xl": ["JetBrains Mono"],
+                    "body-md": ["Inter"]
+                },
+                "fontSize": {
+                    "headline-xl-mobile": ["40px", {"lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "code-snippet": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                }
+            },
+        },
+    }
+</script>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-grid-line flex justify-between items-center px-6 md:px-margin-desktop h-16">
+    <div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">MADIYAR MUKANOV</div>
+    <nav class="hidden md:flex items-center gap-8">
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="/">Home</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="publications">Publications</a>
+        <a class="font-label-sm text-label-sm text-primary border-b border-primary pb-1" href="technical_projects">Technical</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="career">Career</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="random_projects">Random</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="resources">Resources</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="news">News</a>
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary hover:border-b hover:border-primary/50 transition-all duration-200" href="contacts">Contacts</a>
+        <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener" class="ml-4 bg-primary text-surface px-4 py-1.5 font-code-snippet font-bold text-sm hover:brightness-110 active:scale-95 transition-all">RÉSUMÉ/CV</a>
+    </nav>
+    <button id="mobile-menu-btn" class="md:hidden text-primary" aria-label="Toggle menu"><span class="material-symbols-outlined">menu</span></button>
+</header>
+<div id="mobile-menu" class="hidden fixed top-16 left-0 w-full z-40 bg-surface border-b border-grid-line md:hidden">
+    <nav class="flex flex-col px-6 py-4 gap-1">
+        <a href="/" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Home</a>
+        <a href="publications" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Publications</a>
+        <a href="technical_projects" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Technical</a>
+        <a href="career" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Career</a>
+        <a href="random_projects" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Random</a>
+        <a href="resources" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Resources</a>
+        <a href="news" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">News</a>
+        <a href="contacts" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary py-3 border-b border-grid-line transition-colors">Contacts</a>
+        <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener" class="mt-2 bg-primary text-surface px-4 py-3 font-code-snippet font-bold text-sm text-center">RÉSUMÉ/CV</a>
+    </nav>
+</div>
+
+<main class="max-w-[1440px] mx-auto px-6 md:px-margin-desktop pt-28 pb-16">
+
+    <!-- Hero -->
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-10">
+        <div class="md:col-span-8">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">[ Client Project · 2026 ]</span>
+                <div class="h-[1px] w-12 bg-primary"></div>
+            </div>
+            <h1 class="font-headline-xl text-headline-xl-mobile md:text-headline-xl text-primary mb-4">
+                Autonomous Robot Inspection<br>
+                <span class="text-on-surface opacity-80">— Reading Instruments So a Person Doesn't Have To</span>
+            </h1>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed mb-6">
+A Unitree quadruped robot walks a fixed route through a facility, stops at instrument panels, photographs them, and reads what they say — gauges and digital displays alike. We built the layer that makes this possible on top of the robot's existing navigation stack, and the whole thing now runs unattended on the robot itself.
+            </p>
+        </div>
+        <div class="md:col-span-4 flex flex-col gap-gutter">
+            <div class="technical-border p-6 bg-slate-surface">
+                <h3 class="font-label-sm text-label-sm text-primary mb-4 border-b border-grid-line pb-2 uppercase">Metadata</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-text-dim font-label-sm text-label-sm">ROBOT</span>
+                        <span class="font-label-sm text-label-sm text-on-surface">Unitree quadruped</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-text-dim font-label-sm text-label-sm">ONBOARD COMPUTE</span>
+                        <span class="font-label-sm text-label-sm text-on-surface">NVIDIA Jetson</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-text-dim font-label-sm text-label-sm">ROS 2</span>
+                        <span class="font-label-sm text-label-sm text-on-surface">Humble</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-text-dim font-label-sm text-label-sm">RECOGNITION</span>
+                        <span class="font-label-sm text-label-sm text-on-surface">Gemini Robotics-ER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="technical-border p-6 bg-slate-surface">
+                <h3 class="font-label-sm text-label-sm text-primary mb-4 border-b border-grid-line pb-2 uppercase">Tech Stack</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">ROS 2 Humble</span>
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">BehaviorTree.CPP</span>
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">C++</span>
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Python</span>
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">FastAPI</span>
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Docker</span>
+                    <span class="px-2 py-1 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">MediaMTX</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video -->
+    <section class="mb-16">
+        <div class="technical-border overflow-hidden bg-slate-surface">
+            <video class="w-full" controls preload="metadata" playsinline poster="assets/img/projects/robot_inspection/hero.jpg">
+                <source src="assets/video/projects/robot_inspection/demo.mp4" type="video/mp4">
+            </video>
+            <div class="p-3 font-code-snippet text-code-snippet text-text-dim border-t border-grid-line">Robot navigating the route, live position on the map, camera feed — one continuous run</div>
+        </div>
+    </section>
+
+    <!-- Sidebar + Content layout -->
+    <div class="flex gap-gutter items-start">
+
+        <!-- Progress Sidebar -->
+        <aside class="hidden md:block w-56 flex-shrink-0 sticky top-24">
+            <div class="font-label-sm text-label-sm text-text-dim mb-6 uppercase tracking-widest">Project Progress</div>
+            <div class="progress-step active" data-section="concept" role="link" tabindex="0">
+                <div class="step-num">01</div>
+                <div class="step-label">Concept</div>
+                <div class="step-desc">A layer over someone else's stack</div>
+            </div>
+            <div class="progress-step" data-section="architecture" role="link" tabindex="0">
+                <div class="step-num">02</div>
+                <div class="step-label">Architecture</div>
+                <div class="step-desc">UI → API → Behavior Tree → Nav2</div>
+            </div>
+            <div class="progress-step" data-section="deployment" role="link" tabindex="0">
+                <div class="step-num">03</div>
+                <div class="step-label">Deployment</div>
+                <div class="step-desc">Sim, server, onboard</div>
+            </div>
+            <div class="progress-step" data-section="stack" role="link" tabindex="0">
+                <div class="step-num">04</div>
+                <div class="step-label">Tech Stack</div>
+                <div class="step-desc">What it's built with</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 min-w-0">
+
+            <!-- [ 01 ] Concept -->
+            <section id="concept" class="technical-border p-8 bg-surface-container-low mb-10">
+                <div class="inline-flex items-center gap-2 mb-6">
+                    <span class="font-label-sm text-label-sm text-primary">[ 01 ]</span>
+                    <h2 class="font-headline-md text-headline-md text-on-surface">Concept</h2>
+                </div>
+                <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4">
+                    <p>
+                        The client needed a way to inspect an industrial site without sending a person to walk the same round every shift: walk a route, stop at each instrument, record what it reads, hand the numbers to an operator. The robot itself could already move to coordinates — everything past that was manual.
+                    </p>
+                    <p>
+                        A behavior tree only ever talks to navigation through its public interface, and nothing else assumes anything about how navigation works underneath.
+                    </p>
+                </div>
+            </section>
+
+            <!-- [ 02 ] Architecture -->
+            <section id="architecture" class="technical-border p-8 bg-surface-container-low mb-10">
+                <div class="inline-flex items-center gap-2 mb-6">
+                    <span class="font-label-sm text-label-sm text-primary">[ 02 ]</span>
+                    <h2 class="font-headline-md text-headline-md text-on-surface">Architecture</h2>
+                </div>
+
+                <div class="layer-flow mb-8">
+                    <div class="layer-box technical-border bg-slate-surface p-4 text-center">
+                        <div class="font-code-snippet text-code-snippet text-primary">Web UI / API Client</div>
+                    </div>
+                    <div class="layer-arrow">→</div>
+                    <div class="layer-box technical-border bg-slate-surface p-4 text-center">
+                        <div class="font-code-snippet text-code-snippet text-primary">REST API<br><span class="text-text-dim text-[11px]">FastAPI</span></div>
+                    </div>
+                    <div class="layer-arrow">→</div>
+                    <div class="layer-box technical-border bg-slate-surface p-4 text-center">
+                        <div class="font-code-snippet text-code-snippet text-primary">Behavior Tree Executor<br><span class="text-text-dim text-[11px]">BehaviorTree.CPP, C++</span></div>
+                    </div>
+                    <div class="layer-arrow">→</div>
+                    <div class="layer-box technical-border bg-slate-surface p-4 text-center">
+                        <div class="font-code-snippet text-code-snippet text-primary">Robot Navigation<br><span class="text-text-dim text-[11px]">Nav2 — existing stack</span></div>
+                    </div>
+                </div>
+
+                <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-4 mb-8">
+                    <p>
+                        The route is an XML behavior tree, with custom nodes for moving to a target, checking battery, and requesting/holding permission to enter a zone — everything talks to navigation only through Nav2's own interface. A separate coordination service tracks which zones are occupied, so a robot waits its turn instead of abandoning the task. On arrival at each point, a separate inspection module grabs a frame from the robot's camera, sends it to Gemini Robotics-ER, and returns a structured reading — instrument type, value, unit, confidence.
+                    </p>
+                </div>
+            </section>
+
+            <!-- [ 03 ] Deployment -->
+            <section id="deployment" class="technical-border p-8 bg-surface-container-low mb-10">
+                <div class="inline-flex items-center gap-2 mb-6">
+                    <span class="font-label-sm text-label-sm text-primary">[ 03 ]</span>
+                    <h2 class="font-headline-md text-headline-md text-on-surface">Deployment</h2>
+                </div>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+                    The stack runs identically in three places: a simulated robot for debugging, a server at a second site, and — the one that mattered most — packaged and running directly on the robot's onboard NVIDIA Jetson. Onboard, the robot completes its route without depending on a server at all.
+                </p>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Getting onto the robot was its own piece of work: a different processor architecture, a different base image, ROS networking pinned to the robot's specific interface, and an auto-restart on reboot so a power cycle doesn't require someone to SSH in and start it by hand.
+                </p>
+            </section>
+
+            <!-- [ 04 ] Tech Stack -->
+            <section id="stack" class="technical-border p-8 bg-surface-container-low mb-10">
+                <div class="inline-flex items-center gap-2 mb-6">
+                    <span class="font-label-sm text-label-sm text-primary">[ 04 ]</span>
+                    <h2 class="font-headline-md text-headline-md text-on-surface">Tech Stack</h2>
+                </div>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">ROS 2 Humble · CycloneDDS</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">C++ — tree executor &amp; coordination</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Python — API &amp; inspection module</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">BehaviorTree.CPP 4.6 + ROS2</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">FastAPI / uvicorn</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Gemini Robotics-ER</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Docker / docker compose — x86 + ARM64</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">Nav2 — integrated with, not authored</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">MediaMTX</span>
+                    <span class="px-3 py-1.5 bg-surface-container-high border border-grid-line font-code-snippet text-code-snippet text-primary">NVIDIA Jetson</span>
+                </div>
+            </section>
+
+            <!-- Back link -->
+            <div>
+                <a href="technical_projects" class="inline-flex items-center gap-2 font-code-snippet text-code-snippet text-primary hover:underline">
+                    <span class="material-symbols-outlined text-[16px]">arrow_back</span> Back to Projects
+                </a>
+            </div>
+
+        </div><!-- /main content -->
+    </div><!-- /flex layout -->
+
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-grid-line bg-surface w-full py-8 px-6 md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+    <div class="font-label-sm text-label-sm text-text-dim font-code-snippet">© 2025 MADIYAR MUKANOV</div>
+    <div class="flex gap-8">
+        <a class="font-label-sm text-label-sm text-text-dim hover:text-primary transition-colors" href="mailto:mmukanovm@gmail.com">Email</a>
+        <a class="font-label-sm text-label-sm text-text-dim hover:text-primary transition-colors" href="https://github.com/MadiyarM">GitHub</a>
+        <a class="font-label-sm text-label-sm text-text-dim hover:text-primary transition-colors" href="https://www.linkedin.com/in/muqantegi/">LinkedIn</a>
+    </div>
+</footer>
+
+<script>
+    (function(){
+        var btn = document.getElementById('mobile-menu-btn');
+        var menu = document.getElementById('mobile-menu');
+        if(btn && menu){
+            btn.addEventListener('click', function(){ menu.classList.toggle('hidden'); });
+            document.addEventListener('click', function(e){
+                if(!menu.contains(e.target) && !btn.contains(e.target)) menu.classList.add('hidden');
+            });
+        }
+    })();
+</script>
+<script>
+    const sectionIds = ['concept', 'architecture', 'deployment', 'stack'];
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const activeId = entry.target.id;
+            sectionIds.forEach(id => {
+                const step = document.querySelector(`.progress-step[data-section="${id}"]`);
+                if (!step) return;
+                const idx = sectionIds.indexOf(id);
+                const activeIdx = sectionIds.indexOf(activeId);
+                if (id === activeId) {
+                    step.classList.add('active');
+                    step.classList.remove('completed');
+                } else if (idx < activeIdx) {
+                    step.classList.remove('active');
+                    step.classList.add('completed');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        });
+    }, { threshold: 0.25 });
+
+    sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+    });
+
+    function goToSection(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const headerOffset = 80;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    function setActiveStep(id) {
+        document.querySelectorAll('.progress-step').forEach(step => {
+            step.classList.toggle('active', step.getAttribute('data-section') === id);
+            step.classList.remove('completed');
+        });
+    }
+
+    document.querySelectorAll('.progress-step').forEach(step => {
+        const id = step.getAttribute('data-section');
+        step.addEventListener('click', () => { setActiveStep(id); goToSection(id); });
+        step.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setActiveStep(id);
+                goToSection(id);
+            }
+        });
+    });
+</script>
+</body>
+</html>
